@@ -509,30 +509,98 @@
         }
 
         /* Funding Opportunities */
-        .funding-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: clamp(16px, 2.8vw, 40px);
-        }
+       /* Funding Opportunities */
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 2.8vw, 40px);
+}
 
-        .funding-card {
-            background: var(--color-white);
-            padding: clamp(22px, 3.2vw, 48px);
-            border-radius: var(--radius-card);
-            text-align: center;
-            border: 2px solid transparent;
-            transition: border-color 0.3s;
-        }
+.funding-card {
+    background: var(--color-white);
+    padding: clamp(22px, 3.2vw, 48px);
+    border-radius: var(--radius-card);
+    text-align: center;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
 
-        .funding-card:hover { border-color: var(--color-brand-green); }
+.funding-card:hover { border-color: var(--color-brand-green); }
 
-        .funding-amount {
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 900;
-            color: var(--color-text-main);
-            margin: 18px 0;
-            font-family: var(--font-heading);
-        }
+.funding-amount {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 900;
+    color: var(--color-text-main);
+    margin: 18px 0;
+    font-family: var(--font-heading);
+}
+
+/* >>> PASTE NEW STYLES RIGHT HERE <<< */
+
+/* Funding Opportunities — make it feel like a distinct section */
+.funding-section {
+    background: linear-gradient(180deg, rgba(36, 238, 85, 0.10) 0%, var(--color-bg-secondary) 35%, var(--color-bg-secondary) 100%);
+    position: relative;
+}
+
+.funding-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: var(--color-brand-green);
+}
+
+.funding-section .section-title {
+    margin-top: 6px;
+}
+
+.funding-section .section-desc {
+    margin-bottom: clamp(22px, 3vw, 40px);
+}
+
+.funding-wrapper {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: var(--radius-card);
+    padding: clamp(18px, 3vw, 40px);
+    box-shadow: var(--shadow-card);
+}
+
+.funding-cta {
+    margin-top: clamp(18px, 3vw, 32px);
+    text-align: center;
+}
+
+.funding-cta p {
+    max-width: 70ch;
+    margin: 0 auto clamp(12px, 1.6vw, 16px);
+    color: var(--color-text-soft);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.95em 1.8em;
+    border-radius: var(--radius-btn);
+    font-weight: 800;
+    font-size: clamp(0.95rem, 1.1vw, 1rem);
+    background: var(--color-text-main);
+    color: var(--color-white);
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(28, 28, 28, 0.18);
+}
+
 
         /* Contact */
         .contact-container { max-width: 100%; margin: 0 auto; text-align: center; }
@@ -860,23 +928,46 @@
     </section>
 
     <!-- Funding Opportunities -->
-    <section id="funding" class="bg-sand">
+    <section id="funding" class="funding-section">
         <div class="container">
             <h2 class="section-title">Funding Opportunities</h2>
-            <div class="funding-grid">
-                <div class="funding-card">
-                    <h3>Seed Funding Needed</h3>
-                    <div class="funding-amount">$600,000</div>
-                    <p>To operationalize the platform and legal framework.</p>
+            <p class="section-desc">
+            ReFund is raising seed operating support and building an initial recoverable grant pool to unlock government funding for nonprofits.
+            </p>
+
+            <div class="funding-wrapper">
+                <div class="funding-grid">
+                    <div class="funding-card">
+                        <h3>Seed Funding Needed</h3>
+                        <div class="funding-amount">$600,000</div>
+                        <p>To operationalize the platform and legal framework.</p>
+                    </div>
+
+                    <div class="funding-card">
+                        <h3>Recoverable Grant Pool</h3>
+                        <div class="funding-amount">$10 Million</div>
+                        <p>Target for initial capital deployment.</p>
+                    </div>
                 </div>
-                <div class="funding-card">
-                    <h3>Recoverable Grant Pool</h3>
-                    <div class="funding-amount">$10 Million</div>
-                    <p>Target for initial capital deployment.</p>
+
+                <div class="funding-cta">
+                    <p>
+                        Want the full overview, model, and participation options? Download the funder briefing.
+                </p>
+
+                    <a class="btn-secondary"
+                       href="assets/refund-funder-briefing.pdf"
+                       download
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <i class="ri-file-download-line"></i>
+                        Download Funder Briefing (PDF)
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+
 
     <!-- Contact -->
     <section id="contact" class="bg-accent">
