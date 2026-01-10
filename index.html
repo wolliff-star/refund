@@ -31,6 +31,19 @@
             --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
 
+        @font-face {
+            font-family: 'MiSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'NotoSerifCJKsc-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSerifCJKsc-Regular.otf');
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
@@ -39,7 +52,15 @@
             color: var(--color-text-soft);
             background-color: var(--color-bg-primary);
             line-height: 1.6;
+            width: 100%;
+            margin: 0;
             overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--color-text-main);
+            line-height: 1.2;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -52,41 +73,40 @@
         }
 
         .btn {
+            display: inline-block;
             padding: 0.95em 1.8em;
-            background: var(--color-brand-green);
+            background-color: var(--color-brand-green);
             color: var(--color-text-main);
             font-weight: 800;
             border-radius: var(--radius-btn);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: clamp(0.95rem, 1.1vw, 1rem);
             white-space: nowrap;
         }
 
-        /* ================= HEADER (FIXED SPACING) ================= */
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(36, 238, 85, 0.3);
+        }
 
+        /* Header */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(255,255,255,0.95);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            padding: 16px 0;
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-            padding: clamp(12px, 1.5vw, 18px) 0;
         }
 
+        /* === HEADER SPACING FIX (stable layout) === */
         .nav-wrapper {
             display: flex;
             align-items: center;
             gap: clamp(12px, 2vw, 24px);
-        }
-
-        .logo {
-            flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: clamp(40px, 4vw, 64px);
-            display: block;
         }
 
         nav {
@@ -96,91 +116,519 @@
 
         nav ul {
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: clamp(12px, 1.6vw, 28px);
+            gap: clamp(14px, 2vw, 32px);
+            font-size: clamp(0.9rem, 1.1vw, 1rem);
             font-weight: 600;
             flex-wrap: wrap;
+            justify-content: flex-end; /* key fix */
+            align-items: center;
         }
 
-        header .btn {
+        nav a:hover { color: var(--color-text-main); }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+            color: var(--color-text-main);
+            white-space: nowrap;
             flex: 0 0 auto;
         }
 
-        /* Header responsive behavior */
-        @media (max-width: 900px) {
-            .nav-wrapper {
-                flex-wrap: wrap;
-            }
-
-            .logo {
-                order: 1;
-            }
-
-            header .btn {
-                order: 2;
-                margin-left: auto;
-            }
-
-            nav {
-                order: 3;
-                flex: 1 1 100%;
-            }
-
-            nav ul {
-                justify-content: center;
-                row-gap: 10px;
-            }
+        /* Header logo sizing */
+        .logo img {
+            height: clamp(40px, 4vw, 64px);
+            width: auto;
+            display: block;
         }
 
-        /* ================= FOOTER LOGO ================= */
-
+        /* Footer logo sizing (larger than header) + white background badge */
         .footer-logo img {
             height: clamp(72px, 8vw, 120px);
-            background: #fff;
+            width: auto;
+            display: block;
+
+            background: #FFFFFF;
             padding: clamp(10px, 1.2vw, 16px);
             border-radius: 16px;
-            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+
+            filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--color-bg-primary);
+            padding: clamp(72px, 10vw, 120px) 0 clamp(56px, 8vw, 100px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -4%;
+            right: -6%;
+            width: clamp(220px, 30vw, 400px);
+            height: clamp(220px, 30vw, 400px);
+            background: linear-gradient(135deg, rgba(36, 238, 85, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.1rem, 5vw, 4rem);
+            margin-bottom: clamp(18px, 2.6vw, 32px);
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+            margin-bottom: clamp(26px, 3.5vw, 48px);
+            max-width: 70ch;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        section { padding: var(--spacing-section) 0; }
+
+        .section-title {
+            font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .section-desc {
+            font-size: clamp(1rem, 1.3vw, 1.125rem);
+            text-align: center;
+            max-width: 75ch;
+            margin: 0 auto clamp(36px, 5vw, 64px);
+        }
+
+        /* The Challenge */
+        .bg-sand { background-color: var(--color-bg-secondary); }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(20px, 4vw, 60px);
+            align-items: stretch;
+        }
+
+        .challenge-card {
+            background: var(--color-white);
+            padding: clamp(26px, 4vw, 48px);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+
+        .stat-highlight {
+            font-size: clamp(2.4rem, 6vw, 3.5rem);
+            font-family: var(--font-heading);
+            color: var(--color-brand-green);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: clamp(1rem, 1.2vw, 1.125rem);
+            font-weight: 700;
+            color: var(--color-text-main);
+        }
+
+        /* Why It Matters */
+        .matters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(18px, 3vw, 40px);
+        }
+
+        .matter-item {
+            text-align: center;
+            padding: clamp(22px, 3.2vw, 40px);
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            transition: transform 0.3s;
+        }
+
+        .matter-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .matter-icon {
+            font-size: clamp(2rem, 3vw, 3rem);
+            color: var(--color-brand-green);
+            margin-bottom: 18px;
+            background: rgba(36, 238, 85, 0.1);
+            width: clamp(64px, 7vw, 80px);
+            height: clamp(64px, 7vw, 80px);
+            line-height: clamp(64px, 7vw, 80px);
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .matter-item h3 {
+            font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+            margin-bottom: 12px;
+        }
+
+        /* Testimonial */
+        .bg-accent { background-color: var(--color-bg-accent); }
+
+        .testimonial-wrapper {
+            max-width: 90%;
+            width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-icon {
+            font-size: clamp(2.5rem, 4vw, 3.75rem);
+            color: var(--color-brand-green);
+            opacity: 0.5;
+            margin-bottom: clamp(18px, 3vw, 32px);
+        }
+
+        .testimonial-text {
+            font-family: var(--font-serif);
+            font-size: clamp(1.35rem, 2.3vw, 2rem);
+            color: var(--color-text-main);
+            margin-bottom: clamp(18px, 3vw, 40px);
+            font-style: italic;
+        }
+
+        .author-info h4 { font-size: clamp(1.05rem, 1.3vw, 1.25rem); margin-bottom: 4px; }
+        .author-info span { font-size: clamp(0.95rem, 1.1vw, 1rem); color: var(--color-text-soft); }
+
+        /* The Solution */
+        .solution-wrapper {
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            padding: clamp(34px, 6vw, 80px);
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--color-brand-green);
+        }
+
+        .solution-text {
+            font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+            line-height: 1.5;
+            color: var(--color-text-main);
+            max-width: 70ch;
+            margin: 0 auto;
+        }
+
+        /* How It Works */
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(18px, 3vw, 40px);
+            position: relative;
+            margin-top: clamp(26px, 4vw, 60px);
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 6%;
+            right: 6%;
+            height: 2px;
+            background: #E2E8F0;
+            z-index: 0;
+        }
+
+        .step-item {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 260px);
+            text-align: center;
+        }
+
+        .step-number {
+            width: clamp(62px, 6vw, 80px);
+            height: clamp(62px, 6vw, 80px);
+            background: var(--color-white);
+            border: 2px solid var(--color-brand-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.35rem, 2.1vw, 2rem);
+            font-weight: 900;
+            color: var(--color-text-main);
+            margin: 0 auto 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .step-item h3 {
+            font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+            margin-bottom: 10px;
+        }
+
+        .step-item p { font-size: clamp(0.95rem, 1.1vw, 1rem); }
+
+        /* Case Studies */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(18px, 3vw, 40px);
+        }
+
+        .case-card {
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-img-placeholder {
+            height: clamp(160px, 18vw, 200px);
+            background: #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #A0AEC0;
+        }
+
+        .case-content {
+            padding: clamp(20px, 2.6vw, 32px);
+            flex: 1;
+        }
+
+        .case-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(36, 238, 85, 0.15);
+            color: #1a8e36;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .case-card h3 {
+            font-size: clamp(1.1rem, 1.5vw, 1.375rem);
+            margin-bottom: 10px;
+        }
+
+        .case-result { margin-top: 14px; font-weight: 800; color: var(--color-text-main); }
+
+        /* Funders */
+        .funders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(14px, 2.4vw, 32px);
+        }
+
+        .funder-card {
+            background: var(--color-white);
+            padding: clamp(18px, 2.6vw, 32px);
+            border-radius: var(--radius-card);
+            text-align: center;
+            border: 1px solid #edf2f7;
+        }
+
+        .funder-icon {
+            font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+            color: var(--color-brand-green);
+            margin-bottom: 12px;
+        }
+
+        .funder-card h3 {
+            font-size: clamp(1rem, 1.2vw, 1.125rem);
+            margin-bottom: 8px;
+        }
+
+        /* About & Learning */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(16px, 2.8vw, 40px);
+        }
+
+        .content-card {
+            background: var(--color-white);
+            padding: clamp(22px, 3.2vw, 48px);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(16px, 2.8vw, 40px);
+        }
+
+        .blog-card {
+            background: var(--color-white);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .blog-img { height: clamp(160px, 18vw, 200px); background-color: #E2E8F0; }
+
+        .blog-content { padding: clamp(16px, 2.2vw, 24px); }
+
+        .blog-date {
+            font-size: 14px;
+            color: var(--color-text-soft);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .blog-title {
+            font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+            margin-bottom: 12px;
+            color: var(--color-text-main);
+        }
+
+        /* Funding Opportunities */
+        .funding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(16px, 2.8vw, 40px);
+        }
+
+        .funding-card {
+            background: var(--color-white);
+            padding: clamp(22px, 3.2vw, 48px);
+            border-radius: var(--radius-card);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .funding-card:hover { border-color: var(--color-brand-green); }
+
+        .funding-amount {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 900;
+            color: var(--color-text-main);
+            margin: 18px 0;
+            font-family: var(--font-heading);
+        }
+
+        /* Contact */
+        .contact-container { max-width: 100%; margin: 0 auto; text-align: center; }
+        .contact-box {
+            background: var(--color-white);
+            padding: clamp(22px, 3vw, 40px);
+            border-radius: var(--radius-card);
+            margin-top: clamp(18px, 3vw, 40px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-footer-bg);
+            color: #E2E8F0;
+            padding: clamp(48px, 7vw, 80px) 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: clamp(16px, 2.8vw, 40px);
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-col h4 {
+            color: var(--color-white);
+            font-size: clamp(1rem, 1.25vw, 1.125rem);
+            margin-bottom: 18px;
+        }
+
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a {
+            color: #CBD5E0;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--color-brand-green); }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            font-size: 14px;
+            color: #A0AEC0;
+        }
+
+        /* Responsive tweaks for smaller screens */
+        @media (max-width: 900px) {
+            header { padding: 14px 0; }
+            .nav-wrapper { flex-wrap: wrap; }
+            nav ul { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .steps-container::before { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 520px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-col:first-child { text-align: center; }
+            .footer-logo { margin-left: auto; margin-right: auto; }
         }
     </style>
 </head>
 
-<body>
+<body id="top">
 
-<header>
-    <div class="container nav-wrapper">
-        <a href="#top" class="logo">
-            <img src="assets/refund-logo.png" alt="ReFund logo" />
-        </a>
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#top" class="logo">
+                <img src="assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
+            </a>
 
-        <nav>
-            <ul>
-                <li><a href="#challenge">The Challenge</a></li>
-                <li><a href="#solution">The Solution</a></li>
-                <li><a href="#impact">Impact</a></li>
-                <li><a href="#insights">Insights</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact ReFund</a></li>
-            </ul>
-        </nav>
+            <nav>
+                <ul>
+                    <li><a href="#challenge">The Challenge</a></li>
+                    <li><a href="#solution">The Solution</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact ReFund</a></li>
+                </ul>
+            </nav>
 
-        <a href="#funding" class="btn">Get Involved</a>
-    </div>
-</header>
-
-<!-- (Rest of your page remains unchanged) -->
-
-<footer>
-    <div class="container">
-        <a href="#top" class="footer-logo">
-            <img src="assets/refund-logo.png" alt="ReFund logo" />
-        </a>
-    </div>
-</footer>
-
-</body>
-</html>
-
+            <a href="#funding" class="btn">Get Involved</a>
+        </div>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -214,8 +662,8 @@
         </div>
     </section>
 
-    <!-- Why It Matters -->
-
+    <!-- Why It Matters (FIXED: proper section wrapper) -->
+    <section>
         <div class="container">
             <h2 class="section-title">Why It Matters</h2>
             <div class="matters-grid">
@@ -289,9 +737,8 @@
         </div>
     </section>
 
-    <!-- Case Studies -->
-    <section id="impact">
-    <section class="bg-sand">
+    <!-- Case Studies (FIXED: no nested section tags) -->
+    <section id="impact" class="bg-sand">
         <div class="container">
             <h2 class="section-title">Impact Stories</h2>
             <p class="section-desc">See how recoverable grants are helping nonprofits thrive.</p>
@@ -362,38 +809,37 @@
         </div>
     </section>
 
-
     <!-- Learning Section -->
     <section id="insights">
-    <div class="container">
-        <h2 class="section-title">Latest Insights</h2>
-        <div class="blog-grid">
-            <div class="blog-card">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
-                <div class="blog-content">
-                    <span class="blog-date">Oct 12, 2023</span>
-                    <h3 class="blog-title">Understanding Recoverable Grants</h3>
-                    <p>A deep dive into how this financial instrument works.</p>
+        <div class="container">
+            <h2 class="section-title">Latest Insights</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
+                    <div class="blog-content">
+                        <span class="blog-date">Oct 12, 2023</span>
+                        <h3 class="blog-title">Understanding Recoverable Grants</h3>
+                        <p>A deep dive into how this financial instrument works.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="blog-card">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
-                <div class="blog-content">
-                    <span class="blog-date">Sep 28, 2023</span>
-                    <h3 class="blog-title">The True Cost of Waiting</h3>
-                    <p>Analyzing the financial burden of reimbursement delays.</p>
+                <div class="blog-card">
+                    <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
+                    <div class="blog-content">
+                        <span class="blog-date">Sep 28, 2023</span>
+                        <h3 class="blog-title">The True Cost of Waiting</h3>
+                        <p>Analyzing the financial burden of reimbursement delays.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="blog-card">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
-                <div class="blog-content">
-                    <span class="blog-date">Sep 15, 2023</span>
-                    <h3 class="blog-title">Building Financial Resilience</h3>
-                    <p>Strategies for nonprofits to manage cash flow gaps.</p>
+                <div class="blog-card">
+                    <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop') center/cover;"></div>
+                    <div class="blog-content">
+                        <span class="blog-date">Sep 15, 2023</span>
+                        <h3 class="blog-title">Building Financial Resilience</h3>
+                        <p>Strategies for nonprofits to manage cash flow gaps.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </section>
 
     <!-- About Section -->
@@ -439,20 +885,20 @@
             <p>Ready to help unlock billions for social impact? Contact us to learn more.</p>
 
             <div class="contact-box">
-    <p style="max-width: 60ch; margin: 0 auto 24px;">
-        Interested in partnering with ReFund or learning more about funding opportunities?
-        Complete our short intake form and we’ll follow up.
-    </p>
+                <p style="max-width: 60ch; margin: 0 auto 24px;">
+                    Interested in partnering with ReFund or learning more about funding opportunities?
+                    Complete our short intake form and we’ll follow up.
+                </p>
 
-    <a
-        href="https://forms.gle/YOUR_FORM_LINK"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn"
-    >
-        Contact ReFund
-    </a>
-</div>
+                <a
+                    href="https://forms.gle/YOUR_FORM_LINK"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn"
+                >
+                    Contact ReFund
+                </a>
+            </div>
         </div>
     </section>
 
@@ -461,39 +907,44 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <!-- Updated to match header logo -->
-                    <a href="#" class="footer-logo">
+                    <a href="#top" class="footer-logo">
                         <img src="assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
                     </a>
                     <p style="color: #CBD5E0; max-width: 42ch;">Providing upfront, zero-cost recoverable grants that allow nonprofits to carry out government-funded work without draining reserves.</p>
                 </div>
+
                 <div class="footer-col">
                     <h4>Explore</h4>
                     <ul class="footer-links">
                         <li><a href="#challenge">The Challenge</a></li>
                         <li><a href="#solution">The Solution</a></li>
                         <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#impact">Case Studies</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#insights">Insights</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">For Funders</a></li>
+                        <li><a href="#insights">Blog</a></li>
+                        <li><a href="#funding">For Funders</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul class="footer-links">
-                        <li><a href="mailto:yisroelquint@gmail.com">Contact Team</a></li>
+                        <li><a href="#contact">Contact Form</a></li>
                         <li><a href="#">LinkedIn</a></li>
                         <li><a href="#">Twitter</a></li>
                     </ul>
                 </div>
             </div>
+
             <div class="copyright">
                 &copy; 2025 ReFund. All rights reserved.
             </div>
