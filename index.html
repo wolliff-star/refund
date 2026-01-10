@@ -126,16 +126,30 @@
 
         nav a:hover { color: var(--color-text-main); }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: var(--font-heading);
-            font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-            color: var(--color-text-main);
-            white-space: nowrap;
-            flex: 0 0 auto;
-        }
+      .logo {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.8vw, 18px);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-text strong {
+    font-family: var(--font-heading);
+    font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+    color: var(--color-text-main);
+}
+
+.logo-subtitle {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    font-weight: 600;
+    color: var(--color-text-soft);
+}
+
 
         /* Header logo sizing */
         .logo img {
@@ -538,36 +552,25 @@
 /* >>> PASTE NEW STYLES RIGHT HERE <<< */
 
 /* Funding Opportunities — make it feel like a distinct section */
+/* Funding Opportunities — distinct via green shading (no top/bottom bars) */
 .funding-section {
-    background: linear-gradient(180deg, rgba(36, 238, 85, 0.10) 0%, var(--color-bg-secondary) 35%, var(--color-bg-secondary) 100%);
-    position: relative;
-}
-
-.funding-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 10px;
-    background: var(--color-brand-green);
-}
-
-.funding-section .section-title {
-    margin-top: 6px;
+    background: rgba(36, 238, 85, 0.08);
 }
 
 .funding-section .section-desc {
     margin-bottom: clamp(22px, 3vw, 40px);
 }
 
+/* Inner wrapper stays consistent with other sections (soft card on tinted bg) */
 .funding-wrapper {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(226, 232, 240, 0.9);
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(226, 232, 240, 0.95);
     border-radius: var(--radius-card);
     padding: clamp(18px, 3vw, 40px);
     box-shadow: var(--shadow-card);
+    backdrop-filter: blur(4px);
 }
+
 
 .funding-cta {
     margin-top: clamp(18px, 3vw, 32px);
@@ -680,21 +683,24 @@
     <header>
         <div class="container nav-wrapper">
             <a href="#top" class="logo">
-                <img src="assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
-            </a>
+    <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
+    <span class="logo-text">
+        <strong>ReFund</strong>
+        <span class="logo-subtitle">The Recoverable Grants Fund</span>
+    </span>
+</a>
 
             <nav>
                 <ul>
                     <li><a href="#challenge">The Challenge</a></li>
                     <li><a href="#solution">The Solution</a></li>
-                    <li><a href="#impact">Impact</a></li>
-                    <li><a href="#insights">Insights</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact ReFund</a></li>
+                    <li><a href="#about">About ReFund</a></li>
+                    <li><a href="#impact">Impact & Insights</a></li>
+                    <li><a href="#funding">Resources for Funders</a></li>
                 </ul>
             </nav>
 
-            <a href="#funding" class="btn">Get Involved</a>
+            <a href="#contact" class="btn">Get Involved</a>
         </div>
     </header>
 
@@ -767,7 +773,7 @@
     </section>
 
     <!-- The Solution -->
-    <section id="solution" class="bg-sand">
+ <section id="solution">
         <div class="container">
             <h2 class="section-title">The Solution</h2>
             <div class="solution-wrapper">
@@ -777,7 +783,7 @@
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works">
+    <section id="how-it-works" class="bg-sand">
         <div class="container">
             <h2 class="section-title">How ReFund Works</h2>
             <div class="steps-container">
@@ -805,8 +811,55 @@
         </div>
     </section>
 
+
+    <!-- For Funders -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why ReFund Works for Funders</h2>
+            <div class="funders-grid">
+                <div class="funder-card">
+                    <i class="ri-check-double-line funder-icon"></i>
+                    <h3>Zero Cost</h3>
+                    <p>To nonprofits, maximizing grant value.</p>
+                </div>
+                <div class="funder-card">
+                    <i class="ri-bar-chart-box-line funder-icon"></i>
+                    <h3>Amplifies Impact</h3>
+                    <p>Unlock government billions with millions.</p>
+                </div>
+                <div class="funder-card">
+                    <i class="ri-recycle-line funder-icon"></i>
+                    <h3>Recycles Capital</h3>
+                    <p>Funds are used repeatedly for impact.</p>
+                </div>
+                <div class="funder-card">
+                    <i class="ri-shield-check-line funder-icon"></i>
+                    <h3>Low Risk</h3>
+                    <p>Backed by signed government contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-sand">
+        <div class="container">
+            <h2 class="section-title">About ReFund</h2>
+            <div class="about-grid">
+                <div class="content-card">
+                    <h3>Our Story</h3>
+                    <p style="margin-top: 16px;">Born from the realization that liquidity, not solvency, kills many great nonprofits. We are a team of finance experts and community leaders dedicated to fixing the plumbing of philanthropy.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Our Team</h3>
+                    <p style="margin-top: 16px;">We bring together decades of experience in nonprofit management, government contracting, and impact investing to create a sustainable solution for the sector.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Case Studies (FIXED: no nested section tags) -->
-    <section id="impact" class="bg-sand">
+    <section id="impact">
         <div class="container">
             <h2 class="section-title">Impact Stories</h2>
             <p class="section-desc">See how recoverable grants are helping nonprofits thrive.</p>
@@ -848,37 +901,8 @@
         </div>
     </section>
 
-    <!-- For Funders -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Why ReFund Works for Funders</h2>
-            <div class="funders-grid">
-                <div class="funder-card">
-                    <i class="ri-check-double-line funder-icon"></i>
-                    <h3>Zero Cost</h3>
-                    <p>To nonprofits, maximizing grant value.</p>
-                </div>
-                <div class="funder-card">
-                    <i class="ri-bar-chart-box-line funder-icon"></i>
-                    <h3>Amplifies Impact</h3>
-                    <p>Unlock government billions with millions.</p>
-                </div>
-                <div class="funder-card">
-                    <i class="ri-recycle-line funder-icon"></i>
-                    <h3>Recycles Capital</h3>
-                    <p>Funds are used repeatedly for impact.</p>
-                </div>
-                <div class="funder-card">
-                    <i class="ri-shield-check-line funder-icon"></i>
-                    <h3>Low Risk</h3>
-                    <p>Backed by signed government contracts.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Learning Section -->
-    <section id="insights">
+    <section id="insights" class="bg-sand">
         <div class="container">
             <h2 class="section-title">Latest Insights</h2>
             <div class="blog-grid">
@@ -910,22 +934,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="bg-sand">
-        <div class="container">
-            <h2 class="section-title">About ReFund</h2>
-            <div class="about-grid">
-                <div class="content-card">
-                    <h3>Our Story</h3>
-                    <p style="margin-top: 16px;">Born from the realization that liquidity, not solvency, kills many great nonprofits. We are a team of finance experts and community leaders dedicated to fixing the plumbing of philanthropy.</p>
-                </div>
-                <div class="content-card">
-                    <h3>Our Team</h3>
-                    <p style="margin-top: 16px;">We bring together decades of experience in nonprofit management, government contracting, and impact investing to create a sustainable solution for the sector.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Funding Opportunities -->
     <section id="funding" class="funding-section">
@@ -1010,19 +1019,17 @@
                         <li><a href="#challenge">The Challenge</a></li>
                         <li><a href="#solution">The Solution</a></li>
                         <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#impact">Impact</a></li>
-                        <li><a href="#insights">Insights</a></li>
-                        <li><a href="#contact">Contact</a></li>
+			<li><a href="#about">About ReFund</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul class="footer-links">
-                        <li><a href="#insights">Blog</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#insights">Insights</a></li>
                         <li><a href="#funding">For Funders</a></li>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
 
@@ -1030,8 +1037,16 @@
                     <h4>Contact</h4>
                     <ul class="footer-links">
                         <li><a href="#contact">Contact Form</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li>
+    <a
+        href="https://www.linkedin.com/company/therefund/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        LinkedIn
+    </a>
+</li>
+
                     </ul>
                 </div>
             </div>
