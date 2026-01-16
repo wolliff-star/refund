@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <title>Green Valley Conservation Corps - Impact Story</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'MiSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'NotoSerifCJKsc-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSerifCJKsc-Bold.otf');
+        }
+        @font-face {
+            font-family: 'AlibabaSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Regular.otf');
+        }
+
+        :root {
+            --primary: #10B981;
+            --primary-light: #D1FAE5;
+            --text-dark: #1F2937;
+            --text-gray: #4B5563;
+            --text-light: #9CA3AF;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --bg-accent: #ECFDF5;
+            --border-radius: 24px;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            margin: 0 auto;
+            font-family: 'MiSans-Regular', sans-serif;
+            background-color: #F8FAFC;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utility */
+        .container {
+            width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .badge-green {
+            background-color: var(--primary-light);
+            color: #047857;
+        }
+
+        .section-title {
+            font-family: 'NotoSerifCJKsc-Bold', serif;
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            height: 100px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-gray);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 24px 80px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+        .breadcrumb .current {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 40px 80px 80px;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding-right: 40px;
+        }
+
+        .hero h1 {
+            font-family: 'NotoSerifCJKsc-Bold', serif;
+            font-size: 64px;
+            line-height: 1.1;
+            margin: 24px 0;
+            color: var(--text-dark);
+        }
+        
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            color: var(--text-gray);
+            font-size: 18px;
+            margin-bottom: 32px;
+            align-items: center;
+        }
+        
+        .hero-meta i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .hero-tagline {
+            font-size: 24px;
+            color: var(--text-gray);
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            line-height: 1.5;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Metrics Bar */
+        .metrics-bar {
+            margin: 0 80px 80px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .metric-value {
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            padding: 0 80px 100px;
+        }
+
+        .main-article {
+            background: transparent;
+        }
+
+        .article-section {
+            margin-bottom: 60px;
+            background: white;
+            padding: 48px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .article-section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+        }
+        
+        .article-section ul {
+            list-style: none;
+            margin: 24px 0;
+        }
+        
+        .article-section ul li {
+            padding-left: 32px;
+            position: relative;
+            margin-bottom: 16px;
+            font-size: 18px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        .article-section ul li::before {
+            content: "\EB79";
+            font-family: 'remixicon';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+            border-left: 4px solid var(--primary);
+            padding-left: 16px;
+        }
+
+        .info-row {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .info-value a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Testimonial */
+        .testimonial-section {
+            background: #F3F4F6;
+            padding: 80px;
+            margin: 0 0 80px;
+            position: relative;
+        }
+        
+        .testimonial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .testimonial-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+        }
+
+        .testimonial-content blockquote {
+            font-family: 'NotoSerifCJKsc-Bold', serif;
+            font-size: 32px;
+            line-height: 1.4;
+            color: var(--text-dark);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .testimonial-author span {
+            color: var(--text-light);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        
+        .quote-icon {
+            font-size: 60px;
+            color: rgba(16, 185, 129, 0.2);
+            position: absolute;
+            top: 60px;
+            left: 100px;
+        }
+
+        /* By The Numbers */
+        .numbers-section {
+            padding: 0 80px 100px;
+        }
+        
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+        }
+        
+        .number-item {
+            background: var(--bg-accent);
+            padding: 32px 24px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .number-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .number-big {
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .number-desc {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Lessons Learned */
+        .lessons-section {
+            background: white;
+            margin: 0 80px 100px;
+            padding: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border-left: 10px solid var(--primary);
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .lessons-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+
+        /* Related Stories */
+        .related-section {
+            padding: 0 80px 100px;
+            background: #F8FAFC;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .story-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .story-img {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .story-content {
+            padding: 32px;
+        }
+        
+        .story-category {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .story-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+        
+        .story-link {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--bg-white);
+            padding: 100px 80px;
+            text-align: center;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 40px;
+            padding: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cta-box h2 {
+            font-family: 'NotoSerifCJKsc-Bold', serif;
+            font-size: 48px;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+        
+        .cta-box p {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+        
+        .btn-large {
+            padding: 16px 48px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding: 80px 80px 40px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 60px;
+        }
+        
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: white;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col a {
+            color: #9CA3AF;
+            transition: color 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            color: #6B7280;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://assets-temp.lovart.ai/img/eedea4c5667e4660a861dddc326d257b/3de61eb468eb633dcb4e6d191f22e7d08fc2248431bd50c2508f8352484a0631.png" alt="ReFund Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="#">About Us</a>
+            <a href="#" class="active">Impact Stories</a>
+            <a href="#">How it Works</a>
+            <a href="#">Resources</a>
+        </nav>
+        <div class="cta-header">
+            <a href="#" class="btn btn-primary">Donate</a>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        Home <span>></span> Impact Stories <span>></span> <span class="current">Green Valley Conservation Corps</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge badge-green">Environmental</div>
+            <h1>Restoring watersheds without financial barriers</h1>
+            <div class="hero-meta">
+                <span><i class="ri-building-line"></i> Green Valley Conservation Corps</span>
+                <span><i class="ri-map-pin-line"></i> Oregon</span>
+            </div>
+            <p class="hero-tagline">By bridging the gap between federal grants and immediate cash flow needs, we empowered local action to protect vital ecosystems.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop" alt="Watershed Restoration">
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="metrics-bar">
+        <div class="metric-card">
+            <span class="metric-value">$500K</span>
+            <span class="metric-label">Grant Secured</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-value">12</span>
+            <span class="metric-label">Seasonal Jobs Created</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-value">$45K</span>
+            <span class="metric-label">Interest Saved</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-value">50</span>
+            <span class="metric-label">Miles Restored</span>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+        <!-- Left: Narrative -->
+        <article class="main-article">
+            
+            <section class="article-section">
+                <h2 class="section-title">The Challenge</h2>
+                <p>Green Valley Conservation Corps was awarded a $500,000 federal grant to restore critical watershed areas in Southern Oregon. The project required immediate action to meet environmental deadlines, but the EPA's reimbursement process meant waiting 90 days for payment.</p>
+                <p>With less than $50,000 in reserves, the organization couldn't afford to front the costs. Traditional lenders offered loans at 9% interest, which would have cost $45,000—nearly 10% of the grant value. These funds would have come from unrestricted reserves meant for organizational resilience and future programs.</p>
+            </section>
+
+            <section class="article-section" style="background-color: #F0FDF4;">
+                <h2 class="section-title">The Solution</h2>
+                <p>ReFund provided a $500,000 recoverable grant, allowing Green Valley to begin work immediately. The zero-cost, zero-interest grant covered:</p>
+                <ul>
+                    <li>Equipment rental and supplies for restoration work</li>
+                    <li>Seasonal worker salaries for 12 local staff</li>
+                    <li>Project management costs</li>
+                    <li>Environmental monitoring and reporting</li>
+                </ul>
+                <p>The organization repaid ReFund in full once EPA reimbursement arrived 87 days later, ensuring the project proceeded without financial strain.</p>
+            </section>
+
+            <section class="article-section">
+                <h2 class="section-title">The Impact</h2>
+                <p>With immediate access to capital, Green Valley Conservation Corps achieved remarkable results:</p>
+                <ul>
+                    <li>Restored 50 miles of critical watershed habitat</li>
+                    <li>Hired 12 seasonal workers from local communities</li>
+                    <li>Completed the project on schedule and within budget</li>
+                    <li>Saved $45,000 that would have gone to loan interest</li>
+                    <li>Preserved unrestricted reserves for future opportunities</li>
+                    <li>Established a strong track record for future federal grants</li>
+                </ul>
+            </section>
+
+        </article>
+
+        <!-- Right: Sidebar -->
+        <aside class="sidebar">
+            <!-- Org Info -->
+            <div class="info-card">
+                <h3>Organization Info</h3>
+                <div class="info-row">
+                    <div class="info-label">Founded</div>
+                    <div class="info-value">2018</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Focus</div>
+                    <div class="info-value">Watershed restoration & conservation</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Team</div>
+                    <div class="info-value">25 staff + seasonal workers</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Website</div>
+                    <div class="info-value"><a href="#">greenvalleycc.org</a></div>
+                </div>
+            </div>
+
+            <!-- Grant Details -->
+            <div class="info-card">
+                <h3>Grant Details</h3>
+                <div class="info-row">
+                    <div class="info-label">Federal Grant</div>
+                    <div class="info-value">$500,000</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Recoverable Grant</div>
+                    <div class="info-value">$500,000</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Timeline</div>
+                    <div class="info-value">90 days</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Source</div>
+                    <div class="info-value">EPA Environmental Restoration Program</div>
+                </div>
+            </div>
+            
+            <!-- Small Map/Image or Visual -->
+            <div class="info-card" style="padding: 0; overflow: hidden; height: 300px;">
+                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1000&auto=format&fit=crop" alt="Field Work" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </aside>
+    </div>
+
+    <!-- Testimonial Section -->
+    <div class="testimonial-section">
+        <i class="ri-double-quotes-l quote-icon"></i>
+        <div class="testimonial-container">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Sarah Chen" class="testimonial-image">
+            <div class="testimonial-content">
+                <blockquote>
+                    "ReFund's recoverable grant was transformative. We could focus on the environmental work instead of worrying about cash flow. The $45,000 we saved is now funding our next conservation initiative."
+                </blockquote>
+                <div class="testimonial-author">
+                    Sarah Chen <span>— Executive Director, Green Valley Conservation Corps</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- By The Numbers -->
+    <section class="numbers-section">
+        <h2 class="section-title" style="margin-bottom: 40px; text-align: center;">By The Numbers</h2>
+        <div class="numbers-grid">
+            <div class="number-item">
+                <div class="number-big">50</div>
+                <div class="number-desc">miles of watershed restored</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">12</div>
+                <div class="number-desc">local jobs<br>created</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">$45k</div>
+                <div class="number-desc">interest costs avoided</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">87</div>
+                <div class="number-desc">days from grant to repayment</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">300+</div>
+                <div class="number-desc">native species protected</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Learned -->
+    <section class="lessons-section">
+        <div class="lessons-icon">
+            <i class="ri-lightbulb-flash-line"></i>
+        </div>
+        <div>
+            <h2 class="section-title" style="margin-bottom: 16px;">Lessons Learned</h2>
+            <p style="font-size: 20px; color: var(--text-gray); line-height: 1.6;">
+                This experience demonstrated that with the right financial tools, environmental organizations can access government funding without compromising their mission or financial health. Recoverable grants eliminate the false choice between immediate action and fiscal responsibility.
+            </p>
+        </div>
+    </section>
+
+    <!-- Related Stories -->
+    <section class="related-section">
+        <h2 class="section-title" style="padding-top: 60px;">Related Stories</h2>
+        <div class="related-grid">
+            <div class="story-card">
+                <img src="https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=1000&auto=format&fit=crop" class="story-img" alt="Coastal Cleanup">
+                <div class="story-content">
+                    <div class="story-category">Maine</div>
+                    <div class="story-title">Coastal Cleanup Coalition</div>
+                    <a href="#" class="story-link">Read Story <i class="ri-arrow-right-line"></i></a>
+                </div>
+            </div>
+            <div class="story-card">
+                <img src="https://images.unsplash.com/photo-1416879741223-837af1ca3a00?q=80&w=1000&auto=format&fit=crop" class="story-img" alt="Urban Green Spaces">
+                <div class="story-content">
+                    <div class="story-category">Seattle</div>
+                    <div class="story-title">Urban Green Spaces Initiative</div>
+                    <a href="#" class="story-link">Read Story <i class="ri-arrow-right-line"></i></a>
+                </div>
+            </div>
+            <div class="story-card">
+                <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=1000&auto=format&fit=crop" class="story-img" alt="River Restoration">
+                <div class="story-content">
+                    <div class="story-category">Colorado</div>
+                    <div class="story-title">River Restoration Project</div>
+                    <a href="#" class="story-link">Read Story <i class="ri-arrow-right-line"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-box">
+            <h2>Could Your Organization Benefit?</h2>
+            <p>If your nonprofit is facing cash flow challenges with government grants, recoverable grants might be the solution.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary btn-large">Apply Now</a>
+                <a href="#" class="btn btn-outline btn-large" style="border-color: var(--primary); background: white;">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 24px;">
+                    <img src="https://assets-temp.lovart.ai/img/eedea4c5667e4660a861dddc326d257b/3de61eb468eb633dcb4e6d191f22e7d08fc2248431bd50c2508f8352484a0631.png" alt="ReFund Logo" style="filter: brightness(100); height: 40px;">
+                </div>
+                <p style="color: #9CA3AF; line-height: 1.6; max-width: 300px;">
+                    Empowering nonprofits with the financial tools they need to change the world.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Organization</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 ReFund. All rights reserved.</span>
+            <span>Made with <i class="ri-heart-fill" style="color: #EF4444;"></i> for impact.</span>
+        </div>
+    </footer>
+
+</body>
+</html>
