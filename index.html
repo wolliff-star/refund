@@ -376,5 +376,53 @@
     </div>
   </footer>
 
+<script>
+  (function () {
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('primary-nav');
+    const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+
+    if (!toggle || !nav || !btn) return;
+
+    function closeMenu() {
+      toggle.checked = false;
+      btn.setAttribute('aria-label', 'Open menu');
+    }
+
+    function openMenu() {
+      toggle.checked = true;
+      btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    // Keep aria-label accurate when toggled
+    btn.addEventListener('click', () => {
+      // click happens before checked state updates, so defer
+      setTimeout(() => {
+        toggle.checked ? openMenu() : closeMenu();
+      }, 0);
+    });
+
+    // Close when a nav link is clicked
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) closeMenu();
+    });
+
+    // Close when clicking/tapping outside the nav + button
+    document.addEventListener('click', (e) => {
+      if (!toggle.checked) return;
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedButton = btn.contains(e.target);
+      if (!clickedInsideNav && !clickedButton) closeMenu();
+    });
+
+    // Optional: close on Escape (nice on mobile keyboards too)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  })();
+</script>
+
+
 </body>
 </html>
