@@ -186,7 +186,9 @@ header.site-header {
 .nav-toggle {
   position: absolute;
   opacity: 0;
-  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  left: -9999px;
 }
 
 .nav-toggle-btn {
@@ -753,6 +755,9 @@ footer {
     gap: 12px;
     justify-content: space-between;
   }
+
+.nav-wrapper { position: relative; }
+
 
   /* Hide desktop CTA on mobile */
   .btn-desktop { display: none; }
