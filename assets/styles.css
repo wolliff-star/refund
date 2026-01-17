@@ -698,6 +698,18 @@ section { padding: var(--spacing-section) 0; }
   .toolkit-layout{ grid-template-columns: 1fr; }
 }
 
+.primary-nav ul{
+  max-height: min(70vh, 520px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-toggle:checked ~ .primary-nav { display: block; }
+
+/* Lock page scroll while menu open */
+.nav-toggle:checked ~ .primary-nav ~ * { /* noop placeholder */ }
+
+
 .contact-container { max-width: 100%; margin: 0 auto; text-align: center; }
 .contact-box {
   background: var(--color-white);
@@ -706,6 +718,9 @@ section { padding: var(--spacing-section) 0; }
   margin-top: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-soft);
 }
+
+
+
 
 /* Footer */
 footer {
