@@ -1,4 +1,3 @@
-<!-- ✅ UPDATED index.html (Option A: hamburger + dropdown menu) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ReFund - Unlocking Government Funding for Nonprofits</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=20260110" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260117" />
 </head>
 
 <body id="top">
@@ -14,43 +13,43 @@
 
   <!-- Header -->
   <header>
-  <div class="container nav-wrapper">
-    <a href="#top" class="logo">
-      <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
-      <span class="logo-text">
-        <strong>ReFund</strong>
-        <span class="logo-subtitle">The Recoverable Grants Fund</span>
-      </span>
-    </a>
+    <div class="container nav-wrapper">
+      <a href="#top" class="logo">
+        <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
+        <span class="logo-text">
+          <strong>ReFund</strong>
+          <span class="logo-subtitle">The Recoverable Grants Fund</span>
+        </span>
+      </a>
 
-    <!-- Mobile toggle -->
-    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">
-      <span class="sr-only">Open menu</span>
-      <i class="ri-menu-line" aria-hidden="true"></i>
-    </button>
+      <!-- Mobile menu toggle (CSS-only) -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
 
-    <!-- Desktop nav / Mobile dropdown -->
-    <nav id="primary-nav" class="site-nav" aria-label="Primary navigation">
-      <ul>
-        <li><a href="#challenge">The Challenge</a></li>
-        <li><a href="#solution">The Solution</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#insights">Insights</a></li>
-        <li><a href="#funding">For Funders</a></li>
+      <label for="nav-toggle"
+             class="nav-toggle-btn"
+             aria-label="Open menu"
+             aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </label>
 
-        <!-- Mobile-only CTA inside the dropdown -->
-        <li class="nav-cta-item">
-          <a href="#contact" class="btn">Get Involved</a>
-        </li>
-      </ul>
-    </nav>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#challenge">The Challenge</a></li>
+          <li><a href="#solution">The Solution</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#funding">For Funders</a></li>
 
-    <!-- Desktop-only CTA -->
-    <a href="#contact" class="btn nav-cta">Get Involved</a>
-  </div>
-</header>
+          <!-- Mobile-only CTA -->
+          <li class="nav-cta-item"><a href="#contact" class="btn">Get Involved</a></li>
+        </ul>
+      </nav>
 
+      <!-- Desktop-only CTA -->
+      <a href="#contact" class="btn nav-cta">Get Involved</a>
+    </div>
+  </header>
 
   <main id="main" tabindex="-1">
     <!-- Hero Section -->
@@ -231,7 +230,7 @@
       </div>
     </section>
 
-    <!-- Learning Section (Insights teaser) -->
+    <!-- Insights teaser -->
     <section id="insights" class="bg-sand" aria-labelledby="insights-title">
       <div class="container">
         <h2 class="section-title" id="insights-title">Latest Insights</h2>
@@ -264,6 +263,7 @@
 
           <div class="funding-cta">
             <p>Want to learn more about our model and participation options? Download the funder briefing.</p>
+
             <a class="btn-secondary"
                href="assets/refund-funder-briefing.pdf"
                download
@@ -284,7 +284,6 @@
                 <div class="toolkit-icon" aria-hidden="true">
                   <i class="ri-briefcase-4-line"></i>
                 </div>
-
                 <div>
                   <div class="toolkit-kicker">Funder Toolkit</div>
                   <div class="toolkit-title">Everything you need to participate</div>
@@ -294,7 +293,6 @@
                 </div>
               </div>
             </div>
-
             <div class="toolkit-side" aria-hidden="true"></div>
           </div>
         </a>
@@ -313,12 +311,10 @@
             Complete our short intake form and we’ll follow up.
           </p>
 
-          <a
-            href="https://forms.gle/hffd39fyrjGEtBPH7"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn"
-          >
+          <a href="https://forms.gle/hffd39fyrjGEtBPH7"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn">
             Contact ReFund
           </a>
         </div>
@@ -334,7 +330,9 @@
           <a href="#top" class="footer-logo">
             <img src="assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
           </a>
-          <p style="color: #CBD5E0; max-width: 42ch;">ReFund provides zero-cost recoverable grants that enable nonprofits to carry out government-funded work.</p>
+          <p style="color: #CBD5E0; max-width: 42ch;">
+            ReFund provides zero-cost recoverable grants that enable nonprofits to carry out government-funded work.
+          </p>
         </div>
 
         <div class="footer-col">
@@ -362,7 +360,9 @@
           <ul class="footer-links">
             <li><a href="#contact">Contact Form</a></li>
             <li>
-              <a href="https://www.linkedin.com/company/therefund/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/company/therefund/"
+                 target="_blank"
+                 rel="noopener noreferrer">
                 LinkedIn
               </a>
             </li>
@@ -376,32 +376,5 @@
     </div>
   </footer>
 
-  <!-- Mobile nav script -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.nav-toggle');
-      const nav = document.getElementById('primary-nav');
-      if (!btn || !nav) return;
-
-      const setState = (open) => {
-        document.body.classList.toggle('nav-open', open);
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.querySelector('i').className = open ? 'ri-close-line' : 'ri-menu-line';
-      };
-
-      btn.addEventListener('click', () => {
-        const open = document.body.classList.contains('nav-open');
-        setState(!open);
-      });
-
-      nav.addEventListener('click', (e) => {
-        if (e.target && e.target.matches('a[href^="#"]')) setState(false);
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setState(false);
-      });
-    })();
-  </script>
 </body>
 </html>
