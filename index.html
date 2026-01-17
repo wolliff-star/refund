@@ -385,59 +385,56 @@
 
   <!-- Mobile menu close behavior -->
   <script>
-    (function () {
-      const toggle = document.getElementById('nav-toggle');
-      const nav = document.getElementById('primary-nav');
-      const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+  (function () {
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('primary-nav');
+    const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
 
-      if (!toggle || !nav || !btn) return;
+    if (!toggle || !nav || !btn) return;
 
-      function closeMenu() {
-        toggle.checked = false;
-        btn.setAttribute('aria-label', 'Open menu');
-        btn.setAttribute('aria-expanded', 'false');
-        document.documentElement.style.overflow = '';
-      }
+    function syncUI() {
+      const isOpen = toggle.checked;
+      btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+    }
 
-      function openMenu() {
-        toggle.checked = true;
-        btn.setAttribute('aria-label', 'Close menu');
-        btn.setAttribute('aria-expanded', 'true');
-        document.documentElement.style.overflow = 'hidden';
-      }
+    function closeMenu() {
+      toggle.checked = false;
+      syncUI();
+    }
 
-      // Click hamburger toggles open/close and updates aria
-      btn.addEventListener('click', () => {
-        setTimeout(() => {
-          toggle.checked ? openMenu() : closeMenu();
-        }, 0);
-      });
+    // Keep aria + scroll lock in sync with checkbox state
+    toggle.addEventListener('change', syncUI);
 
-      // Close when a nav link is clicked
-      nav.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (a) closeMenu();
-      });
+    // Close when a nav link is clicked
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) closeMenu();
+    });
 
-      // Close when clicking/tapping outside the nav + button
-      document.addEventListener('click', (e) => {
-        if (!toggle.checked) return;
-        const clickedInsideNav = nav.contains(e.target);
-        const clickedButton = btn.contains(e.target);
-        if (!clickedInsideNav && !clickedButton) closeMenu();
-      });
+    // Close when clicking/tapping outside the nav + toggle button
+    document.addEventListener('click', (e) => {
+      if (!toggle.checked) return;
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedButton = btn.contains(e.target);
+      if (!clickedInsideNav && !clickedButton) closeMenu();
+    });
 
-      // Close on Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-      });
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
 
-      // Safety: if viewport grows to desktop, ensure menu closes
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && toggle.checked) closeMenu();
-      });
-    })();
-  </script>
+    // Close if viewport grows to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+
+    // Initialize
+    syncUI();
+  })();
+</script>
 
 </body>
 </html>
