@@ -728,21 +728,28 @@ footer {
 }
 
 /* =========================================================
-   MOBILE NAV (WORKING WITH YOUR CURRENT HTML)
+   MOBILE NAV (FIXED: checkbox is NOT display:none)
    ========================================================= */
 
-/* Hide checkbox but keep it toggleable via label */
+/* Keep checkbox accessible to the label toggle:
+   - NOT display:none
+   - visually hidden technique instead */
 .nav-toggle {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-  left: -9999px;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
 }
 
-/* Hamburger button base */
+/* Hamburger button */
 .nav-toggle-btn {
-  display: none;              /* shown on mobile */
+  display: none; /* shown on mobile */
   align-items: center;
   justify-content: center;
   width: 44px;
@@ -753,6 +760,12 @@ footer {
   cursor: pointer;
   z-index: 1200;
   position: relative;
+  flex: 0 0 auto;
+}
+
+/* Make sure icons don't “eat” clicks strangely */
+.nav-toggle-btn i {
+  pointer-events: none;
 }
 
 /* icon swap */
@@ -766,9 +779,10 @@ footer {
 .nav-cta-mobile { display: none; }
 
 @media (max-width: 900px) {
-  /* Wrap header items cleanly */
+  /* Ensure header items align cleanly */
   .nav-wrapper {
     flex-wrap: nowrap;
+    align-items: center;
   }
 
   /* Show hamburger */
@@ -782,8 +796,8 @@ footer {
     display: none;
     position: absolute;
     top: calc(100% + 12px);
-    right: clamp(16px, 2.5vw, 40px);
     left: clamp(16px, 2.5vw, 40px);
+    right: clamp(16px, 2.5vw, 40px);
     background: rgba(255, 255, 255, 0.98);
     border: 1px solid rgba(226, 232, 240, 0.95);
     border-radius: 18px;
@@ -801,6 +815,7 @@ footer {
     flex-direction: column;
     gap: 6px;
     align-items: stretch;
+    justify-content: flex-start;
   }
 
   .primary-nav a {
@@ -816,14 +831,9 @@ footer {
 
   /* Mobile CTA inside menu */
   .nav-cta-mobile { display: block; margin-top: 6px; }
-
-  .btn.btn-nav {
-    width: 100%;
-    text-align: center;
-  }
+  .btn.btn-nav { width: 100%; text-align: center; }
 }
 
-/* Desktop-only alignment tweaks so the toggle doesn't affect layout */
 @media (min-width: 901px) {
   .nav-toggle-btn { display: none; }
   .primary-nav { display: block; }
