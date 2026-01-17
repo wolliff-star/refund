@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ReFund - Unlocking Government Funding for Nonprofits</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css?v=20260117" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260110" />
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- Header -->
-  <header>
+  <header class="site-header">
     <div class="container nav-wrapper">
       <a href="#top" class="logo">
         <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
@@ -22,16 +22,15 @@
         </span>
       </a>
 
-      <!-- Mobile menu toggle (CSS-only) -->
+      <!-- Mobile nav toggle -->
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
 
-      <label for="nav-toggle"
-             class="nav-toggle-btn"
-             aria-label="Open menu"
-             aria-controls="primary-nav">
-        <span></span><span></span><span></span>
+      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+        <i class="ri-close-line nav-close" aria-hidden="true"></i>
       </label>
 
+      <!-- Primary navigation -->
       <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
         <ul>
           <li><a href="#challenge">The Challenge</a></li>
@@ -41,13 +40,15 @@
           <li><a href="#insights">Insights</a></li>
           <li><a href="#funding">For Funders</a></li>
 
-          <!-- Mobile-only CTA -->
-          <li class="nav-cta-item"><a href="#contact" class="btn">Get Involved</a></li>
+          <!-- Mobile-only CTA inside menu -->
+          <li class="nav-cta-mobile">
+            <a href="#contact" class="btn btn-nav">Get Involved</a>
+          </li>
         </ul>
       </nav>
 
-      <!-- Desktop-only CTA -->
-      <a href="#contact" class="btn nav-cta">Get Involved</a>
+      <!-- Desktop CTA (hidden on mobile) -->
+      <a href="#contact" class="btn btn-desktop">Get Involved</a>
     </div>
   </header>
 
@@ -230,7 +231,7 @@
       </div>
     </section>
 
-    <!-- Insights teaser -->
+    <!-- Insights -->
     <section id="insights" class="bg-sand" aria-labelledby="insights-title">
       <div class="container">
         <h2 class="section-title" id="insights-title">Latest Insights</h2>
@@ -278,12 +279,14 @@
         <a href="funders/index.html"
            class="subpage-callout toolkit-callout funding-block"
            aria-label="Explore resources for funders">
+
           <div class="toolkit-layout">
             <div class="toolkit-main">
               <div class="toolkit-head">
                 <div class="toolkit-icon" aria-hidden="true">
                   <i class="ri-briefcase-4-line"></i>
                 </div>
+
                 <div>
                   <div class="toolkit-kicker">Funder Toolkit</div>
                   <div class="toolkit-title">Everything you need to participate</div>
@@ -293,8 +296,10 @@
                 </div>
               </div>
             </div>
+
             <div class="toolkit-side" aria-hidden="true"></div>
           </div>
+
         </a>
       </div>
     </section>
@@ -311,10 +316,12 @@
             Complete our short intake form and we’ll follow up.
           </p>
 
-          <a href="https://forms.gle/hffd39fyrjGEtBPH7"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="btn">
+          <a
+            href="https://forms.gle/hffd39fyrjGEtBPH7"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+          >
             Contact ReFund
           </a>
         </div>
@@ -330,9 +337,7 @@
           <a href="#top" class="footer-logo">
             <img src="assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
           </a>
-          <p style="color: #CBD5E0; max-width: 42ch;">
-            ReFund provides zero-cost recoverable grants that enable nonprofits to carry out government-funded work.
-          </p>
+          <p style="color: #CBD5E0; max-width: 42ch;">ReFund provides zero-cost recoverable grants that enable nonprofits to carry out government-funded work.</p>
         </div>
 
         <div class="footer-col">
@@ -360,9 +365,11 @@
           <ul class="footer-links">
             <li><a href="#contact">Contact Form</a></li>
             <li>
-              <a href="https://www.linkedin.com/company/therefund/"
-                 target="_blank"
-                 rel="noopener noreferrer">
+              <a
+                href="https://www.linkedin.com/company/therefund/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 LinkedIn
               </a>
             </li>
@@ -376,53 +383,61 @@
     </div>
   </footer>
 
-<script>
-  (function () {
-    const toggle = document.getElementById('nav-toggle');
-    const nav = document.getElementById('primary-nav');
-    const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+  <!-- Mobile menu close behavior -->
+  <script>
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
 
-    if (!toggle || !nav || !btn) return;
+      if (!toggle || !nav || !btn) return;
 
-    function closeMenu() {
-      toggle.checked = false;
-      btn.setAttribute('aria-label', 'Open menu');
-    }
+      function closeMenu() {
+        toggle.checked = false;
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.setAttribute('aria-expanded', 'false');
+        document.documentElement.style.overflow = '';
+      }
 
-    function openMenu() {
-      toggle.checked = true;
-      btn.setAttribute('aria-label', 'Close menu');
-    }
+      function openMenu() {
+        toggle.checked = true;
+        btn.setAttribute('aria-label', 'Close menu');
+        btn.setAttribute('aria-expanded', 'true');
+        document.documentElement.style.overflow = 'hidden';
+      }
 
-    // Keep aria-label accurate when toggled
-    btn.addEventListener('click', () => {
-      // click happens before checked state updates, so defer
-      setTimeout(() => {
-        toggle.checked ? openMenu() : closeMenu();
-      }, 0);
-    });
+      // Click hamburger toggles open/close and updates aria
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          toggle.checked ? openMenu() : closeMenu();
+        }, 0);
+      });
 
-    // Close when a nav link is clicked
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (a) closeMenu();
-    });
+      // Close when a nav link is clicked
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (a) closeMenu();
+      });
 
-    // Close when clicking/tapping outside the nav + button
-    document.addEventListener('click', (e) => {
-      if (!toggle.checked) return;
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedButton = btn.contains(e.target);
-      if (!clickedInsideNav && !clickedButton) closeMenu();
-    });
+      // Close when clicking/tapping outside the nav + button
+      document.addEventListener('click', (e) => {
+        if (!toggle.checked) return;
+        const clickedInsideNav = nav.contains(e.target);
+        const clickedButton = btn.contains(e.target);
+        if (!clickedInsideNav && !clickedButton) closeMenu();
+      });
 
-    // Optional: close on Escape (nice on mobile keyboards too)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-  })();
-</script>
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
 
+      // Safety: if viewport grows to desktop, ensure menu closes
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900 && toggle.checked) closeMenu();
+      });
+    })();
+  </script>
 
 </body>
 </html>
