@@ -11,46 +11,52 @@
 <body id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container nav-wrapper">
-      <a href="#top" class="logo">
-        <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
-        <span class="logo-text">
-          <strong>ReFund</strong>
-          <span class="logo-subtitle">The Recoverable Grants Fund</span>
-        </span>
-      </a>
+<!-- Header -->
+<header class="site-header" id="site-header">
+  <div class="container nav-wrapper">
+    <a href="#top" class="logo">
+      <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
+      <span class="logo-text">
+        <strong>ReFund</strong>
+        <span class="logo-subtitle">The Recoverable Grants Fund</span>
+      </span>
+    </a>
 
-      <!-- Mobile nav toggle -->
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+    <!-- Mobile nav toggle (button, not checkbox) -->
+    <button
+      class="nav-toggle-btn"
+      id="nav-toggle-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+    >
+      <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+      <i class="ri-close-line nav-close" aria-hidden="true"></i>
+    </button>
 
-      <label for="nav-toggle" class="nav-toggle-btn" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
-        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
-        <i class="ri-close-line nav-close" aria-hidden="true"></i>
-      </label>
+    <!-- Primary navigation -->
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+      <ul>
+        <li><a href="#challenge">The Challenge</a></li>
+        <li><a href="#solution">The Solution</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#funding">For Funders</a></li>
 
-      <!-- Primary navigation -->
-      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
-        <ul>
-          <li><a href="#challenge">The Challenge</a></li>
-          <li><a href="#solution">The Solution</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#impact">Impact</a></li>
-          <li><a href="#insights">Insights</a></li>
-          <li><a href="#funding">For Funders</a></li>
+        <!-- Mobile-only CTA inside menu -->
+        <li class="nav-cta-mobile">
+          <a href="#contact" class="btn btn-nav">Get Involved</a>
+        </li>
+      </ul>
+    </nav>
 
-          <!-- Mobile-only CTA inside menu -->
-          <li class="nav-cta-mobile">
-            <a href="#contact" class="btn btn-nav">Get Involved</a>
-          </li>
-        </ul>
-      </nav>
+    <!-- Desktop CTA -->
+    <a href="#contact" class="btn btn-desktop">Get Involved</a>
+  </div>
+</header>
 
-      <!-- Desktop CTA (hidden on mobile) -->
-      <a href="#contact" class="btn btn-desktop">Get Involved</a>
-    </div>
-  </header>
 
   <main id="main" tabindex="-1">
     <!-- Hero Section -->
@@ -385,56 +391,49 @@
 
   <!-- Mobile menu close behavior -->
   <script>
-  (function () {
-    const toggle = document.getElementById('nav-toggle');
-    const nav = document.getElementById('primary-nav');
-    const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+(function () {
+  const header = document.getElementById('site-header');
+  const btn = document.getElementById('nav-toggle-btn');
+  const nav = document.getElementById('primary-nav');
+  if (!header || !btn || !nav) return;
 
-    if (!toggle || !nav || !btn) return;
+  function setOpen(isOpen){
+    header.classList.toggle('nav-open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  }
 
-    function syncUI() {
-      const isOpen = toggle.checked;
-      btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      document.documentElement.style.overflow = isOpen ? 'hidden' : '';
-    }
+  btn.addEventListener('click', () => {
+    const isOpen = header.classList.contains('nav-open');
+    setOpen(!isOpen);
+  });
 
-    function closeMenu() {
-      toggle.checked = false;
-      syncUI();
-    }
+  // close on link click
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (a) setOpen(false);
+  });
 
-    // Keep aria + scroll lock in sync with checkbox state
-    toggle.addEventListener('change', syncUI);
+  // close on outside click
+  document.addEventListener('click', (e) => {
+    if (!header.classList.contains('nav-open')) return;
+    if (!header.contains(e.target)) setOpen(false);
+  });
 
-    // Close when a nav link is clicked
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (a) closeMenu();
-    });
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
 
-    // Close when clicking/tapping outside the nav + toggle button
-    document.addEventListener('click', (e) => {
-      if (!toggle.checked) return;
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedButton = btn.contains(e.target);
-      if (!clickedInsideNav && !clickedButton) closeMenu();
-    });
+  // close if viewport grows to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setOpen(false);
+  });
 
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // Close if viewport grows to desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) closeMenu();
-    });
-
-    // Initialize
-    syncUI();
-  })();
+  setOpen(false);
+})();
 </script>
+
 
 </body>
 </html>
