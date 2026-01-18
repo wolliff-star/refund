@@ -11,52 +11,50 @@
 <body id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
 
-<!-- Header -->
-<header class="site-header" id="site-header">
-  <div class="container nav-wrapper">
-    <a href="#top" class="logo">
-      <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
-      <span class="logo-text">
-        <strong>ReFund</strong>
-        <span class="logo-subtitle">The Recoverable Grants Fund</span>
-      </span>
-    </a>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#top" class="logo">
+        <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
+        <span class="logo-text">
+          <strong>ReFund</strong>
+          <span class="logo-subtitle">The Recoverable Grants Fund</span>
+        </span>
+      </a>
 
-    <!-- Mobile nav toggle (button, not checkbox) -->
-    <button
-      class="nav-toggle-btn"
-      id="nav-toggle-btn"
-      type="button"
-      aria-label="Open menu"
-      aria-controls="primary-nav"
-      aria-expanded="false"
-    >
-      <i class="ri-menu-line nav-open" aria-hidden="true"></i>
-      <i class="ri-close-line nav-close" aria-hidden="true"></i>
-    </button>
+      <!-- Mobile nav toggle button (JS-driven; no checkbox) -->
+      <button
+        type="button"
+        class="nav-toggle-btn"
+        aria-label="Open menu"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+      >
+        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+        <i class="ri-close-line nav-close" aria-hidden="true"></i>
+      </button>
 
-    <!-- Primary navigation -->
-    <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
-      <ul>
-        <li><a href="#challenge">The Challenge</a></li>
-        <li><a href="#solution">The Solution</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#insights">Insights</a></li>
-        <li><a href="#funding">For Funders</a></li>
+      <!-- Primary navigation -->
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#challenge">The Challenge</a></li>
+          <li><a href="#solution">The Solution</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#funding">For Funders</a></li>
 
-        <!-- Mobile-only CTA inside menu -->
-        <li class="nav-cta-mobile">
-          <a href="#contact" class="btn btn-nav">Get Involved</a>
-        </li>
-      </ul>
-    </nav>
+          <!-- Mobile-only CTA inside menu -->
+          <li class="nav-cta-mobile">
+            <a href="#contact" class="btn btn-nav">Get Involved</a>
+          </li>
+        </ul>
+      </nav>
 
-    <!-- Desktop CTA -->
-    <a href="#contact" class="btn btn-desktop">Get Involved</a>
-  </div>
-</header>
-
+      <!-- Desktop CTA (hidden on mobile via CSS) -->
+      <a href="#contact" class="btn btn-desktop">Get Involved</a>
+    </div>
+  </header>
 
   <main id="main" tabindex="-1">
     <!-- Hero Section -->
@@ -389,51 +387,59 @@
     </div>
   </footer>
 
-  <!-- Mobile menu close behavior -->
+  <!-- JS-driven mobile menu (more reliable than checkbox+label across mobile browsers) -->
   <script>
-(function () {
-  const header = document.getElementById('site-header');
-  const btn = document.getElementById('nav-toggle-btn');
-  const nav = document.getElementById('primary-nav');
-  if (!header || !btn || !nav) return;
+    (function () {
+      const btn = document.querySelector('.nav-toggle-btn');
+      const nav = document.getElementById('primary-nav');
+      const header = document.querySelector('.site-header');
 
-  function setOpen(isOpen){
-    header.classList.toggle('nav-open', isOpen);
-    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-  }
+      if (!btn || !nav || !header) return;
 
-  btn.addEventListener('click', () => {
-    const isOpen = header.classList.contains('nav-open');
-    setOpen(!isOpen);
-  });
+      function setOpen(isOpen) {
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        header.classList.toggle('nav-open', isOpen);
+        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+      }
 
-  // close on link click
-  nav.addEventListener('click', (e) => {
-    const a = e.target.closest('a');
-    if (a) setOpen(false);
-  });
+      function isOpen() {
+        return header.classList.contains('nav-open');
+      }
 
-  // close on outside click
-  document.addEventListener('click', (e) => {
-    if (!header.classList.contains('nav-open')) return;
-    if (!header.contains(e.target)) setOpen(false);
-  });
+      // Toggle button
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        setOpen(!isOpen());
+      });
 
-  // close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
-  });
+      // Close when a nav link is clicked
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (a) setOpen(false);
+      });
 
-  // close if viewport grows to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) setOpen(false);
-  });
+      // Close when clicking outside nav (mobile overlay behavior)
+      document.addEventListener('click', (e) => {
+        if (!isOpen()) return;
+        const clickedNav = nav.contains(e.target);
+        const clickedBtn = btn.contains(e.target);
+        if (!clickedNav && !clickedBtn) setOpen(false);
+      });
 
-  setOpen(false);
-})();
-</script>
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
 
+      // Close if viewport grows to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) setOpen(false);
+      });
 
+      // Initialize
+      setOpen(false);
+    })();
+  </script>
 </body>
 </html>
