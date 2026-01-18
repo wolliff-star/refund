@@ -767,3 +767,32 @@ footer {
   .footer-col:first-child { text-align: center; }
   .footer-logo { margin-left: auto; margin-right: auto; }
 }
+
+/* --- Mobile hamburger visibility fix (stacking / z-index) --- */
+
+/* Ensure header creates a reliable stacking context */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000; /* higher than anything else */
+}
+
+/* Ensure the header row is the stacking parent */
+.site-header .nav-wrapper {
+  position: relative;
+  z-index: 2001;
+}
+
+/* Put the hamburger above logo/text */
+.nav-toggle-btn {
+  position: relative;
+  z-index: 2003;
+}
+
+/* Keep nav overlay under the button (so button stays clickable/visible) */
+@media (max-width: 900px) {
+  .primary-nav {
+    z-index: 2002;
+  }
+}
+
