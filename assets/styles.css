@@ -796,3 +796,6 @@ footer {
   }
 }
 
+@media (max-width: 900px) {
+  .logo { max-width: calc(100% - 56px); } /* leave room for the button */
+}
