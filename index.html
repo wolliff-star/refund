@@ -391,41 +391,74 @@
   </footer>
 
    <script>
-    (function () {
-      const header = document.getElementById('site-header');
-      const btn = document.getElementById('nav-toggle-btn');
-      const nav = document.getElementById('primary-nav');
-      const scrim = document.getElementById('nav-scrim');
+(function () {
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('primary-nav');
+  const header = document.querySelector('.site-header');
 
-      if (!header || !btn || !nav || !scrim) return;
+  if (!toggle || !nav || !header) return;
 
-      function setOpen(isOpen) {
-        header.classList.toggle('nav-open', isOpen);
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
-      }
+  let scrollY = 0;
 
-      btn.addEventListener('click', () => {
-        const isOpen = !header.classList.contains('nav-open');
-        setOpen(isOpen);
-      });
+  function openMenu() {
+    scrollY = window.scrollY || 0;
 
-      scrim.addEventListener('click', () => setOpen(false));
+    // Apply open state
+    header.classList.add('nav-open');
+    toggle.checked = true;
 
-      nav.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (a) setOpen(false);
-      });
+    // Lock scroll (Android-safe)
+    document.body.classList.add('nav-lock');
+    document.body.style.top = `-${scrollY}px`;
+  }
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
-      });
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    toggle.checked = false;
 
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) setOpen(false);
-      });
-    })();
-  </script>
+    // Unlock scroll and restore position
+    document.body.classList.remove('nav-lock');
+    const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
+    document.body.style.top = '';
+    window.scrollTo(0, y);
+  }
+
+  function syncFromToggle() {
+    if (toggle.checked) openMenu();
+    else closeMenu();
+  }
+
+  // Toggle changes (checkbox/label)
+  toggle.addEventListener('change', syncFromToggle);
+
+  // Close when a nav link is clicked
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (a) closeMenu();
+  });
+
+  // Close when clicking outside nav
+  document.addEventListener('click', (e) => {
+    if (!toggle.checked) return;
+    const clickedInsideNav = nav.contains(e.target);
+    const clickedInsideHeader = header.contains(e.target);
+    if (!clickedInsideNav && !clickedInsideHeader) closeMenu();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Close if viewport grows to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  // Start closed
+  closeMenu();
+})();
+</script>
+
 </body>
 </html>
