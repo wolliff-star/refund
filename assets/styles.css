@@ -855,3 +855,46 @@ footer {
   .funding-card { padding: clamp(18px, 5vw, 28px); }
   .funding-wrapper { padding: clamp(14px, 4.5vw, 22px); }
 }
+
+/* =========================
+   MOBILE OVERFLOW FIX: FUNDING CARDS
+   ========================= */
+
+/* 1) Let the grid collapse sooner and avoid min widths that exceed the viewport */
+@media (max-width: 900px) {
+  .funding-grid {
+    grid-template-columns: 1fr;  /* stack cards */
+  }
+}
+
+/* 2) Make sure grid items can shrink (prevents "card wider than background") */
+.funding-grid > * {
+  min-width: 0;
+}
+
+/* 3) Ensure wrapper + cards never exceed parent width */
+.funding-wrapper,
+.funding-card {
+  max-width: 100%;
+}
+
+/* 4) Prevent any text from forcing horizontal overflow inside the card */
+.funding-card,
+.funding-card * {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* 5) On very small screens, tighten padding a bit so cards fit cleanly */
+@media (max-width: 520px) {
+  .funding-wrapper {
+    padding: 16px; /* overrides clamp on tiny screens */
+  }
+  .funding-card {
+    padding: 18px; /* overrides clamp on tiny screens */
+  }
+  .funding-amount {
+    font-size: clamp(1.6rem, 9vw, 2.4rem); /* keep big numbers from "pushing" */
+  }
+}
+
