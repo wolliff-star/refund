@@ -38,6 +38,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* ✅ overflow fix: avoid accidental horizontal scroll from any child */
+html, body { max-width: 100%; }
+
 body {
   font-family: var(--font-main);
   color: var(--color-text-soft);
@@ -57,10 +60,18 @@ h1, h2, h3, h4, h5, h6 {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
+/* ✅ overflow fix: container should never exceed viewport */
 .container {
   width: min(var(--container-max), var(--container-max-wide));
   margin: 0 auto;
   padding: 0 clamp(16px, 2.5vw, 40px);
+  max-width: 100%;
+}
+
+/* ✅ overflow fix: allow long words/URLs to wrap in cards */
+p, li, a, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .btn {
@@ -107,17 +118,14 @@ button:focus-visible {
    HEADER + NAV (DESKTOP)
    ========================= */
 
-/* IMPORTANT: isolate header stacking context so menu always layers above page */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 5000; /* higher than any section */
+  z-index: 5000;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 16px 0;
   box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-
-  /* This prevents weird Android stacking where body content renders “above” overlays */
   isolation: isolate;
 }
 
@@ -455,6 +463,10 @@ section { padding: var(--spacing-section) 0; }
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: clamp(16px, 2.8vw, 40px);
 }
+
+/* ✅ overflow fix: grid children can shrink instead of forcing overflow */
+.about-grid > * { min-width: 0; }
+
 .content-card {
   background: var(--color-white);
   padding: clamp(22px, 3.2vw, 48px);
@@ -497,6 +509,10 @@ section { padding: var(--spacing-section) 0; }
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(16px, 2.8vw, 40px);
 }
+
+/* ✅ overflow fix: grid children can shrink */
+.funding-grid > * { min-width: 0; }
+
 .funding-card {
   background: var(--color-white);
   padding: clamp(22px, 3.2vw, 48px);
@@ -504,6 +520,9 @@ section { padding: var(--spacing-section) 0; }
   text-align: center;
   border: 2px solid transparent;
   transition: border-color 0.3s;
+
+  /* ✅ overflow fix: never exceed container */
+  max-width: 100%;
 }
 .funding-card:hover { border-color: var(--color-brand-green); }
 .funding-amount {
@@ -521,6 +540,9 @@ section { padding: var(--spacing-section) 0; }
   padding: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(4px);
+
+  /* ✅ overflow fix */
+  max-width: 100%;
 }
 
 .funding-cta {
@@ -547,6 +569,7 @@ section { padding: var(--spacing-section) 0; }
   border: none;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  max-width: 100%;
 }
 .btn-secondary:hover {
   transform: translateY(-2px);
@@ -564,6 +587,7 @@ section { padding: var(--spacing-section) 0; }
   background: rgba(36, 238, 85, 0.12);
   padding: clamp(16px, 2.4vw, 22px);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  max-width: 100%; /* ✅ overflow fix */
 }
 .subpage-callout:hover {
   box-shadow: var(--shadow-soft);
@@ -578,6 +602,7 @@ section { padding: var(--spacing-section) 0; }
   padding: clamp(18px, 2.6vw, 26px);
   border-radius: 22px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  max-width: 100%; /* ✅ overflow fix */
 }
 .toolkit-callout:hover{
   border-color: rgba(36,238,85,0.75);
@@ -629,6 +654,10 @@ section { padding: var(--spacing-section) 0; }
   gap: clamp(14px, 2vw, 22px);
   align-items: start;
 }
+
+/* ✅ overflow fix */
+.toolkit-layout > * { min-width: 0; }
+
 .toolkit-side{
   display: flex;
   flex-direction: column;
@@ -646,6 +675,7 @@ section { padding: var(--spacing-section) 0; }
   border-radius: var(--radius-card);
   margin-top: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-soft);
+  max-width: 100%; /* ✅ overflow fix */
 }
 
 /* Footer */
@@ -717,7 +747,6 @@ footer {
     justify-content: center;
     cursor: pointer;
 
-    /* Make sure the button is always above overlays */
     position: relative;
     z-index: 7002;
   }
@@ -751,7 +780,7 @@ footer {
   /* Convert nav into a fixed panel that sits ABOVE page content */
   .primary-nav {
     position: fixed;
-    top: 76px; /* header height-ish; safe for sticky header */
+    top: 76px;
     left: 12px;
     right: 12px;
 
@@ -769,7 +798,6 @@ footer {
     pointer-events: none;
     transition: transform 0.18s ease, opacity 0.18s ease;
 
-    /* CRITICAL: keep above everything else */
     z-index: 7001;
   }
 
@@ -812,10 +840,18 @@ footer {
 @media (max-width: 768px) {
   .steps-container::before { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  /* ✅ overflow fix: on smaller screens, allow About grid to be 1 column earlier */
+  .about-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { text-align: center; }
   .footer-logo { margin-left: auto; margin-right: auto; }
+
+  /* ✅ overflow fix: reduce padding so cards never exceed their parent */
+  .content-card { padding: clamp(18px, 5vw, 28px); }
+  .funding-card { padding: clamp(18px, 5vw, 28px); }
+  .funding-wrapper { padding: clamp(14px, 4.5vw, 22px); }
 }
