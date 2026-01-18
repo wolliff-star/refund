@@ -63,6 +63,7 @@ ul { list-style: none; }
   padding: 0 clamp(16px, 2.5vw, 40px);
 }
 
+/* Buttons */
 .btn {
   display: inline-block;
   padding: 0.95em 1.8em;
@@ -76,7 +77,6 @@ ul { list-style: none; }
   font-size: clamp(0.95rem, 1.1vw, 1rem);
   white-space: nowrap;
 }
-
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(36, 238, 85, 0.3);
@@ -104,50 +104,42 @@ button:focus-visible {
 }
 
 /* =========================
-   HEADER + NAV (DESKTOP)
+   Header + Navigation
    ========================= */
-
-/* IMPORTANT: isolate header stacking context so menu always layers above page */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 5000; /* higher than any section */
+  z-index: 1000;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 16px 0;
   box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-
-  /* This prevents weird Android stacking where body content renders “above” overlays */
-  isolation: isolate;
 }
 
 .nav-wrapper {
   display: flex;
   align-items: center;
   gap: clamp(12px, 2vw, 24px);
-  position: relative;
 }
 
+/* Logo */
 .logo {
   display: flex;
   align-items: center;
   gap: clamp(12px, 1.8vw, 18px);
   min-width: 0;
 }
-
 .logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
   min-width: 0;
 }
-
 .logo-text strong {
   font-family: var(--font-heading);
   font-size: clamp(1.05rem, 1.5vw, 1.35rem);
   color: var(--color-text-main);
 }
-
 .logo-subtitle {
   font-size: clamp(0.75rem, 1vw, 0.9rem);
   font-weight: 600;
@@ -157,7 +149,6 @@ button:focus-visible {
   text-overflow: ellipsis;
   max-width: 36ch;
 }
-
 .logo img {
   height: clamp(40px, 4vw, 64px);
   width: auto;
@@ -165,11 +156,7 @@ button:focus-visible {
 }
 
 /* Desktop nav */
-.primary-nav {
-  flex: 1;
-  min-width: 0;
-}
-
+.primary-nav { flex: 1; min-width: 0; }
 .primary-nav ul {
   display: flex;
   gap: clamp(14px, 2vw, 32px);
@@ -179,23 +166,42 @@ button:focus-visible {
   justify-content: flex-end;
   align-items: center;
 }
-
 .primary-nav a:hover { color: var(--color-text-main); }
+
+/* Mobile toggle button (hidden on desktop) */
+.nav-toggle-btn {
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 10px;
+  margin-left: auto; /* ensures it sits at the right edge on mobile */
+  border-radius: 12px;
+  cursor: pointer;
+  line-height: 0;
+  color: var(--color-text-main);
+}
+
+/* Icon swap (menu vs close) */
+.nav-toggle-btn .nav-close { display: none; }
+.site-header.nav-open .nav-toggle-btn .nav-open { display: none; }
+.site-header.nav-open .nav-toggle-btn .nav-close { display: inline; }
+
+.nav-toggle-btn i {
+  font-size: 26px;
+}
 
 /* Desktop CTA */
 .btn-desktop { display: inline-block; }
 
-/* Mobile-only items (hidden on desktop) */
-.nav-toggle-btn,
-.nav-cta-mobile,
-.nav-scrim {
-  display: none;
-}
+/* Mobile-only CTA inside menu (hidden on desktop) */
+.nav-cta-mobile { display: none; }
+.btn-nav { width: 100%; text-align: center; }
 
 /* =========================
-   HERO + SECTIONS
+   Hero Section
    ========================= */
-
 .hero {
   background-color: var(--color-bg-primary);
   padding: clamp(72px, 10vw, 120px) 0 clamp(56px, 8vw, 100px);
@@ -203,7 +209,6 @@ button:focus-visible {
   position: relative;
   overflow: hidden;
 }
-
 .hero::before {
   content: '';
   position: absolute;
@@ -215,19 +220,16 @@ button:focus-visible {
   border-radius: 50%;
   z-index: 0;
 }
-
 .hero .container {
   position: relative;
   z-index: 1;
   max-width: 100%;
 }
-
 .hero h1 {
   font-size: clamp(2.1rem, 5vw, 4rem);
   margin-bottom: clamp(18px, 2.6vw, 32px);
   letter-spacing: -0.02em;
 }
-
 .hero p {
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   margin-bottom: clamp(26px, 3.5vw, 48px);
@@ -243,7 +245,6 @@ section { padding: var(--spacing-section) 0; }
   margin-bottom: 18px;
   text-align: center;
 }
-
 .section-desc {
   font-size: clamp(1rem, 1.3vw, 1.125rem);
   text-align: center;
@@ -251,6 +252,7 @@ section { padding: var(--spacing-section) 0; }
   margin: 0 auto clamp(36px, 5vw, 64px);
 }
 
+/* section bottom link (to subpages) */
 .section-bottom-link {
   text-align: center;
   margin-top: clamp(18px, 3vw, 32px);
@@ -506,6 +508,7 @@ section { padding: var(--spacing-section) 0; }
   transition: border-color 0.3s;
 }
 .funding-card:hover { border-color: var(--color-brand-green); }
+
 .funding-amount {
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 900;
@@ -553,7 +556,7 @@ section { padding: var(--spacing-section) 0; }
   box-shadow: 0 10px 20px rgba(28, 28, 28, 0.18);
 }
 
-/* Toolkit callout */
+/* Callout */
 .funding-block { width: 100%; max-width: 100%; }
 
 .subpage-callout {
@@ -571,6 +574,7 @@ section { padding: var(--spacing-section) 0; }
   transform: translateY(-2px);
 }
 
+/* Toolkit callout */
 .toolkit-callout{
   background: rgba(255,255,255,0.85);
   border: 1px solid rgba(226,232,240,0.95);
@@ -634,9 +638,6 @@ section { padding: var(--spacing-section) 0; }
   flex-direction: column;
   align-items: flex-start;
 }
-@media (max-width: 900px){
-  .toolkit-layout{ grid-template-columns: 1fr; }
-}
 
 /* Contact */
 .contact-container { max-width: 100%; margin: 0 auto; text-align: center; }
@@ -661,6 +662,8 @@ footer {
   margin-bottom: 50px;
 }
 .footer-logo { display: inline-block; margin-bottom: 20px; }
+
+/* Footer logo sizing (larger than header) + white background badge */
 .footer-logo img {
   height: clamp(72px, 8vw, 120px);
   width: auto;
@@ -670,6 +673,7 @@ footer {
   border-radius: 16px;
   filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
 }
+
 .footer-col h4 {
   color: var(--color-white);
   font-size: clamp(1rem, 1.25vw, 1.125rem);
@@ -681,6 +685,7 @@ footer {
   transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--color-brand-green); }
+
 .copyright {
   text-align: center;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -690,132 +695,338 @@ footer {
 }
 
 /* =========================
-   MOBILE NAV (BUTTON + OVERLAY)
+   Responsive behavior
    ========================= */
-
 @media (max-width: 900px) {
-  .nav-wrapper {
-    flex-wrap: nowrap;
-  }
+  .site-header { padding: 14px 0; }
+
+  /* Show hamburger */
+  .nav-toggle-btn { display: inline-flex; align-items: center; justify-content: center; }
 
   /* Hide desktop CTA on mobile */
   .btn-desktop { display: none; }
 
-  /* Show mobile toggle + scrim */
-  .nav-toggle-btn { display: inline-flex; }
-  .nav-scrim { display: block; }
-
-  .nav-toggle-btn {
-    margin-left: auto;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid rgba(226, 232, 240, 0.95);
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    /* Make sure the button is always above overlays */
-    position: relative;
-    z-index: 7002;
-  }
-
-  .nav-toggle-btn i {
-    font-size: 22px;
-    line-height: 1;
-    color: var(--color-text-main);
-  }
-
-  /* icon swap */
-  .nav-toggle-btn .nav-close { display: none; }
-  .site-header.nav-open .nav-toggle-btn .nav-open { display: none; }
-  .site-header.nav-open .nav-toggle-btn .nav-close { display: inline; }
-
-  /* Scrim behind the menu panel */
-  .nav-scrim {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 7000;
-  }
-  .site-header.nav-open .nav-scrim {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Convert nav into a fixed panel that sits ABOVE page content */
+  /* Turn nav into an overlay dropdown */
   .primary-nav {
     position: fixed;
-    top: 76px; /* header height-ish; safe for sticky header */
-    left: 12px;
-    right: 12px;
-
-    background: rgba(255, 255, 255, 0.98);
-    border: 1px solid rgba(226, 232, 240, 0.95);
-    border-radius: 18px;
-    box-shadow: var(--shadow-soft);
-
-    padding: 14px;
-    max-height: calc(100vh - 96px);
-    overflow: auto;
-
-    transform: translateY(-10px);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.18s ease, opacity 0.18s ease;
-
-    /* CRITICAL: keep above everything else */
-    z-index: 7001;
+    top: 72px; /* header height-ish; keeps menu below header */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 16px;
+    display: none;
+    background: rgba(245, 249, 249, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    overflow-y: auto;
   }
 
+  /* Open state */
   .site-header.nav-open .primary-nav {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+    display: block;
   }
 
   .primary-nav ul {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    align-items: stretch;
+    gap: 10px;
     justify-content: flex-start;
-    flex-wrap: nowrap;
+    align-items: stretch;
+    padding: 12px;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(226,232,240,0.95);
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
   }
 
   .primary-nav a {
     display: block;
-    padding: 12px 12px;
-    border-radius: 12px;
+    padding: 14px 14px;
+    border-radius: 14px;
     font-weight: 800;
     color: var(--color-text-main);
   }
-
-  .primary-nav a:hover {
-    background: rgba(36, 238, 85, 0.10);
-  }
+  .primary-nav a:hover { background: rgba(36, 238, 85, 0.12); }
 
   /* Mobile CTA inside menu */
   .nav-cta-mobile { display: block; margin-top: 6px; }
-  .btn.btn-nav {
-    width: 100%;
-    text-align: center;
-    padding: 0.95em 1.2em;
-  }
+  .nav-cta-mobile .btn { width: 100%; }
+
+  /* Make header row tighter */
+  .nav-wrapper { gap: 12px; }
 }
 
 @media (max-width: 768px) {
   .steps-container::before { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .toolkit-layout { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { text-align: center; }
   .footer-logo { margin-left: auto; margin-right: auto; }
+}
+
+/* --- Mobile hamburger visibility fix (stacking / z-index) --- */
+
+/* Ensure header creates a reliable stacking context */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000; /* higher than anything else */
+}
+
+/* Ensure the header row is the stacking parent */
+.site-header .nav-wrapper {
+  position: relative;
+  z-index: 2001;
+}
+
+/* Put the hamburger above logo/text */
+.nav-toggle-btn {
+  position: relative;
+  z-index: 2003;
+}
+
+/* Keep nav overlay under the button (so button stays clickable/visible) */
+@media (max-width: 900px) {
+  .primary-nav {
+    z-index: 2002;
+  }
+}
+
+@media (max-width: 900px) {
+  .logo { max-width: calc(100% - 56px); } /* leave room for the button */
+}
+
+/* =========================
+   MOBILE NAV: make hamburger always visible
+   ========================= */
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure header row is a positioning context */
+.site-header .nav-wrapper{
+  position: relative;
+}
+
+/* Hide the checkbox but keep it clickable via label */
+.nav-toggle{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile layout + pin the button */
+@media (max-width: 900px){
+
+  /* Let header wrap, but keep things from overlapping */
+  .site-header .nav-wrapper{
+    flex-wrap: wrap;
+    align-items: center;
+    padding-right: 56px; /* reserve room for hamburger */
+  }
+
+  /* Pin the hamburger to the top-right inside header */
+  .nav-toggle-btn{
+    position: absolute;
+    top: 50%;
+    right: clamp(16px, 2.5vw, 40px); /* match container padding */
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+    z-index: 10001;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-toggle-btn i{
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Prevent the logo/text from sitting under the hamburger */
+  .logo{
+    max-width: 100%;
+    padding-right: 12px;
+  }
+  .logo-text{
+    min-width: 0;
+  }
+  .logo-subtitle{
+    max-width: 22ch;
+  }
+
+  /* Ensure nav overlay sits under the button but above page */
+  .primary-nav{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+  }
+}
+
+@media (max-width: 900px){
+  .nav-toggle-btn{ color: #1C1C1C; }
+}
+
+/* ===== Mobile menu: force menu items to be visible (Android Chrome fix) ===== */
+@media (max-width: 900px){
+
+  /* When menu is open, guarantee the overlay + its contents are visible */
+  .nav-toggle:checked ~ .primary-nav{
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Ensure nav overlay is actually above the page */
+  .primary-nav{
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(255,255,255,0.98);
+    padding: 86px 20px 24px;
+    overflow-y: auto;
+
+    /* kill any “hidden by default” effects from earlier CSS */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+
+  /* Make sure the list actually shows + has spacing */
+  .primary-nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .primary-nav li{
+    margin: 0;
+  }
+
+  /* Force link text to a visible color */
+  .primary-nav a{
+    display: block;
+    padding: 14px 14px;
+    border-radius: 14px;
+
+    color: #1C1C1C !important;     /* key: visible text */
+    background: rgba(226,232,240,0.35);
+    font-weight: 800;
+  }
+
+  .primary-nav a:hover{
+    background: rgba(36,238,85,0.15);
+  }
+
+  /* Make CTA inside menu visible + full width */
+  .nav-cta-mobile{
+    margin-top: 10px;
+  }
+
+  .nav-cta-mobile .btn-nav{
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===== Fix: mobile menu overlay is behind page content (Android Chrome) ===== */
+@media (max-width: 900px){
+
+  /* Ensure header/toggle always sits on top */
+  .site-header{
+    position: sticky;
+    top: 0;
+    z-index: 30000;
+  }
+
+  .nav-toggle-btn{
+    position: relative;
+    z-index: 30001;
+  }
+
+  /* The menu overlay must be a fixed top layer */
+  .primary-nav{
+    position: fixed !important;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 29999 !important;
+
+    background: rgba(255,255,255,0.98);
+    padding: 86px 20px 24px; /* leaves room for header */
+    overflow-y: auto;
+
+    /* closed state */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+
+  /* Open state */
+  .nav-toggle:checked ~ .primary-nav{
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  /* Make sure the menu content is visible and clickable */
+  .primary-nav ul{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .primary-nav a{
+    display: block;
+    padding: 14px 14px;
+    border-radius: 14px;
+    color: #1C1C1C !important;
+    background: rgba(226,232,240,0.35);
+    font-weight: 800;
+  }
+
+  /* Optional: dim the page behind the menu (helps confirm it's on top) */
+  .nav-toggle:checked ~ .nav-scrim{
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+@media (max-width: 900px){
+  .nav-scrim{
+    position: fixed;
+    inset: 0;
+    z-index: 25000;
+    background: rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
 }
