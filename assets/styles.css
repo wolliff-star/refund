@@ -887,3 +887,69 @@ footer {
   .nav-toggle-btn{ color: #1C1C1C; }
 }
 
+/* ===== Mobile menu: force menu items to be visible (Android Chrome fix) ===== */
+@media (max-width: 900px){
+
+  /* When menu is open, guarantee the overlay + its contents are visible */
+  .nav-toggle:checked ~ .primary-nav{
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Ensure nav overlay is actually above the page */
+  .primary-nav{
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(255,255,255,0.98);
+    padding: 86px 20px 24px;
+    overflow-y: auto;
+
+    /* kill any “hidden by default” effects from earlier CSS */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+
+  /* Make sure the list actually shows + has spacing */
+  .primary-nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .primary-nav li{
+    margin: 0;
+  }
+
+  /* Force link text to a visible color */
+  .primary-nav a{
+    display: block;
+    padding: 14px 14px;
+    border-radius: 14px;
+
+    color: #1C1C1C !important;     /* key: visible text */
+    background: rgba(226,232,240,0.35);
+    font-weight: 800;
+  }
+
+  .primary-nav a:hover{
+    background: rgba(36,238,85,0.15);
+  }
+
+  /* Make CTA inside menu visible + full width */
+  .nav-cta-mobile{
+    margin-top: 10px;
+  }
+
+  .nav-cta-mobile .btn-nav{
+    width: 100%;
+    text-align: center;
+  }
+}
