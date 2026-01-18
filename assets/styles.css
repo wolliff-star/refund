@@ -799,3 +799,87 @@ footer {
 @media (max-width: 900px) {
   .logo { max-width: calc(100% - 56px); } /* leave room for the button */
 }
+
+/* =========================
+   MOBILE NAV: make hamburger always visible
+   ========================= */
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure header row is a positioning context */
+.site-header .nav-wrapper{
+  position: relative;
+}
+
+/* Hide the checkbox but keep it clickable via label */
+.nav-toggle{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile layout + pin the button */
+@media (max-width: 900px){
+
+  /* Let header wrap, but keep things from overlapping */
+  .site-header .nav-wrapper{
+    flex-wrap: wrap;
+    align-items: center;
+    padding-right: 56px; /* reserve room for hamburger */
+  }
+
+  /* Pin the hamburger to the top-right inside header */
+  .nav-toggle-btn{
+    position: absolute;
+    top: 50%;
+    right: clamp(16px, 2.5vw, 40px); /* match container padding */
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+    z-index: 10001;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-toggle-btn i{
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Prevent the logo/text from sitting under the hamburger */
+  .logo{
+    max-width: 100%;
+    padding-right: 12px;
+  }
+  .logo-text{
+    min-width: 0;
+  }
+  .logo-subtitle{
+    max-width: 22ch;
+  }
+
+  /* Ensure nav overlay sits under the button but above page */
+  .primary-nav{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+  }
+}
+
