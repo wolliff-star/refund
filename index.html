@@ -12,7 +12,7 @@
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- Header -->
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <div class="container nav-wrapper">
       <a href="#top" class="logo">
         <img src="assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
@@ -22,10 +22,11 @@
         </span>
       </a>
 
-      <!-- Mobile nav toggle button (JS-driven; no checkbox) -->
+      <!-- Mobile menu button -->
       <button
-        type="button"
         class="nav-toggle-btn"
+        id="nav-toggle-btn"
+        type="button"
         aria-label="Open menu"
         aria-controls="primary-nav"
         aria-expanded="false"
@@ -33,6 +34,9 @@
         <i class="ri-menu-line nav-open" aria-hidden="true"></i>
         <i class="ri-close-line nav-close" aria-hidden="true"></i>
       </button>
+
+      <!-- Scrim -->
+      <span class="nav-scrim" id="nav-scrim" aria-hidden="true"></span>
 
       <!-- Primary navigation -->
       <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
@@ -51,7 +55,7 @@
         </ul>
       </nav>
 
-      <!-- Desktop CTA (hidden on mobile via CSS) -->
+      <!-- Desktop CTA (hidden on mobile in CSS) -->
       <a href="#contact" class="btn btn-desktop">Get Involved</a>
     </div>
   </header>
@@ -387,58 +391,41 @@
     </div>
   </footer>
 
-  <!-- JS-driven mobile menu (more reliable than checkbox+label across mobile browsers) -->
-  <script>
+   <script>
     (function () {
-      const btn = document.querySelector('.nav-toggle-btn');
+      const header = document.getElementById('site-header');
+      const btn = document.getElementById('nav-toggle-btn');
       const nav = document.getElementById('primary-nav');
-      const header = document.querySelector('.site-header');
+      const scrim = document.getElementById('nav-scrim');
 
-      if (!btn || !nav || !header) return;
+      if (!header || !btn || !nav || !scrim) return;
 
       function setOpen(isOpen) {
+        header.classList.toggle('nav-open', isOpen);
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        header.classList.toggle('nav-open', isOpen);
         document.documentElement.style.overflow = isOpen ? 'hidden' : '';
       }
 
-      function isOpen() {
-        return header.classList.contains('nav-open');
-      }
-
-      // Toggle button
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        setOpen(!isOpen());
+      btn.addEventListener('click', () => {
+        const isOpen = !header.classList.contains('nav-open');
+        setOpen(isOpen);
       });
 
-      // Close when a nav link is clicked
+      scrim.addEventListener('click', () => setOpen(false));
+
       nav.addEventListener('click', (e) => {
         const a = e.target.closest('a');
         if (a) setOpen(false);
       });
 
-      // Close when clicking outside nav (mobile overlay behavior)
-      document.addEventListener('click', (e) => {
-        if (!isOpen()) return;
-        const clickedNav = nav.contains(e.target);
-        const clickedBtn = btn.contains(e.target);
-        if (!clickedNav && !clickedBtn) setOpen(false);
-      });
-
-      // Close on Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setOpen(false);
       });
 
-      // Close if viewport grows to desktop
       window.addEventListener('resize', () => {
         if (window.innerWidth > 900) setOpen(false);
       });
-
-      // Initialize
-      setOpen(false);
     })();
   </script>
 </body>
