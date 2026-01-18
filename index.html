@@ -23,23 +23,21 @@
       </a>
 
       <!-- Mobile menu button -->
-      <button
+<button type="button"
         class="nav-toggle-btn"
         id="nav-toggle-btn"
-        type="button"
         aria-label="Open menu"
         aria-controls="primary-nav"
-        aria-expanded="false"
-      >
-        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
-        <i class="ri-close-line nav-close" aria-hidden="true"></i>
-      </button>
+        aria-expanded="false">
+  <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+  <i class="ri-close-line nav-close" aria-hidden="true"></i>
+</button>
 
       <!-- Scrim -->
       <span class="nav-scrim" id="nav-scrim" aria-hidden="true"></span>
 
       <!-- Primary navigation -->
-      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+<nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
         <ul>
           <li><a href="#challenge">The Challenge</a></li>
           <li><a href="#solution">The Solution</a></li>
@@ -390,75 +388,88 @@
     </div>
   </footer>
 
-   <script>
+ <script>
 (function () {
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('primary-nav');
   const header = document.querySelector('.site-header');
+  const nav = document.getElementById('primary-nav');
+  const btn = document.getElementById('nav-toggle-btn');
 
-  if (!toggle || !nav || !header) return;
+  if (!header || !nav || !btn) return;
 
   let scrollY = 0;
 
-  function openMenu() {
+  function isOpen() {
+    return header.classList.contains('nav-open');
+  }
+
+  function lockScroll() {
     scrollY = window.scrollY || 0;
-
-    // Apply open state
-    header.classList.add('nav-open');
-    toggle.checked = true;
-
-    // Lock scroll (Android-safe)
     document.body.classList.add('nav-lock');
     document.body.style.top = `-${scrollY}px`;
   }
 
-  function closeMenu() {
-    header.classList.remove('nav-open');
-    toggle.checked = false;
-
-    // Unlock scroll and restore position
+  function unlockScroll() {
     document.body.classList.remove('nav-lock');
     const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
     document.body.style.top = '';
     window.scrollTo(0, y);
   }
 
-  function syncFromToggle() {
-    if (toggle.checked) openMenu();
-    else closeMenu();
+  function openMenu() {
+    header.classList.add('nav-open');
+    btn.setAttribute('aria-label', 'Close menu');
+    btn.setAttribute('aria-expanded', 'true');
+    lockScroll();
   }
 
-  // Toggle changes (checkbox/label)
-  toggle.addEventListener('change', syncFromToggle);
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    btn.setAttribute('aria-label', 'Open menu');
+    btn.setAttribute('aria-expanded', 'false');
+    unlockScroll();
+  }
 
-  // Close when a nav link is clicked
+  function toggleMenu() {
+    if (isOpen()) closeMenu();
+    else openMenu();
+  }
+
+  // Toggle button click
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Close when clicking a nav link
   nav.addEventListener('click', (e) => {
     const a = e.target.closest('a');
     if (a) closeMenu();
   });
 
-  // Close when clicking outside nav
+  // Close when clicking outside
   document.addEventListener('click', (e) => {
-    if (!toggle.checked) return;
+    if (!isOpen()) return;
     const clickedInsideNav = nav.contains(e.target);
-    const clickedInsideHeader = header.contains(e.target);
-    if (!clickedInsideNav && !clickedInsideHeader) closeMenu();
+    const clickedButton = btn.contains(e.target);
+    if (!clickedInsideNav && !clickedButton) closeMenu();
   });
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape' && isOpen()) closeMenu();
   });
 
   // Close if viewport grows to desktop
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) closeMenu();
+    if (window.innerWidth > 900 && isOpen()) closeMenu();
   });
 
-  // Start closed
+  // Initialize closed
   closeMenu();
 })();
 </script>
+
 
 </body>
 </html>
