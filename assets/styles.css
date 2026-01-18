@@ -907,3 +907,13 @@ footer {
     display: none;
   }
 }
+
+/* Android-safe scroll lock for open mobile menu */
+body.nav-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
