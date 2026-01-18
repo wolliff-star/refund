@@ -898,3 +898,12 @@ footer {
   }
 }
 
+/* =========================
+   HEADER LOGO SUBTITLE — MOBILE ONLY
+   ========================= */
+
+@media (max-width: 900px) {
+  .logo-subtitle {
+    display: none;
+  }
+}
