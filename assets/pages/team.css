@@ -172,6 +172,17 @@ button:focus-visible {
   display: block;
 }
 
+/* NAV FIX (1): Always hide the checkbox visually without breaking label-toggle */
+.nav-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  top: 0;
+}
+
 /* Desktop nav */
 .primary-nav {
   flex: 1;
@@ -194,7 +205,6 @@ button:focus-visible {
 .btn-desktop { display: inline-block; }
 
 /* Mobile-only items (hidden on desktop) */
-.nav-toggle,
 .nav-toggle-btn,
 .nav-cta-mobile,
 .nav-scrim {
@@ -521,6 +531,8 @@ section { padding: var(--spacing-section) 0; }
   text-align: center;
   border: 2px solid transparent;
   transition: border-color 0.3s;
+
+  /* ✅ overflow fix: never exceed container */
   max-width: 100%;
 }
 .funding-card:hover { border-color: var(--color-brand-green); }
@@ -539,6 +551,8 @@ section { padding: var(--spacing-section) 0; }
   padding: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(4px);
+
+  /* ✅ overflow fix */
   max-width: 100%;
 }
 
@@ -584,7 +598,7 @@ section { padding: var(--spacing-section) 0; }
   background: rgba(36, 238, 85, 0.12);
   padding: clamp(16px, 2.4vw, 22px);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  max-width: 100%;
+  max-width: 100%; /* ✅ overflow fix */
 }
 .subpage-callout:hover {
   box-shadow: var(--shadow-soft);
@@ -599,7 +613,7 @@ section { padding: var(--spacing-section) 0; }
   padding: clamp(18px, 2.6vw, 26px);
   border-radius: 22px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  max-width: 100%;
+  max-width: 100%; /* ✅ overflow fix */
 }
 .toolkit-callout:hover{
   border-color: rgba(36,238,85,0.75);
@@ -651,7 +665,10 @@ section { padding: var(--spacing-section) 0; }
   gap: clamp(14px, 2vw, 22px);
   align-items: start;
 }
+
+/* ✅ overflow fix */
 .toolkit-layout > * { min-width: 0; }
+
 .toolkit-side{
   display: flex;
   flex-direction: column;
@@ -669,7 +686,7 @@ section { padding: var(--spacing-section) 0; }
   border-radius: var(--radius-card);
   margin-top: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-soft);
-  max-width: 100%;
+  max-width: 100%; /* ✅ overflow fix */
 }
 
 /* Footer */
@@ -714,24 +731,13 @@ footer {
 }
 
 /* =========================
-   MOBILE NAV (CHECKBOX-DRIVEN)
+   MOBILE NAV (BUTTON + OVERLAY)
    ========================= */
 
-/* ✅ Bulletproof: hide checkbox but keep it functional */
-.nav-toggle {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  pointer-events: none !important;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-}
-
 @media (max-width: 900px) {
-  .nav-wrapper { flex-wrap: nowrap; }
+  .nav-wrapper {
+    flex-wrap: nowrap;
+  }
 
   /* Hide desktop CTA on mobile */
   .btn-desktop { display: none; }
@@ -751,8 +757,13 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     position: relative;
-    z-index: 9999; /* ✅ always clickable */
+    z-index: 7002;
+
+    /* NAV FIX (2): make taps reliable on mobile */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
     pointer-events: auto;
   }
 
@@ -760,14 +771,17 @@ footer {
     font-size: 22px;
     line-height: 1;
     color: var(--color-text-main);
+    pointer-events: none; /* NAV FIX (3): icon never eats the click */
   }
 
-  /* default icon state */
+  /* icon swap (works with either JS class OR checkbox) */
   .nav-toggle-btn .nav-close { display: none; }
+  .site-header.nav-open .nav-toggle-btn .nav-open { display: none; }
+  .site-header.nav-open .nav-toggle-btn .nav-close { display: inline; }
 
-  /* ✅ Icon swap when checked (matches your HTML order) */
-  #nav-toggle:checked + .nav-toggle-btn .nav-open { display: none; }
-  #nav-toggle:checked + .nav-toggle-btn .nav-close { display: inline; }
+  /* NAV FIX (4): CSS-only swap if JS doesn't run */
+  .nav-toggle:checked + .nav-toggle-btn .nav-open { display: none; }
+  .nav-toggle:checked + .nav-toggle-btn .nav-close { display: inline; }
 
   /* Scrim behind the menu panel */
   .nav-scrim {
@@ -779,8 +793,12 @@ footer {
     transition: opacity 0.2s ease;
     z-index: 7000;
   }
-  /* ✅ show scrim when checked */
-  #nav-toggle:checked ~ .nav-scrim {
+  .site-header.nav-open .nav-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* NAV FIX (5): CSS-only scrim */
+  .nav-toggle:checked ~ .nav-scrim {
     opacity: 1;
     pointer-events: auto;
   }
@@ -809,8 +827,13 @@ footer {
     z-index: 7001;
   }
 
-  /* ✅ open panel when checked */
-  #nav-toggle:checked ~ .primary-nav {
+  .site-header.nav-open .primary-nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* NAV FIX (6): CSS-only open */
+  .nav-toggle:checked ~ .primary-nav {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
@@ -849,6 +872,8 @@ footer {
 @media (max-width: 768px) {
   .steps-container::before { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  /* ✅ overflow fix: on smaller screens, allow About grid to be 1 column earlier */
   .about-grid { grid-template-columns: 1fr; }
 }
 
@@ -856,6 +881,8 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { text-align: center; }
   .footer-logo { margin-left: auto; margin-right: auto; }
+
+  /* ✅ overflow fix: reduce padding so cards never exceed their parent */
   .content-card { padding: clamp(18px, 5vw, 28px); }
   .funding-card { padding: clamp(18px, 5vw, 28px); }
   .funding-wrapper { padding: clamp(14px, 4.5vw, 22px); }
@@ -865,25 +892,42 @@ footer {
    MOBILE OVERFLOW FIX: FUNDING CARDS
    ========================= */
 
+/* 1) Let the grid collapse sooner and avoid min widths that exceed the viewport */
 @media (max-width: 900px) {
-  .funding-grid { grid-template-columns: 1fr; }
+  .funding-grid {
+    grid-template-columns: 1fr;  /* stack cards */
+  }
 }
 
-.funding-grid > * { min-width: 0; }
+/* 2) Make sure grid items can shrink (prevents "card wider than background") */
+.funding-grid > * {
+  min-width: 0;
+}
 
+/* 3) Ensure wrapper + cards never exceed parent width */
 .funding-wrapper,
-.funding-card { max-width: 100%; }
+.funding-card {
+  max-width: 100%;
+}
 
+/* 4) Prevent any text from forcing horizontal overflow inside the card */
 .funding-card,
 .funding-card * {
   overflow-wrap: anywhere;
   word-break: normal;
 }
 
+/* 5) On very small screens, tighten padding a bit so cards fit cleanly */
 @media (max-width: 520px) {
-  .funding-wrapper { padding: 16px; }
-  .funding-card { padding: 18px; }
-  .funding-amount { font-size: clamp(1.6rem, 9vw, 2.4rem); }
+  .funding-wrapper {
+    padding: 16px; /* overrides clamp on tiny screens */
+  }
+  .funding-card {
+    padding: 18px; /* overrides clamp on tiny screens */
+  }
+  .funding-amount {
+    font-size: clamp(1.6rem, 9vw, 2.4rem); /* keep big numbers from "pushing" */
+  }
 }
 
 /* =========================
@@ -891,5 +935,16 @@ footer {
    ========================= */
 
 @media (max-width: 900px) {
-  .logo-subtitle { display: none; }
+  .logo-subtitle {
+    display: none;
+  }
+}
+
+/* Android-safe scroll lock for open mobile menu */
+body.nav-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
 }
