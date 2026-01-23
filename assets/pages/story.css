@@ -585,3 +585,34 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   Header + Mobile menu compatibility for Our Story
+   (pairs with global styles.css + the updated Our Story HTML)
+   Safe additions: no layout changes outside the header/menu.
+   ========================================================= */
+
+/* Prevent any page section from creating a stacking context that can sit above the menu panel on Android */
+.page-story main,
+.page-story section {
+  position: relative;
+  z-index: 0;
+}
+
+/* Make sure the sticky header always wins the stacking order on this page */
+.page-story .site-header {
+  z-index: 5000;
+}
+
+/* Ensure the mobile menu panel + scrim render above page content on this page */
+@media (max-width: 900px) {
+  .page-story .nav-scrim { z-index: 7000; }
+  .page-story .primary-nav { z-index: 7001; }
+  .page-story .nav-toggle-btn { z-index: 7002; }
+}
+
+/* If you’re hiding the subtitle on mobile globally, this just guarantees it on this page too */
+@media (max-width: 900px) {
+  .page-story .logo-subtitle { display: none; }
+}
+
