@@ -13,10 +13,10 @@
 <body class="page-story" id="top">
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Shared Header (matches your newer structure) -->
-  <header>
+  <!-- Shared Header (mobile menu matches homepage) -->
+  <header class="site-header">
     <div class="container nav-wrapper">
-      <a href="../../index.html#top" class="logo">
+      <a href="../index.html#top" class="logo">
         <img src="../assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
         <span class="logo-text">
           <strong>ReFund</strong>
@@ -24,7 +24,24 @@
         </span>
       </a>
 
-      <nav aria-label="Primary navigation">
+      <!-- Mobile nav toggle button -->
+      <button
+        type="button"
+        class="nav-toggle-btn"
+        id="nav-toggle-btn"
+        aria-label="Open menu"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+      >
+        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+        <i class="ri-close-line nav-close" aria-hidden="true"></i>
+      </button>
+
+      <!-- Scrim -->
+      <div class="nav-scrim" aria-hidden="true"></div>
+
+      <!-- Primary navigation -->
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
         <ul>
           <li><a href="../index.html#challenge">The Challenge</a></li>
           <li><a href="../index.html#solution">The Solution</a></li>
@@ -32,10 +49,16 @@
           <li><a href="../index.html#impact">Impact</a></li>
           <li><a href="../insights/index.html">Insights</a></li>
           <li><a href="../index.html#funding">For Funders</a></li>
+
+          <!-- Mobile-only CTA inside menu -->
+          <li class="nav-cta-mobile">
+            <a href="../index.html#contact" class="btn btn-nav">Get Involved</a>
+          </li>
         </ul>
       </nav>
 
-      <a href="../../index.html#contact" class="btn">Get Involved</a>
+      <!-- Desktop CTA (hidden on mobile by global CSS) -->
+      <a href="../index.html#contact" class="btn btn-desktop">Get Involved</a>
     </div>
   </header>
 
@@ -83,16 +106,19 @@
         <div class="story-content">
           <div class="story-text">
             <p>
-ReFund was born out of our experience working with Indigenous communities and grassroots organizers at the forefront of addressing the climate crisis. Time and again, we heard from nonprofits about how reimbursement-based funding was holding organizations back. We identified a critical gap in the funding ecosystem and we recognized this problem was solvable.</p>
-        
-<p>While billions of dollars in government
-              grants and contracts are available to support community services, many nonprofits access these funds due to cash flow barriers.
+              ReFund was born out of our experience working with Indigenous communities and grassroots organizers at the forefront of addressing the climate crisis. Time and again, we heard from nonprofits about how reimbursement-based funding was holding organizations back. We identified a critical gap in the funding ecosystem and we recognized this problem was solvable.
             </p>
+
+            <p>
+              While billions of dollars in government grants and contracts are available to support community services, many nonprofits access these funds due to cash flow barriers.
+            </p>
+
             <p>
               We saw organizations forced to choose between serving their communities and maintaining financial stability.
               We saw talented leaders spending more time managing cash flow than delivering programs. We saw a system
               that perpetuated inequity by favoring organizations with existing wealth and access to capital.
             </p>
+
             <p>ReFund was created to change this.</p>
           </div>
 
@@ -118,12 +144,13 @@ ReFund was born out of our experience working with Indigenous communities and gr
 
         <div class="problem-grid">
           <div class="problem-text">
-            <div class="stat-highlight">2/3</div>
-            <div class="stat-desc">
+            <div class="problem-stat">2/3</div>
+            <div class="problem-stat-desc">
               of nonprofits rely on government funding, yet reimbursement delays of 60–180 days are routine.
             </div>
-            <br>
-              <p>Organizations with limited reserves face impossible choices.
+
+            <p>
+              Organizations with limited reserves face impossible choices.
               This system disproportionately excludes the organizations best positioned to serve communities with the
               greatest need.
             </p>
@@ -146,7 +173,7 @@ ReFund was born out of our experience working with Indigenous communities and gr
     <section class="approach-section" aria-labelledby="approach-title">
       <div class="container">
         <div class="section-header section-header-center">
-          <h2 id="approach-title"><p style="text-align: center;">Our Approach</h2>
+          <h2 id="approach-title" style="text-align:center;">Our Approach</h2>
         </div>
 
         <div class="approach-content">
@@ -158,7 +185,7 @@ ReFund was born out of our experience working with Indigenous communities and gr
           <p>
             Our model builds on existing government due diligence, simplifying the application process for nonprofits while maintaining
             strong stewardship. We're the first initiative designed to deploy recoverable grants at scale specifically to address
-            government funding cash flow challenges. Our focused mission allows us to simplify decision0making, keep our infrastructure lean and keep our overhead minimal.
+            government funding cash flow challenges. Our focused mission allows us to simplify decision-making, keep our infrastructure lean, and keep our overhead minimal.
           </p>
 
           <div class="approach-highlight" role="list">
@@ -252,32 +279,14 @@ ReFund was born out of our experience working with Indigenous communities and gr
             <h3 class="value-title">Innovation</h3>
             <p class="value-desc">Evolving new approaches in philanthropy.</p>
           </div>
-<!--
-          <div class="value-card">
-            <div class="value-icon" aria-hidden="true"><i class="ri-shield-star-fill"></i></div>
-            <h3 class="value-title">Stewardship</h3>
-            <p class="value-desc">Maintaining rigorous standards while simplifying processes.</p>
-          </div>
--->
+
           <div class="value-card">
             <div class="value-icon" aria-hidden="true"><i class="ri-team-fill"></i></div>
             <h3 class="value-title">Collaboration</h3>
             <p class="value-desc">Working with funders, nonprofits, and advocates to build the field.</p>
           </div>
-<!--
-          <div class="value-card">
-            <div class="value-icon" aria-hidden="true"><i class="ri-chat-quote-fill"></i></div>
-            <h3 class="value-title">Transparency</h3>
-            <p class="value-desc">Operating with openness about our model, impact, and learnings.</p>
-          </div>
-
-          <div class="value-card">
-            <div class="value-icon" aria-hidden="true"><i class="ri-heart-pulse-fill"></i></div>
-            <h3 class="value-title">Impact</h3>
-            <p class="value-desc">Measuring success by the communities served and barriers removed.</p>
-          </div>
         </div>
-      </div> -->
+      </div>
     </section>
 
     <!-- Partners -->
@@ -292,18 +301,8 @@ ReFund was born out of our experience working with Indigenous communities and gr
           resilience and equitable access to government funding.
         </p>
 
-<p> ReFund is fiscally sponsored by Indigenous Futures Society. </p>
-<!--
-        <div class="partners-grid">
-          <div class="partner-logo-box">PARTNER LOGO</div>
-          <div class="partner-logo-box">PARTNER LOGO</div>
-          <div class="partner-logo-box">PARTNER LOGO</div>
-          <div class="partner-logo-box">PARTNER LOGO</div>
-          <div class="partner-logo-box">PARTNER LOGO</div>
-          <div class="partner-logo-box">PARTNER LOGO</div>
-        </div>
+        <p>ReFund is fiscally sponsored by Indigenous Futures Society.</p>
       </div>
--->
     </section>
 
     <!-- Future -->
@@ -341,13 +340,13 @@ ReFund was born out of our experience working with Indigenous communities and gr
     </section>
   </main>
 
-  <!-- Shared Footer (matches your newer structure) -->
+  <!-- Shared Footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <a href="#top" class="footer-logo">
-            <img src="../../assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
+            <img src="../assets/refund-logo.png" alt="ReFund logo – seedling in leaf" />
           </a>
           <p style="color: #CBD5E0; max-width: 42ch;">
             Providing upfront, zero-cost recoverable grants that allow nonprofits to carry out government-funded work without draining reserves.
@@ -357,27 +356,27 @@ ReFund was born out of our experience working with Indigenous communities and gr
         <div class="footer-col">
           <h4>Explore</h4>
           <ul class="footer-links">
-            <li><a href="../../index.html#challenge">The Challenge</a></li>
-            <li><a href="../../index.html#solution">The Solution</a></li>
-            <li><a href="../../index.html#how-it-works">How It Works</a></li>
-            <li><a href="../../index.html#about">About ReFund</a></li>
+            <li><a href="../index.html#challenge">The Challenge</a></li>
+            <li><a href="../index.html#solution">The Solution</a></li>
+            <li><a href="../index.html#how-it-works">How It Works</a></li>
+            <li><a href="../index.html#about">About ReFund</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>More</h4>
           <ul class="footer-links">
-            <li><a href="../../impact/index.html">Impact Stories</a></li>
-            <li><a href="../../insights/index.html">Insights</a></li>
-            <li><a href="../../funders/index.html">Resources for Funders</a></li>
-            <li><a href="../index.html" aria-current="page">About</a></li>
+            <li><a href="../impact/index.html">Impact Stories</a></li>
+            <li><a href="../insights/index.html">Insights</a></li>
+            <li><a href="../funders/index.html">Resources for Funders</a></li>
+            <li><a href="../about/index.html">About</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>Contact</h4>
           <ul class="footer-links">
-            <li><a href="../../index.html#contact">Contact Form</a></li>
+            <li><a href="../index.html#contact">Contact Form</a></li>
             <li>
               <a href="https://www.linkedin.com/company/therefund/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </li>
@@ -390,5 +389,90 @@ ReFund was born out of our experience working with Indigenous communities and gr
       </div>
     </div>
   </footer>
+
+  <!-- Mobile menu behavior (same as homepage) -->
+  <script>
+  (function () {
+    const header = document.querySelector('.site-header');
+    const nav = document.getElementById('primary-nav');
+    const btn = document.getElementById('nav-toggle-btn');
+    const scrim = document.querySelector('.nav-scrim');
+
+    if (!header || !nav || !btn) return;
+
+    let scrollY = 0;
+
+    function isOpen() {
+      return header.classList.contains('nav-open');
+    }
+
+    function lockScroll() {
+      scrollY = window.scrollY || 0;
+      document.body.classList.add('nav-lock');
+      document.body.style.top = `-${scrollY}px`;
+    }
+
+    function unlockScroll() {
+      document.body.classList.remove('nav-lock');
+      const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
+      document.body.style.top = '';
+      window.scrollTo(0, y);
+    }
+
+    function openMenu() {
+      header.classList.add('nav-open');
+      btn.setAttribute('aria-label', 'Close menu');
+      btn.setAttribute('aria-expanded', 'true');
+      lockScroll();
+    }
+
+    function closeMenu() {
+      header.classList.remove('nav-open');
+      btn.setAttribute('aria-label', 'Open menu');
+      btn.setAttribute('aria-expanded', 'false');
+      unlockScroll();
+    }
+
+    function toggleMenu() {
+      if (isOpen()) closeMenu();
+      else openMenu();
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) closeMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!isOpen()) return;
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedButton = btn.contains(e.target);
+      if (!clickedInsideNav && !clickedButton) closeMenu();
+    });
+
+    if (scrim) {
+      scrim.addEventListener('click', () => {
+        if (isOpen()) closeMenu();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && isOpen()) closeMenu();
+    });
+
+    // Initialize closed
+    closeMenu();
+  })();
+  </script>
 </body>
 </html>
