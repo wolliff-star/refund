@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="../assets/pages/team.css?v=20260111" />
 </head>
 
-<body class="page-team">
+<body class="page-team" id="top">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Shared Header -->
-  <header>
+  <!-- Shared Header (homepage-compatible) -->
+  <header class="site-header">
     <div class="container nav-wrapper">
       <a href="../../index.html#top" class="logo">
         <img src="../assets/refund-logo-notext.png" alt="ReFund logo – seedling in leaf" />
@@ -24,7 +24,25 @@
         </span>
       </a>
 
-      <nav aria-label="Primary navigation">
+      <!-- Mobile nav toggle -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+
+      <label
+        for="nav-toggle"
+        class="nav-toggle-btn"
+        aria-label="Open menu"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+      >
+        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+        <i class="ri-close-line nav-close" aria-hidden="true"></i>
+      </label>
+
+      <!-- Scrim -->
+      <div class="nav-scrim" aria-hidden="true"></div>
+
+      <!-- Primary navigation -->
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
         <ul>
           <li><a href="../index.html#challenge">The Challenge</a></li>
           <li><a href="../index.html#solution">The Solution</a></li>
@@ -32,14 +50,20 @@
           <li><a href="../index.html#impact">Impact</a></li>
           <li><a href="../insights/index.html">Insights</a></li>
           <li><a href="../index.html#funding">For Funders</a></li>
+
+          <!-- Mobile-only CTA inside menu -->
+          <li class="nav-cta-mobile">
+            <a href="../../index.html#contact" class="btn btn-nav">Get Involved</a>
+          </li>
         </ul>
       </nav>
 
-      <a href="../../index.html#contact" class="btn">Get Involved</a>
+      <!-- Desktop CTA (hidden on mobile by global CSS) -->
+      <a href="../../index.html#contact" class="btn btn-desktop">Get Involved</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- Hero -->
     <section class="team-hero">
@@ -85,12 +109,11 @@
 
             <div class="leader-body">
               <div class="leader-bio">
-<p>Yisroel Quint is the Co-founder of ReFund and the Founder and Co-director of the Dollar a Day Fund for Indigenous Environmental Justice. <p>
-<p>Yisroel is a philanthropic leader with experience spanning foundation grantmaking, nonprofit management, and grassroots capacity building. Guided by a commitment to justice, equity, and long-term sustainability, Yisroel works to ensure that philanthropy strengthens the capacity of frontline organizations and expands access to the resources they need to thrive.<p>
-<p>Yisroel has developed expertise in philanthropy, nonprofit finance, and environmental justice, with a focus on addressing disparities that under-resource Indigenous and BIPOC-led organizations. Dollar a Day Fund has mobilized over $400,000 from individual donors to support more than 365 Native-led organizations and Tribes through an innovative fundraising model and a strong focus on accountability to Native-led organizations and Tribes. Yisroel has also built solar partnerships generating more than $100,000 in free solar equipment for Native nonprofits, and has provided technical assistance to hundreds of grassroots groups.<p>
-<p>Yisroel also brings rich experience in stewarding substantial grantmaking portfolios and  in partnering with private foundations to move funds toward Native-led organizations and Tribes through innovative models such as recoverable grantmaking and participatory grantmaking. He served as Program Officer at Pacific Foundation Services, where he managed $5.5 million across five foundations and increased giving to Native-led organizations and Tribes by more than $1 million over two years. At the David and Lucile Packard Foundation, he worked to advance organizational effectiveness across the Conservation & Science portfolio. His experience also includes roles at the Laura Arrillaga-Andreessen Foundation, the National Democratic Institute, and Operation Period. He has served on the Board of Bay Area Cancer Connections since 2021 and as President since 2024. <p>
-<p>Yisroel graduated with distinction from Stanford University with honors in Democracy, Development, and the Rule of Law.<p>
-
+                <p>Yisroel Quint is the Co-founder of ReFund and the Founder and Co-director of the Dollar a Day Fund for Indigenous Environmental Justice.</p>
+                <p>Yisroel is a philanthropic leader with experience spanning foundation grantmaking, nonprofit management, and grassroots capacity building. Guided by a commitment to justice, equity, and long-term sustainability, Yisroel works to ensure that philanthropy strengthens the capacity of frontline organizations and expands access to the resources they need to thrive.</p>
+                <p>Yisroel has developed expertise in philanthropy, nonprofit finance, and environmental justice, with a focus on addressing disparities that under-resource Indigenous and BIPOC-led organizations. Dollar a Day Fund has mobilized over $400,000 from individual donors to support more than 365 Native-led organizations and Tribes through an innovative fundraising model and a strong focus on accountability to Native-led organizations and Tribes. Yisroel has also built solar partnerships generating more than $100,000 in free solar equipment for Native nonprofits, and has provided technical assistance to hundreds of grassroots groups.</p>
+                <p>Yisroel also brings rich experience in stewarding substantial grantmaking portfolios and in partnering with private foundations to move funds toward Native-led organizations and Tribes through innovative models such as recoverable grantmaking and participatory grantmaking. He served as Program Officer at Pacific Foundation Services, where he managed $5.5 million across five foundations and increased giving to Native-led organizations and Tribes by more than $1 million over two years. At the David and Lucile Packard Foundation, he worked to advance organizational effectiveness across the Conservation & Science portfolio. His experience also includes roles at the Laura Arrillaga-Andreessen Foundation, the National Democratic Institute, and Operation Period. He has served on the Board of Bay Area Cancer Connections since 2021 and as President since 2024.</p>
+                <p>Yisroel graduated with distinction from Stanford University with honors in Democracy, Development, and the Rule of Law.</p>
               </div>
 
               <div class="leader-tags">
@@ -101,11 +124,11 @@
 
             <div class="leader-footer">
               <div class="contact-links">
-               <!-- <a class="contact-link" href="mailto:#"><i class="ri-mail-line"></i> Email</a> -->
-                <a class="contact-link" href="https://www.linkedin.com/in/yisroelquint/"><i class="ri-linkedin-fill"></i> LinkedIn</a>
-              <!-- </div>
-              <a class="leader-cta" href="#">Read bio</a>
-            </div> -->
+                <a class="contact-link" href="https://www.linkedin.com/in/yisroelquint/">
+                  <i class="ri-linkedin-fill"></i> LinkedIn
+                </a>
+              </div>
+            </div>
           </article>
 
           <!-- Winifred -->
@@ -122,16 +145,11 @@
 
             <div class="leader-body">
               <div class="leader-bio">
-<p>Winifred Olliff is the Co-founder of ReFund and the owner of Chromodoris Consulting LLC.<p> 
-
-<p>Winifred brings more than 20 years of leadership experience in the nonprofit and philanthropy sectors. With deep knowledge of organizational effectiveness, strategic planning, program design and philanthropy operations, Winifred designs systems and advances strategies that make philanthropy more effective, equitable, and regenerative. <p>
-
-<p>Winifred’s career has been dedicated to supporting mission-driven organizations to navigate systemic barriers, strengthen financial and operational resilience and become more accountable to the people they serve. After serving in the Peace Corps to advance digital inclusion initiatives in Albania early in their career, Winifred supported the launch of several successful digital inclusion initiatives in California, including Community Technology Network and School2Home. At the Wikimedia Foundation, they stewarded an $8 million portfolio of international grants, expanded Wikipedia’s global partner network to more than 200 organizations across six continents through capacity building and organizational effectiveness training, built Wikimedia’s grantmaking systems and launched Wikimedia’s flagship participatory grantmaking program.<p>
-
-<p>Now a leading voice in participatory philanthropy, Winifred partners with Katy Love on initiatives such as the Fund for Shared Insight’s Participatory Climate Initiative, which directed $2 million to frontline Native-led and BIPOC-led environmental justice groups. They also served as Director of Operations for Borealis Philanthropy, a national philanthropic intermediary with a $50 million budget, during a period of rapid growth from 30 to more than 70 staff.<p>
-
-<p>Winifred is a certified Project Management Professional (PMP) and holds a bachelor’s degree from Northwestern University.<p>
-
+                <p>Winifred Olliff is the Co-founder of ReFund and the owner of Chromodoris Consulting LLC.</p>
+                <p>Winifred brings more than 20 years of leadership experience in the nonprofit and philanthropy sectors. With deep knowledge of organizational effectiveness, strategic planning, program design and philanthropy operations, Winifred designs systems and advances strategies that make philanthropy more effective, equitable, and regenerative.</p>
+                <p>Winifred’s career has been dedicated to supporting mission-driven organizations to navigate systemic barriers, strengthen financial and operational resilience and become more accountable to the people they serve. After serving in the Peace Corps to advance digital inclusion initiatives in Albania early in their career, Winifred supported the launch of several successful digital inclusion initiatives in California, including Community Technology Network and School2Home. At the Wikimedia Foundation, they stewarded an $8 million portfolio of international grants, expanded Wikipedia’s global partner network to more than 200 organizations across six continents through capacity building and organizational effectiveness training, built Wikimedia’s grantmaking systems and launched Wikimedia’s flagship participatory grantmaking program.</p>
+                <p>Now a leading voice in participatory philanthropy, Winifred partners with Katy Love on initiatives such as the Fund for Shared Insight’s Participatory Climate Initiative, which directed $2 million to frontline Native-led and BIPOC-led environmental justice groups. They also served as Director of Operations for Borealis Philanthropy, a national philanthropic intermediary with a $50 million budget, during a period of rapid growth from 30 to more than 70 staff.</p>
+                <p>Winifred is a certified Project Management Professional (PMP) and holds a bachelor’s degree from Northwestern University.</p>
               </div>
 
               <div class="leader-tags">
@@ -142,11 +160,11 @@
 
             <div class="leader-footer">
               <div class="contact-links">
-                <!-- <a class="contact-link" href="mailto:#"><i class="ri-mail-line"></i> Email</a> -->
-                <a class="contact-link" href="https://linkedin.com/in/olliff"><i class="ri-linkedin-fill"></i> LinkedIn</a>
-              <!-- </div>
-              <a class="leader-cta" href="#">Read bio</a>
-            </div> -->
+                <a class="contact-link" href="https://linkedin.com/in/olliff">
+                  <i class="ri-linkedin-fill"></i> LinkedIn
+                </a>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -159,53 +177,7 @@
           <h2>Advisory Board</h2>
           <p>Trusted partners helping us design a model that’s rigorous, practical, and equity-centered.</p>
         </div>
-
-<!--
-        <div class="advisor-grid">
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" alt="Dr. Sarah Martinez">
-            <div class="advisor-name">Dr. Sarah Martinez</div>
-            <div class="advisor-title">Nonprofit Finance Expert</div>
-            <p class="advisor-bio">Former CFO of a national nonprofit network with expertise in cash flow and resilience.</p>
-          </article>
-
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" alt="James Chen">
-            <div class="advisor-name">James Chen</div>
-            <div class="advisor-title">Philanthropic Advisor</div>
-            <p class="advisor-bio">20+ years advising foundations on innovative grantmaking and social finance strategy.</p>
-          </article>
-
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?q=80&w=200&auto=format&fit=crop" alt="Patricia Okonkwo">
-            <div class="advisor-name">Patricia Okonkwo</div>
-            <div class="advisor-title">Government Funding Specialist</div>
-            <p class="advisor-bio">Former federal grants administrator focused on reimbursement-based funding systems.</p>
-          </article>
-
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop" alt="Michael Torres">
-            <div class="advisor-name">Michael Torres</div>
-            <div class="advisor-title">Social Enterprise Leader</div>
-            <p class="advisor-bio">Founder of social ventures focused on equitable access to capital for underserved communities.</p>
-          </article>
-
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop" alt="Dr. Keisha Williams">
-            <div class="advisor-name">Dr. Keisha Williams</div>
-            <div class="advisor-title">Equity & Justice Advocate</div>
-            <p class="advisor-bio">Scholar-practitioner specializing in racial equity in philanthropy and nonprofit finance.</p>
-          </article>
-
-          <article class="advisor-card">
-            <img class="advisor-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Robert Kim">
-            <div class="advisor-name">Robert Kim</div>
-            <div class="advisor-title">Financial Systems Expert</div>
-            <p class="advisor-bio">Impact investor and systems designer focused on innovative financing mechanisms.</p>
-          </article>
-        </div>
       </div>
--->
     </section>
 
     <!-- Join -->
@@ -297,5 +269,54 @@
       </div>
     </div>
   </footer>
+
+  <!-- Mobile menu behavior (matches homepage) -->
+  <script>
+    (function () {
+      const header = document.querySelector('.site-header');
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+
+      if (!header || !toggle || !nav || !btn) return;
+
+      function syncUI() {
+        const isOpen = toggle.checked;
+        header.classList.toggle('nav-open', isOpen);
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      function closeMenu() {
+        toggle.checked = false;
+        syncUI();
+      }
+
+      toggle.addEventListener('change', syncUI);
+
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (a) closeMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!toggle.checked) return;
+        const clickedInsideNav = nav.contains(e.target);
+        const clickedButton = btn.contains(e.target);
+        if (!clickedInsideNav && !clickedButton) closeMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) closeMenu();
+      });
+
+      syncUI();
+    })();
+  </script>
 </body>
 </html>
