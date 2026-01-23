@@ -468,3 +468,14 @@
   .page-team .leader-top { gap: 14px; }
   .page-team .contact-link { width: 100%; justify-content: center; }
 }
+
+/* Fix: prevent "Get updates on opportunities" button overflow on mobile */
+@media (max-width: 520px) {
+  .page-team .join-wrap .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: normal;     /* override global nowrap */
+    overflow-wrap: anywhere; /* belt + suspenders */
+  }
+}
