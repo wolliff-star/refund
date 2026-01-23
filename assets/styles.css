@@ -172,17 +172,6 @@ button:focus-visible {
   display: block;
 }
 
-/* NAV FIX (1): Always hide the checkbox visually without breaking label-toggle */
-.nav-toggle {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-  left: -9999px;
-  top: 0;
-}
-
 /* Desktop nav */
 .primary-nav {
   flex: 1;
@@ -760,28 +749,18 @@ footer {
 
     position: relative;
     z-index: 7002;
-
-    /* NAV FIX (2): make taps reliable on mobile */
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    pointer-events: auto;
   }
 
   .nav-toggle-btn i {
     font-size: 22px;
     line-height: 1;
     color: var(--color-text-main);
-    pointer-events: none; /* NAV FIX (3): icon never eats the click */
   }
 
-  /* icon swap (works with either JS class OR checkbox) */
+  /* icon swap */
   .nav-toggle-btn .nav-close { display: none; }
   .site-header.nav-open .nav-toggle-btn .nav-open { display: none; }
   .site-header.nav-open .nav-toggle-btn .nav-close { display: inline; }
-
-  /* NAV FIX (4): CSS-only swap if JS doesn't run */
-  .nav-toggle:checked + .nav-toggle-btn .nav-open { display: none; }
-  .nav-toggle:checked + .nav-toggle-btn .nav-close { display: inline; }
 
   /* Scrim behind the menu panel */
   .nav-scrim {
@@ -794,11 +773,6 @@ footer {
     z-index: 7000;
   }
   .site-header.nav-open .nav-scrim {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  /* NAV FIX (5): CSS-only scrim */
-  .nav-toggle:checked ~ .nav-scrim {
     opacity: 1;
     pointer-events: auto;
   }
@@ -828,12 +802,6 @@ footer {
   }
 
   .site-header.nav-open .primary-nav {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  /* NAV FIX (6): CSS-only open */
-  .nav-toggle:checked ~ .primary-nav {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
