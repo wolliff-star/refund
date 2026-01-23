@@ -38,7 +38,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* overflow fix */
+/* ✅ overflow fix: avoid accidental horizontal scroll from any child */
 html, body { max-width: 100%; }
 
 body {
@@ -60,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
+/* ✅ overflow fix: container should never exceed viewport */
 .container {
   width: min(var(--container-max), var(--container-max-wide));
   margin: 0 auto;
@@ -67,7 +68,7 @@ ul { list-style: none; }
   max-width: 100%;
 }
 
-/* allow long text to wrap */
+/* ✅ overflow fix: allow long words/URLs to wrap in cards */
 p, li, a, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: anywhere;
   word-break: normal;
@@ -85,7 +86,6 @@ p, li, a, h1, h2, h3, h4, h5, h6 {
   border: none;
   font-size: clamp(0.95rem, 1.1vw, 1rem);
   white-space: nowrap;
-  max-width: 100%;
 }
 
 .btn:hover {
@@ -108,8 +108,7 @@ p, li, a, h1, h2, h3, h4, h5, h6 {
 
 /* Focus styles (accessibility) */
 a:focus-visible,
-button:focus-visible,
-label:focus-visible {
+button:focus-visible {
   outline: 3px solid rgba(36, 238, 85, 0.9);
   outline-offset: 3px;
   border-radius: 10px;
@@ -173,6 +172,17 @@ label:focus-visible {
   display: block;
 }
 
+/* NAV FIX (1): Always hide the checkbox visually without breaking label-toggle */
+.nav-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  top: 0;
+}
+
 /* Desktop nav */
 .primary-nav {
   flex: 1;
@@ -195,7 +205,6 @@ label:focus-visible {
 .btn-desktop { display: inline-block; }
 
 /* Mobile-only items (hidden on desktop) */
-.nav-toggle,
 .nav-toggle-btn,
 .nav-cta-mobile,
 .nav-scrim {
@@ -248,6 +257,438 @@ label:focus-visible {
 
 section { padding: var(--spacing-section) 0; }
 
+.section-title {
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.section-desc {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  text-align: center;
+  max-width: 75ch;
+  margin: 0 auto clamp(36px, 5vw, 64px);
+}
+
+.section-bottom-link {
+  text-align: center;
+  margin-top: clamp(18px, 3vw, 32px);
+}
+.section-bottom-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  color: var(--color-text-main);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  border-radius: 12px;
+  padding: 6px 10px;
+}
+.section-bottom-link a:hover { color: #1a8e36; }
+
+.bg-sand { background-color: var(--color-bg-secondary); }
+.bg-accent { background-color: var(--color-bg-accent); }
+
+/* Challenge */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 4vw, 60px);
+  align-items: stretch;
+}
+.challenge-card {
+  background: var(--color-white);
+  padding: clamp(26px, 4vw, 48px);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.stat-highlight {
+  font-size: clamp(2.4rem, 6vw, 3.5rem);
+  font-family: var(--font-heading);
+  color: var(--color-brand-green);
+  margin-bottom: 10px;
+}
+.stat-label {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+/* Matters */
+.matters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(18px, 3vw, 40px);
+}
+.matter-item {
+  text-align: center;
+  padding: clamp(22px, 3.2vw, 40px);
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  transition: transform 0.3s;
+}
+.matter-item:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft);
+}
+.matter-icon {
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--color-brand-green);
+  margin-bottom: 18px;
+  background: rgba(36, 238, 85, 0.1);
+  width: clamp(64px, 7vw, 80px);
+  height: clamp(64px, 7vw, 80px);
+  line-height: clamp(64px, 7vw, 80px);
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.matter-item h3 {
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  margin-bottom: 12px;
+}
+
+/* Testimonial */
+.testimonial-wrapper {
+  max-width: 90%;
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.quote-icon {
+  font-size: clamp(2.5rem, 4vw, 3.75rem);
+  color: var(--color-brand-green);
+  opacity: 0.5;
+  margin-bottom: clamp(18px, 3vw, 32px);
+}
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  color: var(--color-text-main);
+  margin-bottom: clamp(18px, 3vw, 40px);
+  font-style: italic;
+}
+.author-info h4 { font-size: clamp(1.05rem, 1.3vw, 1.25rem); margin-bottom: 4px; }
+.author-info span { font-size: clamp(0.95rem, 1.1vw, 1rem); color: var(--color-text-soft); }
+
+/* Solution */
+.solution-wrapper {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: clamp(34px, 6vw, 80px);
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+.solution-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--color-brand-green);
+}
+.solution-text {
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  line-height: 1.5;
+  color: var(--color-text-main);
+  max-width: 70ch;
+  margin: 0 auto;
+}
+
+/* Steps */
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(18px, 3vw, 40px);
+  position: relative;
+  margin-top: clamp(26px, 4vw, 60px);
+}
+.steps-container::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: #E2E8F0;
+  z-index: 0;
+}
+.step-item {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 260px);
+  text-align: center;
+}
+.step-number {
+  width: clamp(62px, 6vw, 80px);
+  height: clamp(62px, 6vw, 80px);
+  background: var(--color-white);
+  border: 2px solid var(--color-brand-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  font-weight: 900;
+  color: var(--color-text-main);
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.step-item h3 {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  margin-bottom: 10px;
+}
+.step-item p { font-size: clamp(0.95rem, 1.1vw, 1rem); }
+
+/* Funders */
+.funders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(14px, 2.4vw, 32px);
+}
+.funder-card {
+  background: var(--color-white);
+  padding: clamp(18px, 2.6vw, 32px);
+  border-radius: var(--radius-card);
+  text-align: center;
+  border: 1px solid #edf2f7;
+}
+.funder-icon {
+  font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+  color: var(--color-brand-green);
+  margin-bottom: 12px;
+}
+.funder-card h3 {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  margin-bottom: 8px;
+}
+
+/* About cards */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(16px, 2.8vw, 40px);
+}
+
+/* ✅ overflow fix: grid children can shrink instead of forcing overflow */
+.about-grid > * { min-width: 0; }
+
+.content-card {
+  background: var(--color-white);
+  padding: clamp(22px, 3.2vw, 48px);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.card-link {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-card);
+}
+.card-link .content-card {
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+}
+.card-link:hover .content-card {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+  border-color: rgba(36, 238, 85, 0.6);
+}
+.card-cta {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  color: var(--color-text-main);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.card-link:hover .card-cta { color: #1a8e36; }
+
+/* Funding section */
+.funding-section { background: rgba(36, 238, 85, 0.08); }
+.funding-section .section-desc { margin-bottom: clamp(22px, 3vw, 40px); }
+
+.funding-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2.8vw, 40px);
+}
+
+/* ✅ overflow fix: grid children can shrink */
+.funding-grid > * { min-width: 0; }
+
+.funding-card {
+  background: var(--color-white);
+  padding: clamp(22px, 3.2vw, 48px);
+  border-radius: var(--radius-card);
+  text-align: center;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+
+  /* ✅ overflow fix: never exceed container */
+  max-width: 100%;
+}
+.funding-card:hover { border-color: var(--color-brand-green); }
+.funding-amount {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  color: var(--color-text-main);
+  margin: 18px 0;
+  font-family: var(--font-heading);
+}
+
+.funding-wrapper {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: var(--radius-card);
+  padding: clamp(18px, 3vw, 40px);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(4px);
+
+  /* ✅ overflow fix */
+  max-width: 100%;
+}
+
+.funding-cta {
+  margin-top: clamp(18px, 3vw, 32px);
+  text-align: center;
+}
+.funding-cta p {
+  max-width: 70ch;
+  margin: 0 auto clamp(12px, 1.6vw, 16px);
+  color: var(--color-text-soft);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.95em 1.8em;
+  border-radius: var(--radius-btn);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.1vw, 1rem);
+  background: var(--color-text-main);
+  color: var(--color-white);
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  max-width: 100%;
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(28, 28, 28, 0.18);
+}
+
+/* Toolkit callout */
+.funding-block { width: 100%; max-width: 100%; }
+
+.subpage-callout {
+  display: block;
+  margin-top: clamp(18px, 3vw, 28px);
+  border-radius: 18px;
+  border: 1px solid rgba(36, 238, 85, 0.45);
+  background: rgba(36, 238, 85, 0.12);
+  padding: clamp(16px, 2.4vw, 22px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  max-width: 100%; /* ✅ overflow fix */
+}
+.subpage-callout:hover {
+  box-shadow: var(--shadow-soft);
+  border-color: rgba(36, 238, 85, 0.7);
+  transform: translateY(-2px);
+}
+
+.toolkit-callout{
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(226,232,240,0.95);
+  box-shadow: var(--shadow-card);
+  padding: clamp(18px, 2.6vw, 26px);
+  border-radius: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  max-width: 100%; /* ✅ overflow fix */
+}
+.toolkit-callout:hover{
+  border-color: rgba(36,238,85,0.75);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+}
+.toolkit-head{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+}
+.toolkit-icon{
+  width:56px;
+  height:56px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(36,238,85,0.12);
+  color: var(--color-text-main);
+  font-size: 28px;
+  flex: 0 0 auto;
+}
+.toolkit-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  font-size:12px;
+  color: var(--color-text-soft);
+  margin-bottom: 8px;
+}
+.toolkit-title{
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+.toolkit-desc{
+  margin-top: 8px;
+  max-width: 75ch;
+  color: var(--color-text-soft);
+}
+.toolkit-layout{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(14px, 2vw, 22px);
+  align-items: start;
+}
+
+/* ✅ overflow fix */
+.toolkit-layout > * { min-width: 0; }
+
+.toolkit-side{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (max-width: 900px){
+  .toolkit-layout{ grid-template-columns: 1fr; }
+}
+
+/* Contact */
+.contact-container { max-width: 100%; margin: 0 auto; text-align: center; }
+.contact-box {
+  background: var(--color-white);
+  padding: clamp(22px, 3vw, 40px);
+  border-radius: var(--radius-card);
+  margin-top: clamp(18px, 3vw, 40px);
+  box-shadow: var(--shadow-soft);
+  max-width: 100%; /* ✅ overflow fix */
+}
+
 /* Footer */
 footer {
   background-color: var(--color-footer-bg);
@@ -290,11 +731,13 @@ footer {
 }
 
 /* =========================
-   MOBILE NAV (CHECKBOX + OVERLAY)
+   MOBILE NAV (BUTTON + OVERLAY)
    ========================= */
 
 @media (max-width: 900px) {
-  .nav-wrapper { flex-wrap: nowrap; }
+  .nav-wrapper {
+    flex-wrap: nowrap;
+  }
 
   /* Hide desktop CTA on mobile */
   .btn-desktop { display: none; }
@@ -302,16 +745,6 @@ footer {
   /* Show mobile toggle + scrim */
   .nav-toggle-btn { display: inline-flex; }
   .nav-scrim { display: block; }
-
-  /* ✅ IMPORTANT: hide checkbox without breaking label toggle */
-  .nav-toggle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-    left: -9999px;
-  }
 
   .nav-toggle-btn {
     margin-left: auto;
@@ -324,20 +757,29 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     position: relative;
     z-index: 7002;
+
+    /* NAV FIX (2): make taps reliable on mobile */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+    pointer-events: auto;
   }
 
   .nav-toggle-btn i {
     font-size: 22px;
     line-height: 1;
     color: var(--color-text-main);
+    pointer-events: none; /* NAV FIX (3): icon never eats the click */
   }
 
-  /* icon swap driven by checkbox */
+  /* icon swap (works with either JS class OR checkbox) */
   .nav-toggle-btn .nav-close { display: none; }
+  .site-header.nav-open .nav-toggle-btn .nav-open { display: none; }
+  .site-header.nav-open .nav-toggle-btn .nav-close { display: inline; }
+
+  /* NAV FIX (4): CSS-only swap if JS doesn't run */
   .nav-toggle:checked + .nav-toggle-btn .nav-open { display: none; }
   .nav-toggle:checked + .nav-toggle-btn .nav-close { display: inline; }
 
@@ -351,13 +793,17 @@ footer {
     transition: opacity 0.2s ease;
     z-index: 7000;
   }
-
-  /* IMPORTANT: Scrim + panel open when checkbox checked */
+  .site-header.nav-open .nav-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* NAV FIX (5): CSS-only scrim */
   .nav-toggle:checked ~ .nav-scrim {
     opacity: 1;
     pointer-events: auto;
   }
 
+  /* Convert nav into a fixed panel that sits ABOVE page content */
   .primary-nav {
     position: fixed;
     top: 76px;
@@ -381,6 +827,12 @@ footer {
     z-index: 7001;
   }
 
+  .site-header.nav-open .primary-nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* NAV FIX (6): CSS-only open */
   .nav-toggle:checked ~ .primary-nav {
     transform: translateY(0);
     opacity: 1;
@@ -415,31 +867,84 @@ footer {
     text-align: center;
     padding: 0.95em 1.2em;
   }
-
-  /* Remove header subtitle on mobile only */
-  .logo-subtitle { display: none; }
 }
 
 @media (max-width: 768px) {
+  .steps-container::before { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  /* ✅ overflow fix: on smaller screens, allow About grid to be 1 column earlier */
+  .about-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { text-align: center; }
   .footer-logo { margin-left: auto; margin-right: auto; }
+
+  /* ✅ overflow fix: reduce padding so cards never exceed their parent */
+  .content-card { padding: clamp(18px, 5vw, 28px); }
+  .funding-card { padding: clamp(18px, 5vw, 28px); }
+  .funding-wrapper { padding: clamp(14px, 4.5vw, 22px); }
 }
 
 /* =========================
-   OPTIONAL: if you still want your "nav-open" class styles,
-   keep these harmless (doesn't break checkbox mode)
+   MOBILE OVERFLOW FIX: FUNDING CARDS
    ========================= */
-.site-header.nav-open .nav-scrim {
-  opacity: 1;
-  pointer-events: auto;
+
+/* 1) Let the grid collapse sooner and avoid min widths that exceed the viewport */
+@media (max-width: 900px) {
+  .funding-grid {
+    grid-template-columns: 1fr;  /* stack cards */
+  }
 }
-.site-header.nav-open .primary-nav {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
+
+/* 2) Make sure grid items can shrink (prevents "card wider than background") */
+.funding-grid > * {
+  min-width: 0;
+}
+
+/* 3) Ensure wrapper + cards never exceed parent width */
+.funding-wrapper,
+.funding-card {
+  max-width: 100%;
+}
+
+/* 4) Prevent any text from forcing horizontal overflow inside the card */
+.funding-card,
+.funding-card * {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* 5) On very small screens, tighten padding a bit so cards fit cleanly */
+@media (max-width: 520px) {
+  .funding-wrapper {
+    padding: 16px; /* overrides clamp on tiny screens */
+  }
+  .funding-card {
+    padding: 18px; /* overrides clamp on tiny screens */
+  }
+  .funding-amount {
+    font-size: clamp(1.6rem, 9vw, 2.4rem); /* keep big numbers from "pushing" */
+  }
+}
+
+/* =========================
+   HEADER LOGO SUBTITLE — MOBILE ONLY
+   ========================= */
+
+@media (max-width: 900px) {
+  .logo-subtitle {
+    display: none;
+  }
+}
+
+/* Android-safe scroll lock for open mobile menu */
+body.nav-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
 }
