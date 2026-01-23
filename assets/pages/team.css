@@ -1,6 +1,12 @@
 /* =========================================================
-   Header safeguards for Team page
-   (prevents page-specific rules from breaking the shared header)
+   Our Team (page-specific)
+   Uses global tokens from styles.css
+   Scoped to: .page-team
+   ========================================================= */
+
+/* =========================================================
+   TEAM PAGE: HEADER SAFEGUARDS
+   Prevent page styles / browser quirks from breaking shared header + mobile menu
    ========================================================= */
 
 .page-team .site-header{
@@ -14,20 +20,36 @@
   isolation: isolate; /* important for Android stacking */
 }
 
-/* Prevent any page-level img rules (e.g., img {width:100%}) from affecting the logo */
-.page-team .site-header .logo img{
-  width: auto !important;
-  max-width: none !important;
-  height: clamp(40px, 4vw, 64px) !important;
-  display: block;
+.page-team .site-header .nav-wrapper{
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  position: relative;
 }
 
-/* Keep the logo text layout stable */
+/* CRITICAL: hide the checkbox so it can’t affect layout / show as a “box” */
+.page-team .site-header .nav-toggle{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+}
+
+/* Logo sizing + layout (protect against any img { width:100% } rules) */
 .page-team .site-header .logo{
   display: flex;
   align-items: center;
   gap: clamp(12px, 1.8vw, 18px);
   min-width: 0;
+}
+
+.page-team .site-header .logo img{
+  width: auto !important;
+  max-width: none !important;
+  height: clamp(40px, 4vw, 64px) !important;
+  display: block;
 }
 
 .page-team .site-header .logo-text{
@@ -37,22 +59,39 @@
   min-width: 0;
 }
 
+.page-team .site-header .logo-text strong{
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  color: var(--color-text-main);
+}
+
 .page-team .site-header .logo-subtitle{
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-weight: 600;
+  color: var(--color-text-soft);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 36ch;
 }
 
-/* Make sure the nav wrapper behaves like the homepage */
-.page-team .site-header .nav-wrapper{
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 2vw, 24px);
-  position: relative;
+/* Desktop nav baseline (ensures it doesn’t “stack weird” on some pages) */
+.page-team .site-header .primary-nav{
+  flex: 1;
+  min-width: 0;
 }
 
-/* Ensure mobile toggle + menu panel always sit above page content */
+/* Ensure CTA behaves the same as homepage */
+.page-team .site-header .btn-desktop{
+  display: inline-block;
+}
+
+/* Mobile subtitle removal (matches your homepage behavior request) */
+@media (max-width: 520px){
+  .page-team .site-header .logo-subtitle{ display: none; }
+}
+
+/* Mobile menu layering: force above page content */
 @media (max-width: 900px){
   .page-team .site-header .nav-toggle-btn{
     position: relative;
@@ -66,40 +105,16 @@
   }
 }
 
-/* Hide subtitle on mobile (matches homepage behavior you wanted) */
-@media (max-width: 520px){
-  .page-team .site-header .logo-subtitle{
-    display: none;
-  }
-}
-
-
 /* =========================================================
-   Our Team (page-specific)
-   Uses global tokens from styles.css
-   Scoped to: .page-team
+   TEAM PAGE CONTENT
    ========================================================= */
 
 .page-team {
   background: var(--color-bg-primary);
   color: var(--color-text-soft);
-
-  /* Prevent any accidental horizontal scroll on mobile */
-  overflow-x: hidden;
 }
 
 .page-team p { line-height: 1.8; }
-
-/* Make sure long strings never blow up layout */
-.page-team,
-.page-team * {
-  max-width: 100%;
-}
-
-.page-team img {
-  max-width: 100%;
-  height: auto;
-}
 
 /* ---------- Team Hero (avoid .hero collisions) ---------- */
 .page-team .team-hero {
@@ -108,9 +123,6 @@
   background: linear-gradient(180deg, var(--color-white) 0%, var(--color-bg-primary) 100%);
   position: relative;
   overflow: hidden;
-
-  /* Avoid creating odd stacking issues over fixed nav on some Android builds */
-  isolation: isolate;
 }
 
 .page-team .team-hero::before {
@@ -219,9 +231,6 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-
-  /* Critical for long text: prevents grid children from forcing overflow */
-  min-width: 0;
 }
 
 .page-team .leader-card:hover {
@@ -233,12 +242,10 @@
 .page-team .leader-top {
   padding: clamp(18px, 2.6vw, 32px);
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
+  grid-template-columns: 120px 1fr;
   gap: 18px;
   align-items: center;
   position: relative;
-
-  min-width: 0;
 }
 
 .page-team .leader-top::after {
@@ -258,7 +265,6 @@
   overflow: hidden;
   background: var(--color-bg-accent);
   box-shadow: 0 10px 22px rgba(0,0,0,0.08);
-  flex: 0 0 auto;
 }
 
 .page-team .leader-photo img {
@@ -273,9 +279,6 @@
   font-size: clamp(1.15rem, 1.55vw, 1.5rem);
   color: var(--color-text-main);
   margin-bottom: 6px;
-
-  /* Prevent long names from overflowing */
-  overflow-wrap: anywhere;
 }
 
 .page-team .leader-role {
@@ -287,10 +290,6 @@
   text-transform: uppercase;
   font-size: 12px;
   color: #1a8e36;
-
-  /* prevent overflow on narrow screens */
-  flex-wrap: wrap;
-  row-gap: 6px;
 }
 
 .page-team .leader-role i { color: var(--color-brand-green); }
@@ -301,17 +300,11 @@
   flex-direction: column;
   gap: 16px;
   flex: 1;
-
-  min-width: 0;
 }
 
 .page-team .leader-bio {
   color: var(--color-text-soft);
   font-size: 1rem;
-
-  /* Very long strings/urls won't break layout */
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .page-team .leader-bio p { margin-bottom: 12px; }
@@ -334,8 +327,6 @@
   color: #1a8e36;
   font-weight: 800;
   font-size: 13px;
-
-  max-width: 100%;
 }
 
 .page-team .leader-footer {
@@ -347,8 +338,6 @@
   gap: 14px 18px;
   align-items: center;
   justify-content: space-between;
-
-  min-width: 0;
 }
 
 .page-team .contact-links {
@@ -356,7 +345,6 @@
   flex-wrap: wrap;
   gap: 12px 16px;
   align-items: center;
-  min-width: 0;
 }
 
 .page-team .contact-link {
@@ -370,8 +358,6 @@
   border-radius: 12px;
   border: 1px solid rgba(226, 232, 240, 0.95);
   background: rgba(255,255,255,0.7);
-
-  max-width: 100%;
 }
 
 .page-team .contact-link:hover {
@@ -382,84 +368,10 @@
 
 .page-team .contact-link i { font-size: 18px; }
 
-/* optional small CTA on each card */
-.page-team .leader-cta {
-  font-weight: 900;
-  color: var(--color-text-main);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  padding: 8px 10px;
-  border-radius: 12px;
-}
-
-.page-team .leader-card:hover .leader-cta { color: #1a8e36; }
-
 /* ---------- Advisory Board ---------- */
 .page-team .advisors {
   padding: var(--spacing-section) 0;
   background: var(--color-white);
-}
-
-.page-team .advisor-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 2.2vw, 28px);
-}
-
-.page-team .advisor-card {
-  background: var(--color-bg-primary);
-  border: 1px solid rgba(226, 232, 240, 0.95);
-  border-radius: var(--radius-card);
-  padding: clamp(18px, 2.6vw, 32px);
-  box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  text-align: center;
-
-  min-width: 0;
-}
-
-.page-team .advisor-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-soft);
-  border-color: rgba(36, 238, 85, 0.45);
-  background: var(--color-white);
-}
-
-.page-team .advisor-img {
-  width: 96px;
-  height: 96px;
-  border-radius: 20px;
-  object-fit: cover;
-  margin: 0 auto 14px;
-  display: block;
-  background: var(--color-bg-accent);
-}
-
-.page-team .advisor-name {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  color: var(--color-text-main);
-  margin-bottom: 6px;
-
-  overflow-wrap: anywhere;
-}
-
-.page-team .advisor-title {
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #1a8e36;
-  margin-bottom: 12px;
-}
-
-.page-team .advisor-bio {
-  color: var(--color-text-soft);
-  font-size: 0.98rem;
-  line-height: 1.7;
-
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 /* ---------- Join Team ---------- */
@@ -477,6 +389,10 @@
   padding: clamp(22px, 3.6vw, 56px);
   max-width: 980px;
   margin: 0 auto;
+
+  /* Prevent mobile overflow from long inline elements */
+  width: 100%;
+  max-width: 980px;
 }
 
 .page-team .join-wrap p {
@@ -484,6 +400,17 @@
   font-size: clamp(1rem, 1.2vw, 1.1rem);
   margin: 0 auto 18px;
   max-width: 75ch;
+}
+
+/* Mobile-only: make button fit inside card */
+@media (max-width: 520px) {
+  .page-team .join-wrap .btn{
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* ---------- Contact block ---------- */
@@ -501,8 +428,6 @@
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-soft);
   padding: clamp(18px, 3vw, 44px);
-
-  min-width: 0;
 }
 
 .page-team .contact-box .emails {
@@ -512,8 +437,6 @@
   justify-content: center;
   flex-wrap: wrap;
   font-weight: 900;
-
-  overflow-wrap: anywhere;
 }
 
 .page-team .contact-box .emails a {
@@ -523,35 +446,9 @@
 
 .page-team .contact-box .emails a:hover { color: #1a8e36; }
 
-/* ---------- Mobile-only header tweak for this page ----------
-   (Hides the subtitle in the header on mobile)
-   NOTE: This relies on the global header classnames from styles.css
-------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .page-team .logo-subtitle { display: none; }
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
   .page-team .leadership-grid { grid-template-columns: 1fr; }
-  .page-team .advisor-grid { grid-template-columns: 1fr; }
-  .page-team .leader-top { grid-template-columns: 96px minmax(0, 1fr); }
+  .page-team .leader-top { grid-template-columns: 96px 1fr; }
   .page-team .leader-photo { width: 96px; height: 96px; }
-}
-
-/* Extra narrow devices */
-@media (max-width: 420px) {
-  .page-team .leader-top { gap: 14px; }
-  .page-team .contact-link { width: 100%; justify-content: center; }
-}
-
-/* Fix: prevent "Get updates on opportunities" button overflow on mobile */
-@media (max-width: 520px) {
-  .page-team .join-wrap .btn {
-    display: block;
-    width: 100%;
-    text-align: center;
-    white-space: normal;     /* override global nowrap */
-    overflow-wrap: anywhere; /* belt + suspenders */
-  }
 }
