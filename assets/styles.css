@@ -194,12 +194,26 @@ button:focus-visible {
 .btn-desktop { display: inline-block; }
 
 /* Mobile-only items (hidden on desktop) */
-.nav-toggle,
+/* Mobile-only items (hidden on desktop) */
 .nav-toggle-btn,
 .nav-cta-mobile,
 .nav-scrim {
   display: none;
 }
+
+/* ✅ Hide checkbox visually, but keep it toggle-able via label */
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 
 /* =========================
    HERO + SECTIONS
