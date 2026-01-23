@@ -1,4 +1,80 @@
 /* =========================================================
+   Header safeguards for Team page
+   (prevents page-specific rules from breaking the shared header)
+   ========================================================= */
+
+.page-team .site-header{
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+  isolation: isolate; /* important for Android stacking */
+}
+
+/* Prevent any page-level img rules (e.g., img {width:100%}) from affecting the logo */
+.page-team .site-header .logo img{
+  width: auto !important;
+  max-width: none !important;
+  height: clamp(40px, 4vw, 64px) !important;
+  display: block;
+}
+
+/* Keep the logo text layout stable */
+.page-team .site-header .logo{
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 18px);
+  min-width: 0;
+}
+
+.page-team .site-header .logo-text{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  min-width: 0;
+}
+
+.page-team .site-header .logo-subtitle{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 36ch;
+}
+
+/* Make sure the nav wrapper behaves like the homepage */
+.page-team .site-header .nav-wrapper{
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  position: relative;
+}
+
+/* Ensure mobile toggle + menu panel always sit above page content */
+@media (max-width: 900px){
+  .page-team .site-header .nav-toggle-btn{
+    position: relative;
+    z-index: 7002;
+  }
+  .page-team .site-header .nav-scrim{
+    z-index: 7000;
+  }
+  .page-team .site-header .primary-nav{
+    z-index: 7001;
+  }
+}
+
+/* Hide subtitle on mobile (matches homepage behavior you wanted) */
+@media (max-width: 520px){
+  .page-team .site-header .logo-subtitle{
+    display: none;
+  }
+}
+
+
+/* =========================================================
    Our Team (page-specific)
    Uses global tokens from styles.css
    Scoped to: .page-team
