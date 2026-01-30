@@ -971,6 +971,22 @@ body.nav-lock {
   overflow: hidden;
 }
 
+.sponsor-inner {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: center;
+}
+
+.sponsor-inner > * { min-width: 0; }
+
+.sponsor-logo img {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .sponsor-copy {
   margin: 0;
   color: var(--color-text-main);
@@ -978,10 +994,14 @@ body.nav-lock {
   line-height: 1.7;
 }
 
-.sponsor-logo img {
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+@media (max-width: 700px) {
+  .sponsor-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .sponsor-logo img {
+    margin: 0 auto;
+    max-width: 220px;
+  }
 }
