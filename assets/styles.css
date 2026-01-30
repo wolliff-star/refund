@@ -970,3 +970,14 @@ body.nav-lock {
   width: 100%;
   overflow: hidden;
 }
+
+#fiscal-sponsor, #fiscal-sponsor * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#fiscal-sponsor .sponsor-card {
+  display: block !important;
+  outline: 3px solid red !important;
+  min-height: 120px !important;
+}
