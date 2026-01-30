@@ -537,18 +537,12 @@
   max-width: none !important;
   display: block !important;
 }
-
 /* =========================
-   Footer logo sizing fix
+   Footer logo — Our Team page
+   Slightly smaller than homepage
    ========================= */
 
-/* =========================
-   Footer logo sizing (balanced)
-   ========================= */
-
-footer .footer-logo img {
-  max-height: 64px;   /* upper bound, not a hard lock */
-  width: auto;
-  height: auto;
-  display: block;
+.page-team footer .footer-logo img {
+  height: clamp(56px, 6vw, 88px);
+  padding: clamp(8px, 1vw, 12px);
 }
