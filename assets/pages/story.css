@@ -616,3 +616,33 @@
   .page-story .logo-subtitle { display: none; }
 }
 
+/* --- Timeline: prevent year overlap on mobile --- */
+@media (max-width: 980px) {
+  .page-story .timeline-content {
+    /* Reserve space for the watermark year */
+    padding-top: 48px;
+  }
+
+  .page-story .timeline-year {
+    /* Keep the same watermark feel, but fit it on narrow cards */
+    top: 14px;
+    right: 16px;
+    font-size: clamp(1.6rem, 9vw, 2.2rem);
+    line-height: 1;
+    /* Optional: slightly lighter on small screens */
+    color: rgba(74, 85, 104, 0.12);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-story .timeline-content {
+    padding-top: 52px;
+  }
+
+  .page-story .timeline-year {
+    right: 14px;
+    font-size: 1.9rem;
+  }
+}
+
