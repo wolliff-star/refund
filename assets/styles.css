@@ -942,3 +942,36 @@ body.nav-lock {
     max-width: 220px;
   }
 }
+
+/* Force side-by-side */
+#fiscal-sponsor .sponsor-card.sponsor-split{
+  display: grid !important;
+  grid-template-columns: 200px 1fr !important;
+  gap: 24px !important;
+  align-items: center !important;
+  text-align: left !important;
+}
+
+#fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-logo{
+  grid-column: 1 !important;
+}
+
+#fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-body{
+  grid-column: 2 !important;
+  min-width: 0 !important;
+}
+
+/* Stack on small screens */
+@media (max-width: 700px){
+  #fiscal-sponsor .sponsor-card.sponsor-split{
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+  #fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-body{
+    grid-column: 1 !important;
+  }
+  #fiscal-sponsor .sponsor-logo img{
+    margin: 0 auto !important;
+    max-width: 220px !important;
+  }
+}
