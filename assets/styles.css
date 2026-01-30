@@ -971,13 +971,17 @@ body.nav-lock {
   overflow: hidden;
 }
 
-#fiscal-sponsor, #fiscal-sponsor * {
-  opacity: 1 !important;
-  visibility: visible !important;
+.sponsor-copy {
+  margin: 0;
+  color: var(--color-text-main);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.7;
 }
 
-#fiscal-sponsor .sponsor-card {
-  display: block !important;
-  outline: 3px solid red !important;
-  min-height: 120px !important;
+.sponsor-logo img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
