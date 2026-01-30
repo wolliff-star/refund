@@ -183,7 +183,8 @@
 
   </main>
 
-  <!-- Shared Footer -->
+   <!-- Shared Footer -->
+    <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -198,86 +199,129 @@
 </div>
 
         <div class="footer-col">
-          <h4>About</h4>
+          <h4>Explore</h4>
           <ul class="footer-links">
-            <li><a href="/our-story/index.html">Our Story</a></li>
-            <li><a href="/our-team/index.html">Our Team</a></li>
-            <li><a href="/careers/index.html">Careers</a></li>
+            <li><a href="#challenge">The Challenge</a></li>
+            <li><a href="#solution">The Solution</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#about">About ReFund</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Resources</h4>
+          <h4>More</h4>
           <ul class="footer-links">
-            <li><a href="/blog/index.html">Blog</a></li>
-            <li><a href="/impact-stories/index.html">Impact Stories</a></li>
-            <li><a href="/faq/index.html">FAQs</a></li>
+            <li><a href="impact/index.html">Impact Stories</a></li>
+            <li><a href="insights/index.html">Insights</a></li>
+            <li><a href="funders/index.html">Resources for Funders</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Connect</h4>
+          <h4>Contact</h4>
           <ul class="footer-links">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="/contact/index.html">Contact</a></li>
+            <li><a href="#contact">Contact Form</a></li>
+            <li>
+              <a
+                href="https://www.linkedin.com/company/therefund/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="copyright">
-        © 2024 ReFund. All rights reserved.
+        &copy; 2026 ReFund. All rights reserved.
       </div>
     </div>
   </footer>
-
-  <!-- Mobile menu behavior (matches homepage) -->
+  <!-- Mobile menu behavior (same as homepage) -->
   <script>
-    (function () {
-      const header = document.querySelector('.site-header');
-      const toggle = document.getElementById('nav-toggle');
-      const nav = document.getElementById('primary-nav');
-      const btn = document.querySelector('label.nav-toggle-btn[for="nav-toggle"]');
+  (function () {
+    const header = document.querySelector('.site-header');
+    const nav = document.getElementById('primary-nav');
+    const btn = document.getElementById('nav-toggle-btn');
+    const scrim = document.querySelector('.nav-scrim');
 
-      if (!header || !toggle || !nav || !btn) return;
+    if (!header || !nav || !btn) return;
 
-      function syncUI() {
-        const isOpen = toggle.checked;
-        header.classList.toggle('nav-open', isOpen);
-        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        document.documentElement.style.overflow = isOpen ? 'hidden' : '';
-      }
+    let scrollY = 0;
 
-      function closeMenu() {
-        toggle.checked = false;
-        syncUI();
-      }
+    function isOpen() {
+      return header.classList.contains('nav-open');
+    }
 
-      toggle.addEventListener('change', syncUI);
+    function lockScroll() {
+      scrollY = window.scrollY || 0;
+      document.body.classList.add('nav-lock');
+      document.body.style.top = `-${scrollY}px`;
+    }
 
-      nav.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (a) closeMenu();
+    function unlockScroll() {
+      document.body.classList.remove('nav-lock');
+      const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
+      document.body.style.top = '';
+      window.scrollTo(0, y);
+    }
+
+    function openMenu() {
+      header.classList.add('nav-open');
+      btn.setAttribute('aria-label', 'Close menu');
+      btn.setAttribute('aria-expanded', 'true');
+      lockScroll();
+    }
+
+    function closeMenu() {
+      header.classList.remove('nav-open');
+      btn.setAttribute('aria-label', 'Open menu');
+      btn.setAttribute('aria-expanded', 'false');
+      unlockScroll();
+    }
+
+    function toggleMenu() {
+      if (isOpen()) closeMenu();
+      else openMenu();
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    nav.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) closeMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!isOpen()) return;
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedButton = btn.contains(e.target);
+      if (!clickedInsideNav && !clickedButton) closeMenu();
+    });
+
+    if (scrim) {
+      scrim.addEventListener('click', () => {
+        if (isOpen()) closeMenu();
       });
+    }
 
-      document.addEventListener('click', (e) => {
-        if (!toggle.checked) return;
-        const clickedInsideNav = nav.contains(e.target);
-        const clickedButton = btn.contains(e.target);
-        if (!clickedInsideNav && !clickedButton) closeMenu();
-      });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) closeMenu();
+    });
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-      });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && isOpen()) closeMenu();
+    });
 
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeMenu();
-      });
-
-      syncUI();
-    })();
+    // Initialize closed
+    closeMenu();
+  })();
   </script>
 </body>
 </html>
