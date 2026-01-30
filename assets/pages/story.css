@@ -646,13 +646,10 @@
   }
 }
 
-/* =========================================================
-   Footer safeguard (scoped, non-destructive)
-   Does NOT restyle the footer—just prevents distortion.
-   ========================================================= */
+/* Footer safeguard (scoped, non-destructive) */
 .page-story footer .footer-logo img {
   height: clamp(72px, 8vw, 120px);
   width: auto;
-  max-width: none;
+  max-width: 100%;      /* ✅ allow shrinking in flex */
   object-fit: contain;
 }
