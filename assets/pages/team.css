@@ -546,3 +546,30 @@
   height: clamp(56px, 6vw, 88px);
   padding: clamp(8px, 1vw, 12px);
 }
+
+/* =========================
+   FOOTER BRAND (logo + text)
+   ========================= */
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-brand-text {
+  color: #CBD5E0;
+  max-width: 42ch;
+}
+
+/* Mobile: stack */
+@media (max-width: 520px) {
+  .footer-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-brand-text {
+    max-width: 36ch;
+  }
+}
