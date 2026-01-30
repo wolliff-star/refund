@@ -542,9 +542,13 @@
    Footer logo sizing fix
    ========================= */
 
+/* =========================
+   Footer logo sizing (balanced)
+   ========================= */
+
 footer .footer-logo img {
-  height: 42px;
+  max-height: 64px;   /* upper bound, not a hard lock */
   width: auto;
-  max-width: none;
+  height: auto;
   display: block;
 }
