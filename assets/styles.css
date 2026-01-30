@@ -975,3 +975,30 @@ body.nav-lock {
     max-width: 220px !important;
   }
 }
+
+/* =========================
+   FOOTER BRAND (logo + text)
+   ========================= */
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-brand-text {
+  color: #CBD5E0;
+  max-width: 42ch;
+}
+
+/* Mobile: stack */
+@media (max-width: 520px) {
+  .footer-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-brand-text {
+    max-width: 36ch;
+  }
+}
