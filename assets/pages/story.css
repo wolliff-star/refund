@@ -275,3 +275,19 @@
   flex: 1 1 0;
   min-width: 0;
 }
+
+/* Story footer: ensure the brand paragraph is visible next to logo */
+.page-story footer .footer-col.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.page-story footer .footer-col.footer-brand > p {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  opacity: 1;
+  visibility: visible;
+  color: #CBD5E0; /* matches global footer link/text tone */
+}
