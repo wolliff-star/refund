@@ -520,3 +520,20 @@
     height: 40px;
   }
 }
+
+/* Force-hide the nav checkbox everywhere */
+.nav-toggle {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+}
+
+/* Force the header logo image to a sane size */
+.site-header .logo img {
+  height: 44px !important;
+  width: auto !important;
+  max-width: none !important;
+  display: block !important;
+}
