@@ -463,8 +463,6 @@ section { padding: var(--spacing-section) 0; }
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: clamp(16px, 2.8vw, 40px);
 }
-
-/* ✅ overflow fix: grid children can shrink instead of forcing overflow */
 .about-grid > * { min-width: 0; }
 
 .content-card {
@@ -509,8 +507,6 @@ section { padding: var(--spacing-section) 0; }
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(16px, 2.8vw, 40px);
 }
-
-/* ✅ overflow fix: grid children can shrink */
 .funding-grid > * { min-width: 0; }
 
 .funding-card {
@@ -520,8 +516,6 @@ section { padding: var(--spacing-section) 0; }
   text-align: center;
   border: 2px solid transparent;
   transition: border-color 0.3s;
-
-  /* ✅ overflow fix: never exceed container */
   max-width: 100%;
 }
 .funding-card:hover { border-color: var(--color-brand-green); }
@@ -540,8 +534,6 @@ section { padding: var(--spacing-section) 0; }
   padding: clamp(18px, 3vw, 40px);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(4px);
-
-  /* ✅ overflow fix */
   max-width: 100%;
 }
 
@@ -682,33 +674,60 @@ footer {
   color: #E2E8F0;
   padding: clamp(48px, 7vw, 80px) 0 40px;
 }
+
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: clamp(16px, 2.8vw, 40px);
   margin-bottom: 50px;
 }
-.footer-logo { display: inline-block; margin-bottom: 20px; }
+
+/* FOOTER BRAND (logo + text) */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-brand-text {
+  color: #CBD5E0;
+  max-width: 42ch;
+}
+
+/* Footer logo badge (global, prevents distortion) */
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: clamp(10px, 1.2vw, 16px);
+  margin-bottom: 20px;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+}
+
 .footer-logo img {
   height: clamp(72px, 8vw, 120px);
   width: auto;
   display: block;
-  background: #FFFFFF;
-  padding: clamp(10px, 1.2vw, 16px);
-  border-radius: 16px;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+  padding: 0;
+  max-width: none;
 }
+
 .footer-col h4 {
   color: var(--color-white);
   font-size: clamp(1rem, 1.25vw, 1.125rem);
   margin-bottom: 18px;
 }
+
 .footer-links li { margin-bottom: 10px; }
+
 .footer-links a {
   color: #CBD5E0;
   transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--color-brand-green); }
+
 .copyright {
   text-align: center;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -836,7 +855,11 @@ footer {
 @media (max-width: 520px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { text-align: center; }
+
+  /* center the brand block on mobile */
   .footer-logo { margin-left: auto; margin-right: auto; }
+  .footer-brand { flex-direction: column; text-align: center; }
+  .footer-brand-text { max-width: 36ch; }
 
   .content-card { padding: clamp(18px, 5vw, 28px); }
   .funding-card { padding: clamp(18px, 5vw, 28px); }
@@ -862,6 +885,7 @@ footer {
   word-break: normal;
 }
 
+/* Ensure buttons can wrap when needed (override .btn nowrap locally where used) */
 @media (max-width: 520px) {
   .funding-wrapper { padding: 16px; }
   .funding-card { padding: 18px; }
@@ -976,34 +1000,7 @@ body.nav-lock {
   }
 }
 
-/* =========================
-   FOOTER BRAND (logo + text)
-   ========================= */
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.footer-brand-text {
-  color: #CBD5E0;
-  max-width: 42ch;
-}
-
-/* Mobile: stack */
-@media (max-width: 520px) {
-  .footer-brand {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-brand-text {
-    max-width: 36ch;
-  }
-}
-
 /* About + sponsor spacing */
 .about-sponsor {
-  margin-top: clamp(14px, 2.2vw, 22px); /* smaller than your grid gap */
+  margin-top: clamp(14px, 2.2vw, 22px);
 }
