@@ -971,37 +971,66 @@ body.nav-lock {
   overflow: hidden;
 }
 
-.sponsor-inner {
-  display: grid;
-  grid-template-columns: minmax(120px, 180px) 1fr;
-  gap: clamp(16px, 2.4vw, 28px);
-  align-items: center;
+/* =========================
+   FISCAL SPONSOR (robust)
+   ========================= */
+
+#fiscal-sponsor .sponsor-card{
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  padding: clamp(18px, 3vw, 40px);
+  max-width: 100%;
 }
 
-.sponsor-inner > * { min-width: 0; }
+/* Flex fallback (always works) */
+#fiscal-sponsor .sponsor-inner{
+  display: flex;
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: center;
+  flex-wrap: wrap;           /* allows stacking naturally */
+}
 
-.sponsor-logo img {
-  max-width: 180px;
-  width: 100%;
+#fiscal-sponsor .sponsor-logo{
+  flex: 0 0 auto;
+}
+
+#fiscal-sponsor .sponsor-logo img{
+  width: 180px;
+  max-width: 100%;
   height: auto;
   display: block;
 }
 
-.sponsor-copy {
+#fiscal-sponsor .sponsor-copy{
+  flex: 1 1 320px;
   margin: 0;
   color: var(--color-text-main);
   font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.7;
 }
 
-@media (max-width: 700px) {
-  .sponsor-inner {
-    grid-template-columns: 1fr;
+/* Upgrade to grid when supported (optional) */
+@supports (display: grid) {
+  #fiscal-sponsor .sponsor-inner{
+    display: grid;
+    grid-template-columns: minmax(140px, 180px) 1fr;
+    align-items: center;
+  }
+  #fiscal-sponsor .sponsor-copy{
+    flex: initial;
+  }
+}
+
+/* Mobile stacking */
+@media (max-width: 700px){
+  #fiscal-sponsor .sponsor-inner{
+    display: flex;           /* force the known-good layout on small screens */
+    flex-direction: column;
     text-align: center;
   }
-
-  .sponsor-logo img {
-    margin: 0 auto;
-    max-width: 220px;
+  #fiscal-sponsor .sponsor-logo img{
+    width: 220px;
   }
 }
