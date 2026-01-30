@@ -20,9 +20,11 @@
   max-width: 100%;
 }
 
+/* Images default */
 .page-team img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 /* ---------- Team Hero (avoid .hero collisions) ---------- */
@@ -189,7 +191,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .page-team .leader-name {
@@ -225,7 +226,6 @@
   flex-direction: column;
   gap: 16px;
   flex: 1;
-
   min-width: 0;
 }
 
@@ -258,7 +258,6 @@
   color: #1a8e36;
   font-weight: 800;
   font-size: 13px;
-
   max-width: 100%;
 }
 
@@ -271,7 +270,6 @@
   gap: 14px 18px;
   align-items: center;
   justify-content: space-between;
-
   min-width: 0;
 }
 
@@ -294,7 +292,6 @@
   border-radius: 12px;
   border: 1px solid rgba(226, 232, 240, 0.95);
   background: rgba(255,255,255,0.7);
-
   max-width: 100%;
 }
 
@@ -338,7 +335,6 @@
   box-shadow: var(--shadow-card);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   text-align: center;
-
   min-width: 0;
 }
 
@@ -355,7 +351,6 @@
   border-radius: 20px;
   object-fit: cover;
   margin: 0 auto 14px;
-  display: block;
   background: var(--color-bg-accent);
 }
 
@@ -364,7 +359,6 @@
   font-size: 1.15rem;
   color: var(--color-text-main);
   margin-bottom: 6px;
-
   overflow-wrap: anywhere;
 }
 
@@ -381,7 +375,6 @@
   color: var(--color-text-soft);
   font-size: 0.98rem;
   line-height: 1.7;
-
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -425,7 +418,6 @@
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-soft);
   padding: clamp(18px, 3vw, 44px);
-
   min-width: 0;
 }
 
@@ -436,7 +428,6 @@
   justify-content: center;
   flex-wrap: wrap;
   font-weight: 900;
-
   overflow-wrap: anywhere;
 }
 
@@ -449,7 +440,6 @@
 
 /* ---------- Mobile-only header tweak for this page ----------
    (Hides the subtitle in the header on mobile)
-   NOTE: This relies on the global header classnames from styles.css
 ------------------------------------------------------------- */
 @media (max-width: 900px) {
   .page-team .logo-subtitle { display: none; }
@@ -479,11 +469,11 @@
     overflow-wrap: anywhere; /* belt + suspenders */
   }
 }
+
 /* =========================
    Header fixes (Our Team)
    ========================= */
 
-/* Ensure header logo stays a normal size */
 .page-team .site-header .logo {
   display: flex;
   align-items: center;
@@ -492,17 +482,9 @@
 }
 
 .page-team .site-header .logo img {
-  height: 44px;     /* adjust: 36–52px depending on taste */
+  height: 44px;
   width: auto;
-  display: block;
   flex: 0 0 auto;
-}
-
-/* Prevent the logo text from forcing layout issues */
-.page-team .site-header .logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
 }
 
 /* Hide the mobile nav checkbox (it should never be visible) */
@@ -514,62 +496,19 @@
   pointer-events: none;
 }
 
-/* Optional: if the logo still feels big on small screens */
 @media (max-width: 900px) {
-  .page-team .site-header .logo img {
-    height: 40px;
-  }
+  .page-team .site-header .logo img { height: 40px; }
 }
 
-/* Force-hide the nav checkbox everywhere */
-.nav-toggle {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 1px !important;
-  height: 1px !important;
-  pointer-events: none !important;
-}
-
-/* Force the header logo image to a sane size */
-.site-header .logo img {
-  height: 44px !important;
-  width: auto !important;
-  max-width: none !important;
-  display: block !important;
-}
 /* =========================
    Footer logo — Our Team page
-   Slightly smaller than homepage
+   (force no distortion even if another rule sets width)
    ========================= */
 
 .page-team footer .footer-logo img {
   height: clamp(56px, 6vw, 88px);
-  padding: clamp(8px, 1vw, 12px);
-}
-
-/* =========================
-   FOOTER BRAND (logo + text)
-   ========================= */
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.footer-brand-text {
-  color: #CBD5E0;
-  max-width: 42ch;
-}
-
-/* Mobile: stack */
-@media (max-width: 520px) {
-  .footer-brand {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-brand-text {
-    max-width: 36ch;
-  }
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  padding: 0; /* padding should be on .footer-logo wrapper in global CSS */
 }
