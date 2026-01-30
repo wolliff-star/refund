@@ -479,3 +479,44 @@
     overflow-wrap: anywhere; /* belt + suspenders */
   }
 }
+/* =========================
+   Header fixes (Our Team)
+   ========================= */
+
+/* Ensure header logo stays a normal size */
+.page-team .site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.page-team .site-header .logo img {
+  height: 44px;     /* adjust: 36–52px depending on taste */
+  width: auto;
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* Prevent the logo text from forcing layout issues */
+.page-team .site-header .logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* Hide the mobile nav checkbox (it should never be visible) */
+.page-team .nav-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* Optional: if the logo still feels big on small screens */
+@media (max-width: 900px) {
+  .page-team .site-header .logo img {
+    height: 40px;
+  }
+}
