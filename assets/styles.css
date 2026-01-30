@@ -889,7 +889,7 @@ body.nav-lock {
    FISCAL SPONSOR — scoped + collision-proof
    ========================= */
 
-#fiscal-sponsor .sponsor-card {
+#about .sponsor-card {
   background: var(--color-white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
@@ -898,7 +898,7 @@ body.nav-lock {
   max-width: 100%;
 }
 
-#fiscal-sponsor .sponsor-split {
+#about .sponsor-split {
   display: grid;
   grid-template-columns: minmax(140px, 200px) 1fr;
   gap: clamp(16px, 2.4vw, 28px);
@@ -906,23 +906,23 @@ body.nav-lock {
   text-align: left;
 }
 
-#fiscal-sponsor .sponsor-split > * { min-width: 0; }
+#about .sponsor-split > * { min-width: 0; }
 
-#fiscal-sponsor .sponsor-logo img {
+#about .sponsor-logo img {
   max-width: 200px;
   width: 100%;
   height: auto;
   display: block;
 }
 
-#fiscal-sponsor .sponsor-body {
+#about .sponsor-body {
   display: block;
   opacity: 1;
   visibility: visible;
   min-width: 0;
 }
 
-#fiscal-sponsor .sponsor-copy {
+#about .sponsor-copy {
   margin: 0;
   display: block;
   color: var(--color-text-main);
@@ -932,19 +932,19 @@ body.nav-lock {
 
 /* Mobile: stack */
 @media (max-width: 700px) {
-  #fiscal-sponsor .sponsor-split {
+  #about .sponsor-split {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  #fiscal-sponsor .sponsor-logo img {
+  #about .sponsor-logo img {
     margin: 0 auto;
     max-width: 220px;
   }
 }
 
 /* Force side-by-side */
-#fiscal-sponsor .sponsor-card.sponsor-split{
+#about .sponsor-card.sponsor-split{
   display: grid !important;
   grid-template-columns: 200px 1fr !important;
   gap: 24px !important;
@@ -952,25 +952,25 @@ body.nav-lock {
   text-align: left !important;
 }
 
-#fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-logo{
+#about .sponsor-card.sponsor-split > .sponsor-logo{
   grid-column: 1 !important;
 }
 
-#fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-body{
+#about .sponsor-card.sponsor-split > .sponsor-body{
   grid-column: 2 !important;
   min-width: 0 !important;
 }
 
 /* Stack on small screens */
 @media (max-width: 700px){
-  #fiscal-sponsor .sponsor-card.sponsor-split{
+  #about .sponsor-card.sponsor-split{
     grid-template-columns: 1fr !important;
     text-align: center !important;
   }
-  #fiscal-sponsor .sponsor-card.sponsor-split > .sponsor-body{
+  #about .sponsor-card.sponsor-split > .sponsor-body{
     grid-column: 1 !important;
   }
-  #fiscal-sponsor .sponsor-logo img{
+  #about .sponsor-logo img{
     margin: 0 auto !important;
     max-width: 220px !important;
   }
@@ -1001,4 +1001,9 @@ body.nav-lock {
   .footer-brand-text {
     max-width: 36ch;
   }
+}
+
+/* About + sponsor spacing */
+.about-sponsor {
+  margin-top: clamp(14px, 2.2vw, 22px); /* smaller than your grid gap */
 }
