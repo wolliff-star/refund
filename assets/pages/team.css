@@ -537,3 +537,14 @@
   max-width: none !important;
   display: block !important;
 }
+
+/* =========================
+   Footer logo sizing fix
+   ========================= */
+
+footer .footer-logo img {
+  height: 42px;
+  width: auto;
+  max-width: none;
+  display: block;
+}
