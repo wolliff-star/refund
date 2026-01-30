@@ -629,7 +629,6 @@
     right: 16px;
     font-size: clamp(1.6rem, 9vw, 2.2rem);
     line-height: 1;
-    /* Optional: slightly lighter on small screens */
     color: rgba(74, 85, 104, 0.12);
     pointer-events: none;
   }
@@ -646,30 +645,15 @@
   }
 }
 
-/* =========================
-   FOOTER BRAND (logo + text)
-   ========================= */
+/* =========================================================
+   Footer safeguard (scoped)
+   This does NOT restyle the footer—just prevents distortion
+   if any page-level img rules interfere.
+   ========================================================= */
 
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+.page-story footer .footer-logo img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  padding: 0; /* padding belongs on .footer-logo wrapper in global CSS */
 }
-
-.footer-brand-text {
-  color: #CBD5E0;
-  max-width: 42ch;
-}
-
-/* Mobile: stack */
-@media (max-width: 520px) {
-  .footer-brand {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-brand-text {
-    max-width: 36ch;
-  }
-}
-
