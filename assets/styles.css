@@ -886,10 +886,10 @@ body.nav-lock {
 }
 
 /* =========================
-   FISCAL SPONSOR (split desktop, stacked mobile)
+   FISCAL SPONSOR — scoped + collision-proof
    ========================= */
 
-.sponsor-card {
+#fiscal-sponsor .sponsor-card {
   background: var(--color-white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
@@ -898,8 +898,7 @@ body.nav-lock {
   max-width: 100%;
 }
 
-/* Side-by-side layout */
-.sponsor-card--split {
+#fiscal-sponsor .sponsor-split {
   display: grid;
   grid-template-columns: minmax(140px, 200px) 1fr;
   gap: clamp(16px, 2.4vw, 28px);
@@ -907,33 +906,38 @@ body.nav-lock {
   text-align: left;
 }
 
-/* Prevent grid overflow weirdness */
-.sponsor-card--split > * { min-width: 0; }
+#fiscal-sponsor .sponsor-split > * { min-width: 0; }
 
-.sponsor-logo img {
+#fiscal-sponsor .sponsor-logo img {
   max-width: 200px;
   width: 100%;
   height: auto;
   display: block;
 }
 
-.sponsor-copy {
+#fiscal-sponsor .sponsor-body {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  min-width: 0;
+}
+
+#fiscal-sponsor .sponsor-copy {
   margin: 0;
+  display: block;
   color: var(--color-text-main);
   font-size: clamp(1rem, 1.2vw, 1.125rem);
   line-height: 1.7;
 }
 
-.sponsor-text { min-width: 0; }
-
-/* Stack on mobile */
+/* Mobile: stack */
 @media (max-width: 700px) {
-  .sponsor-card--split {
+  #fiscal-sponsor .sponsor-split {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .sponsor-logo img {
+  #fiscal-sponsor .sponsor-logo img {
     margin: 0 auto;
     max-width: 220px;
   }
