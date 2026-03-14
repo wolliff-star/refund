@@ -351,6 +351,18 @@
   border-left: 4px solid var(--report-teal);
 }
 
+.report-section--sand .report-quote {
+  background: var(--color-white);
+}
+
+.report-section--sand .report-quote-card {
+  background: var(--color-white);
+}
+
+.report-section--sand .report-quote-card--featured {
+  background: var(--color-white);
+}
+
 .report-back {
   background: var(--color-text-main);
   color: var(--color-white);
