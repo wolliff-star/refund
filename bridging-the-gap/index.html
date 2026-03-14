@@ -69,25 +69,48 @@
       </div>
     </section>
 
-    <nav class="report-contents" aria-label="Report contents">
-      <div class="report-contents__inner">
-        <ul class="report-contents__list">
-          <li><a href="#executive-summary">Summary</a></li>
+    <section class="report-toc-wrap" aria-labelledby="report-toc-title">
+      <div class="report-toc">
+        <div class="report-toc__header">
+          <p class="report-toc__eyebrow">Contents</p>
+          <h2 id="report-toc-title">In This Report</h2>
+        </div>
+
+        <ol class="report-toc__list">
+          <li><a href="#executive-summary">Executive Summary</a></li>
           <li><a href="#key-findings">Key Findings</a></li>
           <li><a href="#findings">Findings</a></li>
-          <li><a href="#core-revenue">Revenue</a></li>
-          <li><a href="#cash-flow">Cash Flow</a></li>
-          <li><a href="#common-causes">Causes</a></li>
+          <li><a href="#core-revenue">Government Funding Is Core Revenue</a></li>
+          <li><a href="#cash-flow">Cash Flow Instability</a></li>
+          <li><a href="#common-causes">Common Causes</a></li>
           <li><a href="#financial-strain">Financial Strain</a></li>
           <li><a href="#operational-impact">Operational Impact</a></li>
-          <li><a href="#declining-funding">Declining Funding</a></li>
-          <li><a href="#borrowing">Borrowing</a></li>
+          <li><a href="#declining-funding">Declining Government Funding</a></li>
+          <li><a href="#borrowing">Borrowing Is a Costly Solution</a></li>
           <li><a href="#path-forward">Recoverable Grants</a></li>
           <li><a href="#scaling-solutions">Scaling Solutions</a></li>
-          <li><a href="#report-contact">Contact</a></li>
-        </ul>
+        </ol>
       </div>
-    </nav>
+
+      <div class="report-jump">
+        <label class="sr-only" for="report-jump-select">Jump to a section</label>
+        <select id="report-jump-select">
+          <option value="">Jump to a section</option>
+          <option value="#executive-summary">Executive Summary</option>
+          <option value="#key-findings">Key Findings</option>
+          <option value="#findings">Findings</option>
+          <option value="#core-revenue">Government Funding Is Core Revenue</option>
+          <option value="#cash-flow">Cash Flow Instability</option>
+          <option value="#common-causes">Common Causes</option>
+          <option value="#financial-strain">Financial Strain</option>
+          <option value="#operational-impact">Operational Impact</option>
+          <option value="#declining-funding">Declining Government Funding</option>
+          <option value="#borrowing">Borrowing Is a Costly Solution</option>
+          <option value="#path-forward">Recoverable Grants</option>
+          <option value="#scaling-solutions">Scaling Solutions</option>
+        </select>
+      </div>
+    </section>
 
     <article class="report-shell">
       <div class="report-panel">
@@ -684,6 +707,20 @@
 
       closeMenu();
     })();
+
+    const reportJump = document.getElementById("report-jump-select");
+
+    if (reportJump) {
+      reportJump.addEventListener("change", function () {
+        const target = document.querySelector(this.value);
+        if (!target) return;
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    }
   </script>
 </body>
 </html>
