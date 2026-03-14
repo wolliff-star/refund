@@ -65,52 +65,106 @@
   margin: 0 auto;
 }
 
-.report-contents {
-  position: sticky;
-  top: 88px;
-  z-index: 40;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--report-border);
+/* ================================
+   REPORT TABLE OF CONTENTS
+================================ */
+
+.report-toc-wrap {
+  padding: 32px 0 0;
 }
 
-.report-contents__inner {
-  width: min(var(--container-max), var(--report-max-wide));
-  max-width: 100%;
+.report-toc {
+  max-width: var(--report-max);
   margin: 0 auto;
-  padding: 0 clamp(16px, 2.5vw, 40px);
-}
-
-.report-contents__list {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 14px 0;
-  scrollbar-width: none;
-}
-
-.report-contents__list::-webkit-scrollbar {
-  display: none;
-}
-
-.report-contents__list a {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  padding: 10px 14px;
-  border-radius: 999px;
   background: var(--color-white);
   border: 1px solid var(--report-border);
-  font-weight: 800;
-  color: var(--color-text-main);
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  border-radius: 22px;
+  padding: 28px 28px 24px;
+  box-shadow: var(--shadow-card);
 }
 
-.report-contents__list a:hover {
-  background: rgba(36, 238, 85, 0.08);
-  border-color: rgba(36, 238, 85, 0.65);
-  transform: translateY(-1px);
+.report-toc__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-text-soft);
+  margin-bottom: 6px;
 }
+
+.report-toc__header h2 {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  margin-bottom: 20px;
+}
+
+.report-toc__header h2::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: var(--report-teal);
+}
+
+.report-toc__list {
+  columns: 2;
+  column-gap: 30px;
+  padding-left: 1.2rem;
+}
+
+.report-toc__list li {
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+.report-toc__list a {
+  font-weight: 700;
+  color: var(--color-text-main);
+  text-decoration: none;
+}
+
+.report-toc__list a:hover {
+  color: var(--report-teal);
+}
+
+/* ================================
+   MOBILE JUMP MENU
+================================ */
+
+.report-jump {
+  display: none;
+  max-width: var(--report-max);
+  margin: 0 auto;
+}
+
+.report-jump select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--report-border);
+  background: var(--color-white);
+  font: inherit;
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-card);
+}
+
+/* ================================
+   ACCESSIBILITY
+================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ================================
+   REPORT PANELS / SECTIONS
+================================ */
 
 .report-panel {
   padding: var(--report-panel-gap) 0 0;
@@ -125,7 +179,7 @@
   max-width: var(--report-max);
   margin: 0 auto;
   padding: clamp(40px, 6vw, 72px) clamp(20px, 3vw, 28px);
-  scroll-margin-top: 170px;
+  scroll-margin-top: 120px;
 }
 
 .report-section {
@@ -363,6 +417,10 @@
   background: var(--color-white);
 }
 
+/* ================================
+   BACK SECTION
+================================ */
+
 .report-back {
   background: var(--color-text-main);
   color: var(--color-white);
@@ -402,9 +460,18 @@
   color: var(--color-brand-green);
 }
 
+/* ================================
+   RESPONSIVE
+================================ */
+
 @media (max-width: 900px) {
-  .report-contents {
-    top: 76px;
+  .report-toc {
+    display: none;
+  }
+
+  .report-jump {
+    display: block;
+    padding: 0 16px;
   }
 
   .report-stat-grid,
@@ -416,6 +483,11 @@
   .report-voice--full,
   .report-quote-card--featured {
     grid-column: auto;
+  }
+
+  .report-section,
+  .report-back {
+    scroll-margin-top: 96px;
   }
 }
 
@@ -430,8 +502,7 @@
     padding: 18px;
   }
 
-  .report-contents__list a {
-    padding: 9px 12px;
-    font-size: 0.92rem;
+  .report-jump {
+    padding: 0 12px;
   }
 }
