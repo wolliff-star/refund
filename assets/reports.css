@@ -527,3 +527,266 @@
     padding: 0 12px;
   }
 }
+
+/* =================================
+   PRINT / PDF VERSION
+================================= */
+
+@page {
+  size: Letter;
+  margin: 0.65in;
+}
+
+@media print {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body.report-page {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Hide website chrome */
+  .site-header,
+  footer,
+  .skip-link,
+  .report-toc-wrap,
+  .report-jump {
+    display: none !important;
+  }
+
+  /* Reset page shell */
+  .report-shell {
+    padding: 0;
+  }
+
+  .report-panel {
+    padding: 0;
+    margin: 0;
+    border-top: none !important;
+  }
+
+  .report-panel:not(:first-child) {
+    margin-top: 0;
+  }
+
+  /* Hero becomes cover */
+  .report-hero {
+    min-height: 9.5in;
+    padding: 1.1in 0 0.8in;
+    border-bottom: none;
+    background: #fff;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .report-hero__inner {
+    max-width: 6.5in;
+  }
+
+  .report-title {
+    font-size: 30pt;
+    line-height: 1.05;
+  }
+
+  .report-subtitle {
+    font-size: 15pt;
+  }
+
+  .report-meta {
+    font-size: 10.5pt;
+  }
+
+  /* Main content blocks */
+  .report-section,
+  .report-back {
+    max-width: none;
+    width: 100%;
+    margin: 0 0 0.22in 0;
+    padding: 0.28in 0.3in;
+    border-radius: 0;
+    box-shadow: none !important;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .report-section--plain,
+  .report-section--tint,
+  .report-section--sand,
+  .report-section--accent {
+    border: 1px solid #d9e1e8;
+    background: #fff !important;
+  }
+
+  .report-section--accent {
+    border-top: 4px solid var(--report-teal);
+  }
+
+  .report-section > h2,
+  .report-back h2 {
+    max-width: none;
+    font-size: 18pt;
+    line-height: 1.15;
+    margin-bottom: 12pt;
+  }
+
+  .report-section h3 {
+    font-size: 12.5pt;
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+  }
+
+  .report-section p,
+  .report-section li,
+  .report-back p {
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: #222 !important;
+  }
+
+  .report-kicker {
+    font-size: 8pt;
+    margin-bottom: 8pt;
+    color: #555 !important;
+  }
+
+  /* Keep data visuals together */
+  .report-stat-grid,
+  .report-chart,
+  .report-quote,
+  .report-quote-grid,
+  .report-voices {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10pt;
+    margin: 14pt 0 16pt;
+  }
+
+  .report-stat {
+    border: 1px solid #d9e1e8;
+    box-shadow: none;
+    padding: 10pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-stat__number {
+    font-size: 18pt;
+  }
+
+  .report-stat__label {
+    font-size: 9pt;
+  }
+
+  .report-chart {
+    padding: 10pt;
+    margin: 14pt 0;
+    box-shadow: none;
+  }
+
+  .report-chart figcaption {
+    font-size: 8.5pt;
+  }
+
+  .report-quote {
+    background: #fff !important;
+    border: 1px solid #d9e1e8;
+    border-left: 4px solid var(--report-teal);
+    border-radius: 0;
+    padding: 12pt;
+    margin: 14pt 0;
+  }
+
+  .report-quote p {
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .report-quote-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+    margin-top: 12pt;
+  }
+
+  .report-quote-card,
+  .report-voice {
+    box-shadow: none;
+    border: 1px solid #d9e1e8;
+    background: #fff !important;
+    padding: 10pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-quote-card p,
+  .report-voice {
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  .report-quote-card--featured,
+  .report-voice--full {
+    grid-column: 1 / -1;
+  }
+
+  /* Avoid single headings stranded at page bottom */
+  h2, h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  figure, blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  ul, ol {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Contact page */
+  .report-back {
+    margin-top: 0.25in;
+    min-height: 4.5in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    page-break-before: always;
+    break-before: page;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .report-back img {
+    filter: none;
+    width: 1.1in;
+    margin-bottom: 14pt;
+  }
+
+  .report-back .btn {
+    display: inline-block;
+    border: 1px solid #000;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none;
+  }
+
+  .report-back p a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* Links */
+  a,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+}
