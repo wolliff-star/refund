@@ -16,6 +16,7 @@
       padding: 20px;
       box-shadow: var(--shadow-card);
       margin: 24px 0;
+      clear: right;
     }
 
     .report-callout--soft {
@@ -84,7 +85,7 @@
 
     .report-float-icon {
       float: right;
-      width: 120px;
+      width: 112px;
       margin: 4px 0 16px 20px;
     }
 
@@ -103,7 +104,7 @@
     }
 
     .report-icon-placeholder {
-      min-height: 120px;
+      min-height: 112px;
     }
 
     .report-two-visuals {
@@ -115,6 +116,7 @@
 
     .report-vertical-placeholder {
       min-height: 360px;
+      clear: both;
     }
 
     .report-photo-placeholder {
@@ -122,7 +124,19 @@
     }
 
     .report-quote-grid--center .report-quote-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
       text-align: center;
+    }
+
+    .report-quote-grid--center .report-quote-card p {
+      width: 100%;
+    }
+
+    .report-quote-grid--center .report-quote-card--featured {
+      min-height: 200px;
     }
 
     .report-list-tight {
@@ -139,6 +153,12 @@
       clear: both;
     }
 
+    .report-chart,
+    .report-quote,
+    .report-quote-card {
+      clear: both;
+    }
+
     .report-quote-card + p,
     .report-quote-card + figure,
     .report-quote + p,
@@ -146,52 +166,96 @@
       margin-top: 24px;
     }
 
-    .report-toc__list {
-      columns: 1;
-      padding-left: 0;
-      list-style: none;
+    /* TOC redesign */
+    .report-toc {
+      padding: 30px;
     }
 
-    .report-toc__list > li {
-      margin-bottom: 10px;
-      break-inside: avoid;
+    .report-toc__layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
     }
 
-    .report-toc__list > li > a {
-      font-weight: 800;
-      color: var(--color-text-main);
-      text-decoration: none;
+    .report-toc__group {
+      background: var(--report-pale);
+      border: 1px solid var(--report-border);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+    }
+
+    .report-toc__group-title {
       display: inline-block;
-      margin-bottom: 6px;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-text-main);
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    .report-toc__group-title:hover,
+    .report-toc__item:hover {
+      color: var(--report-teal);
     }
 
     .report-toc__sublist {
       list-style: none;
-      padding-left: 18px;
+      padding: 0;
       margin: 0;
-      border-left: 2px solid rgba(32, 178, 170, 0.18);
     }
 
-    .report-toc__sublist li {
-      margin: 6px 0;
+    .report-toc__sublist li + li {
+      margin-top: 8px;
     }
 
-    .report-toc__sublist a {
-      font-weight: 600;
+    .report-toc__item {
+      display: block;
       color: var(--color-text-soft);
+      font-weight: 600;
       text-decoration: none;
+      line-height: 1.35;
+      padding-left: 14px;
+      position: relative;
     }
 
-    .report-toc__list a:hover,
-    .report-toc__sublist a:hover {
+    .report-toc__item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(32, 178, 170, 0.55);
+    }
+
+    .report-toc__toplinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 8px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .report-toc__pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      background: var(--color-white);
+      border: 1px solid var(--report-border);
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--color-text-main);
+      font-weight: 700;
+      box-shadow: var(--shadow-card);
+    }
+
+    .report-toc__pill:hover {
       color: var(--report-teal);
-    }
-
-    @media (min-width: 901px) {
-      .report-toc__list {
-        columns: 2;
-        column-gap: 30px;
-      }
+      border-color: rgba(32, 178, 170, 0.35);
     }
 
     @media (max-width: 900px) {
@@ -203,12 +267,18 @@
       }
 
       .report-inline-callout .report-stat-grid--two,
-      .report-two-visuals {
+      .report-two-visuals,
+      .report-toc__layout {
         grid-template-columns: 1fr;
       }
 
       .report-title--nowrap {
         white-space: normal;
+      }
+
+      .report-quote-grid--center .report-quote-card,
+      .report-quote-grid--center .report-quote-card--featured {
+        min-height: auto;
       }
     }
   </style>
@@ -280,55 +350,51 @@
           <h2 id="report-toc-title">In This Report</h2>
         </div>
 
-        <ol class="report-toc__list">
-          <li>
-            <a href="#executive-summary">Executive Summary</a>
-          </li>
-          <li>
-            <a href="#key-findings">Key Findings</a>
-          </li>
-          <li>
-            <a href="#context">Context</a>
-          </li>
-          <li>
-            <a href="#profile">Respondent Profile</a>
-          </li>
-          <li>
-            <a href="#survey-findings">Survey Findings</a>
+        <div class="report-toc__toplinks">
+          <a class="report-toc__pill" href="#executive-summary">Executive Summary</a>
+          <a class="report-toc__pill" href="#key-findings">Key Findings</a>
+          <a class="report-toc__pill" href="#context">Context</a>
+          <a class="report-toc__pill" href="#profile">Respondent Profile</a>
+          <a class="report-toc__pill" href="#scaling-solutions">Conclusions</a>
+        </div>
+
+        <div class="report-toc__layout">
+          <div class="report-toc__group">
+            <a class="report-toc__group-title" href="#survey-findings">Survey Findings</a>
             <ol class="report-toc__sublist">
-              <li><a href="#structural">Structural Drivers of Cash Flow Instability</a></li>
-              <li><a href="#core-revenue">Government Funding Is Core Revenue</a></li>
-              <li><a href="#cash-flow">Prevalence of Cash Flow Instability</a></li>
-              <li><a href="#common-causes">Causes of Cash Flow Instability</a></li>
+              <li><a class="report-toc__item" href="#structural">Structural Drivers of Cash Flow Instability</a></li>
+              <li><a class="report-toc__item" href="#core-revenue">Government Funding Is Core Revenue</a></li>
+              <li><a class="report-toc__item" href="#cash-flow">Prevalence of Cash Flow Instability</a></li>
+              <li><a class="report-toc__item" href="#common-causes">Causes of Cash Flow Instability</a></li>
             </ol>
-          </li>
-          <li>
-            <a href="#consequences">Consequences for Organizations</a>
+          </div>
+
+          <div class="report-toc__group">
+            <a class="report-toc__group-title" href="#consequences">Consequences for Organizations</a>
             <ol class="report-toc__sublist">
-              <li><a href="#mission-impact">Impact on Program Delivery</a></li>
-              <li><a href="#financial-strain">Financial Strain</a></li>
-              <li><a href="#operational-impact">Operational Impact</a></li>
+              <li><a class="report-toc__item" href="#mission-impact">Impact on Program Delivery</a></li>
+              <li><a class="report-toc__item" href="#financial-strain">Financial Strain</a></li>
+              <li><a class="report-toc__item" href="#operational-impact">Operational Impact</a></li>
             </ol>
-          </li>
-          <li>
-            <a href="#systems">Gaps in the System</a>
+          </div>
+
+          <div class="report-toc__group">
+            <a class="report-toc__group-title" href="#systems">Gaps in the System</a>
             <ol class="report-toc__sublist">
-              <li><a href="#declining-funding">Organizations Are Opting Out</a></li>
-              <li><a href="#respondent-voices">Respondent Voices</a></li>
-              <li><a href="#borrowing">Consequences of Borrowing</a></li>
+              <li><a class="report-toc__item" href="#declining-funding">Organizations Are Opting Out</a></li>
+              <li><a class="report-toc__item" href="#respondent-voices">Respondent Voices</a></li>
+              <li><a class="report-toc__item" href="#borrowing">Consequences of Borrowing</a></li>
             </ol>
-          </li>
-          <li>
-            <a href="#path-forward">Recoverable Grants: A Practical Path Forward</a>
+          </div>
+
+          <div class="report-toc__group">
+            <a class="report-toc__group-title" href="#path-forward">Recoverable Grants: A Practical Path Forward</a>
             <ol class="report-toc__sublist">
-              <li><a href="#voices-path">Respondent Voices</a></li>
-              <li><a href="#case-study">Case Study</a></li>
+              <li><a class="report-toc__item" href="#voices-path">Respondent Voices</a></li>
+              <li><a class="report-toc__item" href="#case-study">Maui Case Study</a></li>
             </ol>
-          </li>
-          <li>
-            <a href="#scaling-solutions">Conclusions: Scaling Solutions to the Cash Flow Crisis</a>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
 
       <div class="report-jump">
@@ -481,7 +547,6 @@
 
       <div class="report-panel">
         <section class="report-section report-section--plain" id="profile" aria-labelledby="profile-title">
-          <p class="report-kicker">1</p>
           <h2 id="profile-title" class="report-title--nowrap">Respondent Profile</h2>
 
           <p>
