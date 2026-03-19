@@ -31,10 +31,23 @@
       margin-bottom: 0;
     }
 
+    .report-callout ul,
+    .report-stat-list {
+      list-style: disc;
+      padding-left: 1.2rem;
+      margin: 12px 0 0;
+    }
+
+    .report-callout li,
+    .report-stat-list li {
+      margin-bottom: 8px;
+      color: var(--color-text-soft);
+    }
+
     .report-float-stat {
       float: right;
       width: min(280px, 42%);
-      margin: 4px 0 20px 24px;
+      margin: 80px 0 20px 20px;
     }
 
     .report-float-stat .report-stat-grid {
@@ -69,12 +82,10 @@
       text-align: center;
     }
 
-    .report-icon-row {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 20px;
-      align-items: start;
-      margin-top: 12px;
+    .report-float-icon {
+      float: right;
+      width: 120px;
+      margin: 4px 0 16px 20px;
     }
 
     .report-icon-placeholder,
@@ -121,22 +132,78 @@
     .report-title--nowrap {
       max-width: none !important;
       white-space: nowrap;
+      font-size: clamp(1.3rem, 2vw, 1.9rem) !important;
     }
 
     .report-clear {
       clear: both;
     }
 
+    .report-quote-card + p,
+    .report-quote-card + figure,
+    .report-quote + p,
+    .report-quote + figure {
+      margin-top: 24px;
+    }
+
+    .report-toc__list {
+      columns: 1;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .report-toc__list > li {
+      margin-bottom: 10px;
+      break-inside: avoid;
+    }
+
+    .report-toc__list > li > a {
+      font-weight: 800;
+      color: var(--color-text-main);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .report-toc__sublist {
+      list-style: none;
+      padding-left: 18px;
+      margin: 0;
+      border-left: 2px solid rgba(32, 178, 170, 0.18);
+    }
+
+    .report-toc__sublist li {
+      margin: 6px 0;
+    }
+
+    .report-toc__sublist a {
+      font-weight: 600;
+      color: var(--color-text-soft);
+      text-decoration: none;
+    }
+
+    .report-toc__list a:hover,
+    .report-toc__sublist a:hover {
+      color: var(--report-teal);
+    }
+
+    @media (min-width: 901px) {
+      .report-toc__list {
+        columns: 2;
+        column-gap: 30px;
+      }
+    }
+
     @media (max-width: 900px) {
-      .report-float-stat {
+      .report-float-stat,
+      .report-float-icon {
         float: none;
         width: 100%;
         margin: 20px 0;
       }
 
       .report-inline-callout .report-stat-grid--two,
-      .report-two-visuals,
-      .report-icon-row {
+      .report-two-visuals {
         grid-template-columns: 1fr;
       }
 
@@ -214,27 +281,53 @@
         </div>
 
         <ol class="report-toc__list">
-          <li><a href="#executive-summary">Executive Summary</a></li>
-          <li><a href="#key-findings">Key Findings</a></li>
-          <li><a href="#context">Context</a></li>
-          <li><a href="#profile">Respondent Profile</a></li>
-          <li><a href="#survey-findings">Survey Findings</a></li>
-          <li><a href="#structural">Structural Drivers of Cash Flow Instability</a></li>
-          <li><a href="#core-revenue">Government Funding Is Core Revenue</a></li>
-          <li><a href="#cash-flow">Prevalence of Cash Flow Instability</a></li>
-          <li><a href="#common-causes">Causes of Cash Flow Instability</a></li>
-          <li><a href="#consequences">Consequences for Organizations</a></li>
-          <li><a href="#mission-impact">Impact on Program Delivery</a></li>
-          <li><a href="#financial-strain">Financial Strain</a></li>
-          <li><a href="#operational-impact">Operational Impact</a></li>
-          <li><a href="#systems">Gaps in the System</a></li>
-          <li><a href="#declining-funding">Organizations Are Opting Out</a></li>
-          <li><a href="#respondent-voices">Respondent Voices</a></li>
-          <li><a href="#borrowing">Consequences of Borrowing</a></li>
-          <li><a href="#path-forward">Recoverable Grants: A Practical Path Forward</a></li>
-          <li><a href="#voices-path">Respondent Voices</a></li>
-          <li><a href="#case-study">Case Study</a></li>
-          <li><a href="#scaling-solutions">Conclusions: Scaling Solutions to the Cash Flow Crisis</a></li>
+          <li>
+            <a href="#executive-summary">Executive Summary</a>
+          </li>
+          <li>
+            <a href="#key-findings">Key Findings</a>
+          </li>
+          <li>
+            <a href="#context">Context</a>
+          </li>
+          <li>
+            <a href="#profile">Respondent Profile</a>
+          </li>
+          <li>
+            <a href="#survey-findings">Survey Findings</a>
+            <ol class="report-toc__sublist">
+              <li><a href="#structural">Structural Drivers of Cash Flow Instability</a></li>
+              <li><a href="#core-revenue">Government Funding Is Core Revenue</a></li>
+              <li><a href="#cash-flow">Prevalence of Cash Flow Instability</a></li>
+              <li><a href="#common-causes">Causes of Cash Flow Instability</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#consequences">Consequences for Organizations</a>
+            <ol class="report-toc__sublist">
+              <li><a href="#mission-impact">Impact on Program Delivery</a></li>
+              <li><a href="#financial-strain">Financial Strain</a></li>
+              <li><a href="#operational-impact">Operational Impact</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#systems">Gaps in the System</a>
+            <ol class="report-toc__sublist">
+              <li><a href="#declining-funding">Organizations Are Opting Out</a></li>
+              <li><a href="#respondent-voices">Respondent Voices</a></li>
+              <li><a href="#borrowing">Consequences of Borrowing</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#path-forward">Recoverable Grants: A Practical Path Forward</a>
+            <ol class="report-toc__sublist">
+              <li><a href="#voices-path">Respondent Voices</a></li>
+              <li><a href="#case-study">Case Study</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#scaling-solutions">Conclusions: Scaling Solutions to the Cash Flow Crisis</a>
+          </li>
         </ol>
       </div>
 
@@ -270,7 +363,7 @@
     <article class="report-shell">
       <div class="report-panel">
         <section class="report-section report-section--plain" id="executive-summary" aria-labelledby="executive-summary-title">
-          <h2 id="executive-summary-title">Executive Summary</h2>
+          <h2 id="executive-summary-title" class="report-title--nowrap">Executive Summary</h2>
 
           <div class="report-float-stat" aria-hidden="false">
             <div class="report-stat-grid">
@@ -307,7 +400,7 @@
 
       <div class="report-panel">
         <section class="report-section report-section--tint" id="key-findings" aria-labelledby="key-findings-title">
-          <h2 id="key-findings-title">Key Findings</h2>
+          <h2 id="key-findings-title" class="report-title--nowrap">Key Findings</h2>
 
           <ol class="report-numbered-list">
             <li>
@@ -347,7 +440,7 @@
       <div class="report-panel">
         <section class="report-section report-section--sand" id="context" aria-labelledby="context-title">
           <p class="report-kicker">Context</p>
-          <h2 id="context-title">Structural Challenges in Government-Funded Work</h2>
+          <h2 id="context-title" class="report-title--nowrap">Structural Challenges in Government-Funded Work</h2>
 
           <p>
             Government funding plays a critical role in supporting nonprofit organizations and Tribes delivering programs that serve communities across the United States.
@@ -389,7 +482,7 @@
       <div class="report-panel">
         <section class="report-section report-section--plain" id="profile" aria-labelledby="profile-title">
           <p class="report-kicker">1</p>
-          <h2 id="profile-title">Respondent Profile</h2>
+          <h2 id="profile-title" class="report-title--nowrap">Respondent Profile</h2>
 
           <p>
             This survey gathered responses from nonprofits and Tribes that regularly implement government-funded programs and therefore experience the impacts of reimbursement-based funding systems. 51 organizations across the United States participated in the survey, with particularly strong representation from the Western United States.
@@ -397,8 +490,14 @@
 
           <div class="report-callout report-callout--soft">
             <p>
-              <strong>The respondent pool includes organizations led by individuals from historically undercapitalized communities:</strong> 67 percent are Indigenous-led, 59 percent are BIPOC-led, 28 percent are woman-led, and 10 percent are LGBTQIA-led.
+              <strong>The respondent pool includes organizations led by individuals from historically undercapitalized communities:</strong>
             </p>
+            <ul class="report-stat-list">
+              <li>67 percent are Indigenous-led.</li>
+              <li>59 percent are BIPOC-led.</li>
+              <li>28 percent are woman-led.</li>
+              <li>10 percent are LGBTQIA-led.</li>
+            </ul>
           </div>
 
           <figure class="report-chart">
@@ -444,7 +543,7 @@
 
       <div class="report-panel">
         <section class="report-section report-section--accent" id="survey-findings" aria-labelledby="survey-findings-title">
-          <h2 id="survey-findings-title">Survey Findings</h2>
+          <h2 id="survey-findings-title" class="report-title--nowrap">Survey Findings</h2>
 
           <p>
             The survey findings reveal that cash flow instability in government-funded work is not an isolated organizational challenge but a systemic feature of reimbursement-based funding systems. Together, these findings illustrate how reimbursement-based funding structures create persistent financial pressures that affect program delivery, organizational stability, and participation in government-funded programs.
@@ -466,7 +565,7 @@
       <div class="report-panel">
         <section class="report-section report-section--sand" id="structural" aria-labelledby="structural-title">
           <p class="report-kicker">Survey Findings: Structural Drivers</p>
-          <h2 id="structural-title">Structural Drivers of Cash Flow Instability</h2>
+          <h2 id="structural-title" class="report-title--nowrap">Structural Drivers of Cash Flow Instability</h2>
 
           <p>
             The survey findings indicate that cash flow instability among nonprofits and Tribes is driven by structural features of government funding systems rather than isolated organizational challenges. Many nonprofits and Tribes rely heavily on government funding to implement programs, yet the majority of respondents have experienced cash flow challenges as a result of reimbursement-based funding structures that require them to cover costs in advance.
@@ -537,7 +636,7 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="cash-flow" aria-labelledby="cash-flow-title">
           <p class="report-kicker">Survey Findings: Structural Drivers</p>
-          <h2 id="cash-flow-title">Cash Flow Instability Is Widespread</h2>
+          <h2 id="cash-flow-title" class="report-title--nowrap">Cash Flow Instability Is Widespread</h2>
 
           <p>
             Among organizations receiving government funding (n=42), 83% report experiencing cash flow challenges related to government funding. These findings indicate that liquidity disruptions are not isolated incidents but a routine feature of reimbursement-based funding systems.
@@ -606,7 +705,7 @@
       <div class="report-panel">
         <section class="report-section report-section--sand" id="consequences" aria-labelledby="consequences-title">
           <p class="report-kicker">Survey Findings</p>
-          <h2 id="consequences-title">Consequences for Organizations</h2>
+          <h2 id="consequences-title" class="report-title--nowrap">Consequences for Organizations</h2>
 
           <p>
             The survey findings indicate that reimbursement-based funding structures shift significant financial risk from public institutions onto nonprofits and Tribes responsible for implementing publicly funded programs. When payments are delayed, organizations must advance program costs while waiting for reimbursement, often with limited reserves or access to flexible capital.
@@ -637,20 +736,21 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="mission-impact" aria-labelledby="mission-impact-title">
           <p class="report-kicker">Survey Findings: Consequences</p>
-          <h2 id="mission-impact-title">Impact on Program Delivery</h2>
+          <h2 id="mission-impact-title" class="report-title--nowrap">Impact on Program Delivery</h2>
 
           <p>
             Cash flow instability disrupts program delivery. Programs must be delayed, reduced or cancelled due to cash flow challenges. In some cases, organizations decline funding opportunities altogether because they are unable to take on the cash flow burdens associated with reimbursement-based funding structures.
           </p>
 
-          <p>Among organizations experiencing cash flow challenges:</p>
-
-          <ul class="report-list">
-            <li>57 percent delayed work due to cash flow challenges.</li>
-            <li>54 percent reduced the scope of work due to cash flow challenges.</li>
-            <li>29 percent stopped work due to cash flow challenges.</li>
-            <li>23 percent declined funding due to cash flow challenges.</li>
-          </ul>
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges:</strong></p>
+            <ul class="report-stat-list">
+              <li>57 percent delayed work due to cash flow challenges.</li>
+              <li>54 percent reduced the scope of work due to cash flow challenges.</li>
+              <li>29 percent stopped work due to cash flow challenges.</li>
+              <li>23 percent declined funding due to cash flow challenges.</li>
+            </ul>
+          </div>
 
           <figure class="report-chart">
             <img
@@ -671,29 +771,30 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="financial-strain" aria-labelledby="financial-strain-title">
           <p class="report-kicker">Survey Findings: Consequences</p>
-          <h2 id="financial-strain-title">Financial Strain</h2>
+          <h2 id="financial-strain-title" class="report-title--nowrap">Financial Strain</h2>
 
-          <div class="report-icon-row">
+          <div class="report-float-icon">
             <div class="report-icon-placeholder">Icon placeholder</div>
-            <div>
-              <p>
-                When reimbursements are delayed, organizations must find a way to cover program expenses while waiting for their funds. These responses shift liquidity risk from public institutions to nonprofit organizations.
-              </p>
+          </div>
 
-              <div class="report-callout">
-                <p><strong>Among organizations experiencing cash flow challenges:</strong></p>
-                <ul class="report-list report-list-tight">
-                  <li>74 percent drew on reserves/savings.</li>
-                  <li>40 percent took out a loan or credit.</li>
-                  <li>20 percent drew on leaders’ personal finances or credit.</li>
-                </ul>
-              </div>
-            </div>
+          <p>
+            When reimbursements are delayed, organizations must find a way to cover program expenses while waiting for their funds. These responses shift liquidity risk from public institutions to nonprofit organizations.
+          </p>
+
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges:</strong></p>
+            <ul class="report-stat-list">
+              <li>74 percent drew on reserves/savings.</li>
+              <li>40 percent took out a loan or credit.</li>
+              <li>20 percent drew on leaders’ personal finances or credit.</li>
+            </ul>
           </div>
 
           <p>
             Drawing down reserves weakens long-term financial resilience, while borrowing introduces additional administrative and financial burdens. Critically, many organizations cannot use unrestricted resources to invest in capacity because they need to maintain an ample reserve to address cash flow challenges brought on by reimbursement structures. It is not unusual for leaders to use their personal credit or financial resources to keep organizations afloat.
           </p>
+
+          <div class="report-clear"></div>
 
           <figure class="report-chart">
             <img
@@ -714,26 +815,27 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="operational-impact" aria-labelledby="operational-impact-title">
           <p class="report-kicker">Survey Findings: Consequences</p>
-          <h2 id="operational-impact-title">Operational Impact</h2>
+          <h2 id="operational-impact-title" class="report-title--nowrap">Operational Impact</h2>
 
-          <div class="report-icon-row">
+          <div class="report-float-icon">
             <div class="report-icon-placeholder">Icon placeholder</div>
-            <div>
-              <p>
-                Beyond these immediate financial responses, many organizations reported broader operational responses with long-term consequences. When organizations delay programs, reduce staff capacity, or postpone payments to vendors, the effects extend beyond a single grant cycle. Over time, these disruptions can weaken organizational stability, reduce program continuity, and limit the ability of nonprofits and Tribes to respond effectively to community needs.
-              </p>
-
-              <div class="report-callout">
-                <p><strong>Among organizations experiencing cash flow challenges:</strong></p>
-                <ul class="report-list report-list-tight">
-                  <li>49 percent cut programs.</li>
-                  <li>26 percent delayed payments.</li>
-                  <li>23 percent reduced staff.</li>
-                  <li>17 percent laid off staff.</li>
-                </ul>
-              </div>
-            </div>
           </div>
+
+          <p>
+            Beyond these immediate financial responses, many organizations reported broader operational responses with long-term consequences. When organizations delay programs, reduce staff capacity, or postpone payments to vendors, the effects extend beyond a single grant cycle. Over time, these disruptions can weaken organizational stability, reduce program continuity, and limit the ability of nonprofits and Tribes to respond effectively to community needs.
+          </p>
+
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges:</strong></p>
+            <ul class="report-stat-list">
+              <li>49 percent cut programs.</li>
+              <li>26 percent delayed payments.</li>
+              <li>23 percent reduced staff.</li>
+              <li>17 percent laid off staff.</li>
+            </ul>
+          </div>
+
+          <div class="report-clear"></div>
 
           <blockquote class="report-quote-card report-quote-card--featured">
             <p>
@@ -754,31 +856,32 @@
       <div class="report-panel">
         <section class="report-section report-section--sand" id="systems" aria-labelledby="systems-title">
           <p class="report-kicker">Survey Findings</p>
-          <h2 id="systems-title">Gaps in the System</h2>
+          <h2 id="systems-title" class="report-title--nowrap">Gaps in the System</h2>
 
-          <div class="report-icon-row">
+          <div class="report-float-icon">
             <div class="report-icon-placeholder">Icon placeholder</div>
-            <div>
-              <p>
-                The survey findings highlight broader systemic gaps in the financing structures that support government-funded work.
-              </p>
-
-              <p>
-                When reimbursement systems create liquidity gaps, organizations must rely on imperfect tools to manage cash flow. Some attempt to bridge these gaps through borrowing, while others reduce participation in government programs altogether.
-              </p>
-
-              <p>
-                These responses can limit the effectiveness of government funding and reduce access to public programs for communities.
-              </p>
-            </div>
           </div>
+
+          <p>
+            The survey findings highlight broader systemic gaps in the financing structures that support government-funded work.
+          </p>
+
+          <p>
+            When reimbursement systems create liquidity gaps, organizations must rely on imperfect tools to manage cash flow. Some attempt to bridge these gaps through borrowing, while others reduce participation in government programs altogether.
+          </p>
+
+          <p>
+            These responses can limit the effectiveness of government funding and reduce access to public programs for communities.
+          </p>
+
+          <div class="report-clear"></div>
         </section>
       </div>
 
       <div class="report-panel">
         <section class="report-section report-section--tint" id="declining-funding" aria-labelledby="declining-funding-title">
           <p class="report-kicker">Survey Findings: Gaps in the System</p>
-          <h2 id="declining-funding-title">Organizations Are Opting Out</h2>
+          <h2 id="declining-funding-title" class="report-title--nowrap">Organizations Are Opting Out</h2>
 
           <p>
             For some organizations, the financial risk associated with reimbursement-based funding becomes significant enough that they reduce or decline participation in government programs. This includes organizations already managing one or more sources of government funding who are unable to take on the additional cash flow burden associated with more government funding. This also includes organizations who are opting out of government funding entirely because they are unable to take on these cash flow burdens.
@@ -793,7 +896,7 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="respondent-voices" aria-labelledby="respondent-voices-title">
           <p class="report-kicker">Survey Findings: Gaps in the System</p>
-          <h2 id="respondent-voices-title">Respondent Voices</h2>
+          <h2 id="respondent-voices-title" class="report-title--nowrap">Respondent Voices</h2>
 
           <div class="report-quote-grid report-quote-grid--center">
             <blockquote class="report-quote-card report-quote-card--featured">
@@ -832,7 +935,7 @@
       <div class="report-panel">
         <section class="report-section report-section--tint" id="borrowing" aria-labelledby="borrowing-title">
           <p class="report-kicker">Survey Findings: Gaps in the System</p>
-          <h2 id="borrowing-title">Borrowing Is a Costly Solution</h2>
+          <h2 id="borrowing-title" class="report-title--nowrap">Borrowing Is a Costly Solution</h2>
 
           <p>
             Some organizations attempt to manage reimbursement delays by borrowing. However, survey findings indicate that debt-based solutions frequently introduce additional challenges. Organizations that borrowed report negative consequences.
@@ -842,7 +945,7 @@
             <div class="report-stat-grid report-stat-grid--two">
               <div class="report-callout">
                 <p><strong>Operational and financial strain</strong></p>
-                <ul class="report-list report-list-tight">
+                <ul class="report-stat-list">
                   <li>73 percent: More admin burden</li>
                   <li>64 percent: Financial risk/instability</li>
                   <li>64 percent: Reduced reserves</li>
@@ -851,7 +954,7 @@
               </div>
               <div class="report-callout">
                 <p><strong>Additional organizational consequences</strong></p>
-                <ul class="report-list report-list-tight">
+                <ul class="report-stat-list">
                   <li>27 percent: Reputational risk</li>
                   <li>27 percent: Reduced capacity</li>
                   <li>18 percent: Limited opportunities</li>
@@ -884,7 +987,7 @@
       <div class="report-panel">
         <section class="report-section report-section--accent" id="path-forward" aria-labelledby="path-forward-title">
           <p class="report-kicker">Practical Path Forward</p>
-          <h2 id="path-forward-title">Recoverable Grants</h2>
+          <h2 id="path-forward-title" class="report-title--nowrap">Recoverable Grants</h2>
 
           <blockquote class="report-quote">
             <p>
@@ -892,22 +995,23 @@
             </p>
           </blockquote>
 
-          <div class="report-icon-row">
+          <div class="report-float-icon">
             <div class="report-icon-placeholder">Icon placeholder</div>
-            <div>
-              <p>
-                Recoverable grants offer a practical nonextractive alternative to traditional financing options. Recoverable grants provide organizations with zero-interest working capital that is repaid once government reimbursements are received. Unlike other low cost alternatives, recoverable grants can be implemented with limited administrative overhead and with limited disruptions to operational or financial systems.
-              </p>
-
-              <p>
-                Recoverable grants align financing with the cash flow realities of government-funded programs while avoiding the risks associated with debt. Because recoverable grant funds are repaid once reimbursements are received, philanthropic capital can be recycled to support many organizations over time.
-              </p>
-            </div>
           </div>
+
+          <p>
+            Recoverable grants offer a practical nonextractive alternative to traditional financing options. Recoverable grants provide organizations with zero-interest working capital that is repaid once government reimbursements are received. Unlike other low cost alternatives, recoverable grants can be implemented with limited administrative overhead and with limited disruptions to operational or financial systems.
+          </p>
+
+          <p>
+            Recoverable grants align financing with the cash flow realities of government-funded programs while avoiding the risks associated with debt. Because recoverable grant funds are repaid once reimbursements are received, philanthropic capital can be recycled to support many organizations over time.
+          </p>
+
+          <div class="report-clear"></div>
 
           <div class="report-callout">
             <p><strong>Survey respondents consistently described recoverable grants as a tool that could:</strong></p>
-            <ul class="report-list report-list-tight">
+            <ul class="report-stat-list">
               <li>reduce financial precarity</li>
               <li>expand access to government funding</li>
               <li>strengthen long-term planning</li>
@@ -922,7 +1026,7 @@
       <div class="report-panel">
         <section class="report-section report-section--accent" id="voices-path" aria-labelledby="voices-path-title">
           <p class="report-kicker">A Practical Path Forward</p>
-          <h2 id="voices-path-title">Respondent Voices</h2>
+          <h2 id="voices-path-title" class="report-title--nowrap">Respondent Voices</h2>
 
           <div class="report-quote-grid report-quote-grid--center">
             <blockquote class="report-quote-card report-quote-card--featured">
@@ -967,7 +1071,7 @@
       <div class="report-panel">
         <section class="report-section report-section--accent" id="case-study" aria-labelledby="case-study-title">
           <p class="report-kicker">A Practical Path Forward</p>
-          <h2 id="case-study-title">Recoverable Grants: Maui Case Study</h2>
+          <h2 id="case-study-title" class="report-title--nowrap">Recoverable Grants: Maui Case Study</h2>
 
           <p>
             Reimbursement delays in Maui County created a six-month cash flow gap for Kaʻ Ehu, an organization implementing a $597,000 county-funded program. Although the funding was secured, delayed payments required the organization to cover approximately $120,000 in operating costs before reimbursement would arrive.
@@ -1005,39 +1109,40 @@
       <div class="report-panel">
         <section class="report-section report-section--plain" id="scaling-solutions" aria-labelledby="scaling-solutions-title">
           <p class="report-kicker">Conclusions</p>
-          <h2 id="scaling-solutions-title">Scaling Solutions to the Cash Flow Crisis</h2>
+          <h2 id="scaling-solutions-title" class="report-title--nowrap">Scaling Solutions to the Cash Flow Crisis</h2>
 
-          <div class="report-icon-row">
+          <div class="report-float-icon">
             <div class="report-icon-placeholder">Icon placeholder</div>
-            <div>
-              <p>
-                The findings presented in this report demonstrate that reimbursement-based funding systems create persistent cash flow instability for nonprofits and Tribes delivering publicly funded programs. Nonprofits and Tribes must carry the financial burden of publicly funded programs while waiting for reimbursement.
-              </p>
-
-              <p>
-                These challenges are structural rather than incidental. Payment delays, reimbursement requirements, and administrative processes combine to shift financial risk onto organizations with limited access to flexible capital.
-              </p>
-
-              <p>
-                Addressing this challenge will require purpose-built tools that provide working capital aligned with government reimbursement cycles. While large-scale reform of reimbursement systems would be welcome, it is likely to be slow even if it does occur. Existing financing tools such as loans or lines of credit provide short-term liquidity but frequently introduce additional risks, costs, and administrative burdens.
-              </p>
-
-              <p>
-                These findings highlight the need for dedicated infrastructure designed to provide working capital aligned with government reimbursement cycles. Platforms that efficiently deploy zero-interest capital in the form of recoverable grants can reduce administrative complexity for nonprofits while ensuring that bridge capital is delivered quickly and predictably. Expanding this infrastructure would stabilize cash flow for organizations implementing public programs and strengthen the effectiveness of government-funded work and the nonprofit sector.
-              </p>
-
-              <p>
-                Ultimately, reducing reimbursement-driven cash flow instability will determine whether organizations serving frontline communities can act when their communities need them.
-              </p>
-            </div>
           </div>
+
+          <p>
+            The findings presented in this report demonstrate that reimbursement-based funding systems create persistent cash flow instability for nonprofits and Tribes delivering publicly funded programs. Nonprofits and Tribes must carry the financial burden of publicly funded programs while waiting for reimbursement.
+          </p>
+
+          <p>
+            These challenges are structural rather than incidental. Payment delays, reimbursement requirements, and administrative processes combine to shift financial risk onto organizations with limited access to flexible capital.
+          </p>
+
+          <p>
+            Addressing this challenge will require purpose-built tools that provide working capital aligned with government reimbursement cycles. While large-scale reform of reimbursement systems would be welcome, it is likely to be slow even if it does occur. Existing financing tools such as loans or lines of credit provide short-term liquidity but frequently introduce additional risks, costs, and administrative burdens.
+          </p>
+
+          <p>
+            These findings highlight the need for dedicated infrastructure designed to provide working capital aligned with government reimbursement cycles. Platforms that efficiently deploy zero-interest capital in the form of recoverable grants can reduce administrative complexity for nonprofits while ensuring that bridge capital is delivered quickly and predictably. Expanding this infrastructure would stabilize cash flow for organizations implementing public programs and strengthen the effectiveness of government-funded work and the nonprofit sector.
+          </p>
+
+          <p>
+            Ultimately, reducing reimbursement-driven cash flow instability will determine whether organizations serving frontline communities can act when their communities need them.
+          </p>
+
+          <div class="report-clear"></div>
         </section>
       </div>
 
       <div class="report-panel">
         <section class="report-back" id="report-contact" aria-labelledby="report-contact-title">
           <img src="/assets/refund-logo.png" alt="ReFund logo - seedling in leaf" />
-          <h2 id="report-contact-title">Contact</h2>
+          <h2 id="report-contact-title" class="report-title--nowrap">Contact</h2>
           <a
             href="https://forms.gle/hffd39fyrjGEtBPH7"
             target="_blank"
