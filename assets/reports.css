@@ -481,13 +481,13 @@
 
 .report-float-icon {
   float: right;
-  width: 112px;
+  width: 200px;
   margin: 4px 0 16px 20px;
 }
 
 .report-icon {
   width: 100%;
-  max-width: 112px;
+  max-width: 200px;
   height: auto;
   display: block;
   object-fit: contain;
@@ -495,8 +495,8 @@
 
 .report-icon-frame {
   width: 100%;
-  max-width: 112px;
-  min-height: 112px;
+  max-width: 200px;
+  min-height: 200px;
   display: grid;
   place-items: center;
 }
