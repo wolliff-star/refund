@@ -107,39 +107,11 @@
   background: var(--report-teal);
 }
 
-.report-toc__toplinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 14px;
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(226, 232, 240, 0.9);
-}
-
-.report-toc__pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 38px;
-  padding: 8px 14px;
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 999px;
-  text-decoration: none;
-  color: var(--color-text-main);
-  font-weight: 700;
-  box-shadow: var(--shadow-card);
-}
-
-.report-toc__pill:hover {
-  color: var(--report-teal);
-  border-color: rgba(32, 178, 170, 0.35);
-}
-
 .report-toc__layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
 .report-toc__group {
@@ -173,7 +145,8 @@
   margin-top: 8px;
 }
 
-.report-toc__item {
+.report-toc__item,
+.report-toc__sublist a {
   display: block;
   color: var(--color-text-soft);
   font-weight: 600;
@@ -183,7 +156,8 @@
   position: relative;
 }
 
-.report-toc__item::before {
+.report-toc__item::before,
+.report-toc__sublist a::before {
   content: "";
   position: absolute;
   left: 0;
@@ -468,6 +442,10 @@
   float: right;
   width: min(280px, 42%);
   margin: 80px 0 20px 20px;
+}
+
+.report-float-stat--causes {
+  margin-top: 28px;
 }
 
 .report-float-stat .report-stat-grid {
