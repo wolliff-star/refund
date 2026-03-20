@@ -69,6 +69,64 @@
    REPORT TABLE OF CONTENTS
 ================================ */
 
+
+.report-toc__balanced {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 18px;
+  margin-top: 22px;
+  align-items: start;
+}
+
+.report-toc__column {
+  min-width: 0;
+}
+
+.report-toc__group--simple {
+  display: grid;
+  gap: 10px;
+}
+
+.report-toc__group--simple .report-toc__group-title {
+  display: block;
+  margin-bottom: 0;
+  padding: 12px 14px;
+  background: var(--color-white);
+  border: 1px solid var(--report-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.report-toc__group--survey {
+  height: 100%;
+}
+
+.report-toc__group--survey > .report-toc__group-title {
+  margin-bottom: 14px;
+}
+
+.report-toc__sublist--nested {
+  margin-top: 10px;
+  margin-left: 14px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(32, 178, 170, 0.2);
+}
+
+.report-toc__sublist--nested li + li {
+  margin-top: 8px;
+}
+
+.report-toc__sublist--nested .report-toc__item {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .report-toc__balanced {
+    grid-template-columns: 1fr;
+  }
+}
+
 .report-toc__sublist .report-toc__sublist {
   margin-top: 10px;
   margin-left: 14px;
