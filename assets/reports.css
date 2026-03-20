@@ -1117,3 +1117,53 @@
     text-decoration: none;
   }
 }
+
+.report-case-study-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: 24px;
+  align-items: start;
+  margin: 24px 0;
+}
+
+.report-case-study-copy {
+  min-width: 0;
+}
+
+.report-case-study-diagram,
+.report-case-study-photo {
+  margin: 0;
+}
+
+.report-case-study-diagram img,
+.report-case-study-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.report-case-study-diagram img {
+  max-height: 420px;
+  object-fit: contain;
+}
+
+.report-case-study-photo {
+  margin: 24px 0;
+}
+
+.report-case-study-photo img {
+  max-height: 420px;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .report-case-study-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .report-case-study-diagram img,
+  .report-case-study-photo img {
+    max-height: none;
+  }
+}
