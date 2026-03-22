@@ -731,8 +731,8 @@
 
 .report-case-study-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(380px, 520px);
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
   align-items: start;
   margin: 24px 0 28px;
 }
@@ -751,15 +751,16 @@
 }
 
 .report-case-study-diagram {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  width: 360px;
+  justify-self: end;
+  align-self: start;
+  margin-top: 6px;
 }
 
 .report-case-study-diagram img {
   display: block;
   width: 100%;
-  max-width: 520px;
+  max-width: 360px;
   height: auto;
   object-fit: contain;
   border-radius: 16px;
@@ -933,6 +934,12 @@
   .report-quote-grid--center .report-quote-card,
   .report-quote-grid--center .report-quote-card--featured {
     min-height: auto;
+  }
+
+  .report-case-study-diagram {
+    width: 100%;
+    justify-self: stretch;
+    margin-top: 0;
   }
 
   .report-case-study-diagram img,
