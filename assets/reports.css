@@ -501,6 +501,11 @@
   height: 100%;
 }
 
+/* executive summary alignment */
+#executive-summary .report-float-stat {
+  margin-top: 0;
+}
+
 .report-float-icon {
   float: right;
   width: 140px;
@@ -535,6 +540,24 @@
   min-height: 140px;
   display: grid;
   place-items: center;
+}
+
+/* financial strain icon slightly smaller than the general large size */
+#financial-strain .report-float-icon--large {
+  width: 220px;
+  margin: 0 0 20px 28px;
+}
+
+#financial-strain .report-icon--large {
+  max-width: 220px;
+}
+
+#financial-strain .report-callout {
+  clear: none;
+  display: inline-block;
+  vertical-align: top;
+  max-width: calc(100% - 250px);
+  margin-top: 12px;
 }
 
 .report-icon-placeholder,
@@ -704,14 +727,18 @@
 
 .report-case-study-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 28px;
   align-items: start;
-  margin: 24px 0;
+  margin: 24px 0 28px;
 }
 
 .report-case-study-copy {
   min-width: 0;
+}
+
+.report-case-study-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .report-case-study-diagram,
@@ -719,17 +746,19 @@
   margin: 0;
 }
 
-.report-case-study-diagram img,
-.report-case-study-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
+.report-case-study-diagram {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .report-case-study-diagram img {
-  max-height: 420px;
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
   object-fit: contain;
+  border-radius: 16px;
 }
 
 .report-case-study-photo {
@@ -737,8 +766,13 @@
 }
 
 .report-case-study-photo img {
-  max-height: 420px;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 440px;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .report-clear {
@@ -755,6 +789,15 @@
 
 .report-section--sand .report-quote-card--featured {
   background: var(--color-white);
+}
+
+/* respondent profile centered side-by-side callout boxes */
+.report-callout-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 700px;
+  margin: 24px auto;
 }
 
 /* ================================
@@ -836,7 +879,8 @@
 
   .report-inline-callout .report-stat-grid--two,
   .report-two-visuals,
-  .report-case-study-layout {
+  .report-case-study-layout,
+  .report-callout-group {
     grid-template-columns: 1fr;
   }
 
@@ -884,6 +928,12 @@
   .report-case-study-photo img {
     max-height: none;
   }
+
+  #financial-strain .report-callout {
+    max-width: 100%;
+    display: block;
+    clear: both;
+  }
 }
 
 @media (max-width: 640px) {
@@ -900,15 +950,6 @@
   .report-jump {
     padding: 0 12px;
   }
-}
-
-/* Reduce only financial strain icon */
-#financial-strain .report-float-icon--large {
-  width: 220px; /* adjust between 200–240px as needed */
-}
-
-#financial-strain .report-icon--large {
-  max-width: 220px;
 }
 
 /* =================================
