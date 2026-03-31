@@ -388,6 +388,10 @@
   text-align: center;
 }
 
+.report-stat-grid--center {
+  place-content: center;
+}
+
 .report-list,
 .report-numbered-list {
   padding-left: 1.2rem;
@@ -444,10 +448,10 @@
 
 .report-list-card__title {
   font-family: var(--font-heading);
-  font-size: clamp(1.28rem, 1.95vw, 1.55rem);
+  font-size: clamp(1.36rem, 2.05vw, 1.7rem);
   color: var(--color-text-main);
-  margin: 0 0 12px;
-  line-height: 1.2;
+  margin: 0 0 10px;
+  line-height: 1.15;
 }
 
 .report-list-card__title::after {
@@ -465,8 +469,9 @@
 }
 
 .report-list-card .report-numbered-list li {
-  margin-bottom: 10px;
-  min-height: 32px;
+  margin-bottom: 8px;
+  min-height: 0;
+  line-height: 1.45;
 }
 
 .report-list-card .report-numbered-list li:last-child {
@@ -491,6 +496,11 @@
 .report-callout--center {
   text-align: center;
 }
+
+.report-callout--left {
+  text-align: left;
+}
+
 
 .report-callout p:last-child,
 .report-callout ul:last-child {
@@ -612,6 +622,7 @@
   font-style: italic;
 }
 
+/* Reset global footer styles on quote attributions */
 .report-quote-attribution,
 .report-quote footer.report-quote-attribution,
 .report-quote-card footer.report-quote-attribution {
@@ -637,6 +648,23 @@
   text-align: center;
 }
 
+.report-quote-card .report-quote-attribution {
+  width: 100%;
+  align-self: stretch;
+  text-align: right;
+}
+
+.report-quote-grid--center .report-quote-card,
+.report-quote-grid--center .report-quote-card--featured {
+  align-items: center;
+}
+
+.report-quote-grid--center .report-quote-card .report-quote-attribution,
+.report-quote-grid--center .report-quote-card--featured .report-quote-attribution {
+  text-align: center;
+}
+
+/* Inline citations */
 .report-citation {
   display: inline-block;
   vertical-align: super;
@@ -716,7 +744,7 @@
 }
 
 .report-quote-grid--center .report-quote-card {
-  align-items: center;
+  align-items: stretch;
   text-align: center;
   min-height: 220px;
 }
@@ -737,6 +765,7 @@
   margin-top: 24px;
 }
 
+/* case study: floated diagram so three paragraphs wrap */
 .report-case-study-layout {
   display: block;
   margin: 24px 0 28px;
@@ -811,6 +840,7 @@
   text-align: center;
 }
 
+/* References */
 .report-references {
   margin-top: 20px;
 }
@@ -855,6 +885,10 @@
 .report-reference-backlink:focus-visible {
   text-decoration: underline;
 }
+
+/* ================================
+   BACK SECTION
+================================ */
 
 .report-back {
   background: var(--color-text-main);
@@ -901,6 +935,10 @@
 .report-back p a {
   color: var(--color-brand-green);
 }
+
+/* ================================
+   RESPONSIVE
+================================ */
 
 @media (max-width: 900px) {
   .report-toc {
@@ -981,6 +1019,10 @@
     padding: 0 12px;
   }
 }
+
+/* =================================
+   PRINT / PDF VERSION
+================================= */
 
 @page {
   size: Letter;
