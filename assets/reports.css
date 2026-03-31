@@ -602,15 +602,46 @@
   font-style: italic;
 }
 
-.report-quote-attribution {
+/* Reset global footer styles on quote attributions */
+.report-quote-attribution,
+.report-quote footer.report-quote-attribution,
+.report-quote-card footer.report-quote-attribution {
   display: block;
-  margin-top: 14px;
+  margin: 14px 0 0;
+  padding: 0;
+  background: transparent !important;
+  color: var(--color-text-main) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
   font-family: var(--font-main);
   font-size: 0.95rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.4;
-  color: var(--color-text-main);
+  text-align: inherit;
+}
+
+/* Inline citations */
+.report-citation {
+  display: inline-block;
+  vertical-align: super;
+  font-size: 0.72em;
+  line-height: 1;
+  margin-left: 0.08em;
+}
+
+.report-citation a {
+  color: var(--report-teal);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.report-citation a:hover,
+.report-citation a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .report-chart {
@@ -762,6 +793,52 @@
 .report-callout-group .report-callout {
   margin: 0;
   text-align: center;
+}
+
+/* References */
+.report-references {
+  margin-top: 20px;
+}
+
+.report-references-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.report-references-list li {
+  margin-bottom: 18px;
+  padding: 0 0 18px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.report-references-list li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.report-reference-number {
+  display: inline-block;
+  min-width: 2.1em;
+  font-family: var(--font-heading);
+  color: var(--report-teal);
+}
+
+.report-reference-text {
+  color: var(--color-text-soft);
+}
+
+.report-reference-backlink {
+  margin-left: 8px;
+  font-weight: 700;
+  color: var(--report-teal);
+  text-decoration: none;
+}
+
+.report-reference-backlink:hover,
+.report-reference-backlink:focus-visible {
+  text-decoration: underline;
 }
 
 /* ================================
@@ -1023,7 +1100,8 @@
   .report-quote,
   .report-quote-grid,
   .report-callout,
-  .report-list-card {
+  .report-list-card,
+  .report-references-list li {
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -1086,9 +1164,17 @@
     line-height: 1.45;
   }
 
-  .report-quote-attribution {
+  .report-quote-attribution,
+  .report-quote footer.report-quote-attribution,
+  .report-quote-card footer.report-quote-attribution {
     font-size: 9pt;
     margin-top: 10pt;
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  .report-citation a {
+    color: #000 !important;
   }
 
   .report-quote-grid {
