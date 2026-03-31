@@ -430,6 +430,40 @@
   margin-bottom: 6px;
 }
 
+.report-list-card {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--color-white);
+  border: 1px solid var(--report-border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-card);
+}
+
+.report-list-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  color: var(--color-text-main);
+  margin: 0 0 18px;
+}
+
+.report-list-card__title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: var(--report-teal);
+}
+
+.report-list-card .report-numbered-list {
+  margin-bottom: 0;
+}
+
+.report-list-card .report-numbered-list li:last-child {
+  margin-bottom: 0;
+}
+
 .report-callout {
   background: var(--color-white);
   border: 1px solid var(--report-border);
@@ -568,6 +602,17 @@
   font-style: italic;
 }
 
+.report-quote-attribution {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-text-main);
+}
+
 .report-chart {
   margin: 28px 0;
   padding: clamp(14px, 2vw, 20px);
@@ -600,6 +645,10 @@
 }
 
 .report-quote-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
   background: var(--color-white);
   border: 1px solid var(--report-border);
   border-radius: 18px;
@@ -622,14 +671,13 @@
 }
 
 .report-quote-grid--center .report-quote-card {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 220px;
   text-align: center;
+  min-height: 220px;
 }
 
-.report-quote-grid--center .report-quote-card p {
+.report-quote-grid--center .report-quote-card p,
+.report-quote-grid--center .report-quote-card .report-quote-attribution {
   width: 100%;
 }
 
@@ -974,7 +1022,8 @@
   .report-chart,
   .report-quote,
   .report-quote-grid,
-  .report-callout {
+  .report-callout,
+  .report-list-card {
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -999,6 +1048,12 @@
 
   .report-stat__label {
     font-size: 9pt;
+  }
+
+  .report-list-card {
+    box-shadow: none;
+    border: 1px solid #d9e1e8;
+    background: #fff !important;
   }
 
   .report-chart {
@@ -1029,6 +1084,11 @@
   .report-quote p {
     font-size: 11pt;
     line-height: 1.45;
+  }
+
+  .report-quote-attribution {
+    font-size: 9pt;
+    margin-top: 10pt;
   }
 
   .report-quote-grid {
