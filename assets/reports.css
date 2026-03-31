@@ -1,1260 +1,1160 @@
-:root {
-  --report-max: 860px;
-  --report-max-wide: 1040px;
-  --report-border: rgba(226, 232, 240, 0.95);
-  --report-quote-bg: #fbf7f1;
-  --report-pale: #f8fafc;
-  --report-teal: #20b2aa;
-  --report-panel-gap: clamp(18px, 3vw, 28px);
-}
-
-.report-page {
-  background: var(--color-bg-primary);
-}
-
-.report-shell {
-  padding: 0 0 clamp(56px, 8vw, 96px);
-}
-
-.report-hero {
-  padding: clamp(56px, 8vw, 100px) 0 clamp(28px, 4vw, 40px);
-  background:
-    radial-gradient(circle at top right, rgba(36, 238, 85, 0.1), transparent 30%),
-    linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
-  border-bottom: 1px solid var(--report-border);
-}
-
-.report-hero__inner {
-  max-width: var(--report-max);
-  text-align: center;
-}
-
-.report-hero__logo {
-  width: clamp(96px, 14vw, 160px);
-  height: auto;
-  display: block;
-  margin: 0 auto 24px;
-}
-
-.report-kicker {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: var(--color-text-soft);
-  margin-bottom: 14px;
-}
-
-.report-title {
-  font-size: clamp(2.1rem, 5vw, 3.8rem);
-  line-height: 1.04;
-  margin-bottom: 14px;
-}
-
-.report-subtitle {
-  font-size: clamp(1.05rem, 2vw, 1.45rem);
-  color: var(--report-teal);
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.report-meta {
-  font-size: 0.95rem;
-  color: var(--color-text-soft);
-  max-width: 48ch;
-  margin: 0 auto;
-}
-
-/* ================================
-   REPORT TABLE OF CONTENTS
-================================ */
-
-.report-toc-wrap {
-  padding: 32px 0 0;
-}
-
-.report-toc {
-  max-width: var(--report-max);
-  margin: 0 auto;
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 22px;
-  padding: 30px;
-  box-shadow: var(--shadow-card);
-}
-
-.report-toc__eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--color-text-soft);
-  margin-bottom: 6px;
-}
-
-.report-toc__header h2 {
-  font-size: clamp(1.25rem, 2vw, 1.6rem);
-  margin-bottom: 0;
-}
-
-.report-toc__header h2::after {
-  content: "";
-  display: block;
-  width: 72px;
-  height: 4px;
-  margin-top: 12px;
-  border-radius: 999px;
-  background: var(--report-teal);
-}
-
-.report-toc__balanced {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.85fr) minmax(320px, 1.15fr);
-  gap: 18px;
-  margin-top: 22px;
-  align-items: start;
-}
-
-.report-toc__column {
-  min-width: 0;
-}
-
-.report-toc__group {
-  background: var(--report-pale);
-  border: 1px solid var(--report-border);
-  border-radius: 18px;
-  padding: 18px 18px 16px;
-}
-
-.report-toc__group-title {
-  display: inline-block;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  color: var(--color-text-main);
-  margin-bottom: 10px;
-  text-decoration: none;
-}
-
-.report-toc__group-title:hover,
-.report-toc__item:hover {
-  color: var(--report-teal);
-}
-
-.report-toc__group--simple {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.report-toc__group--simple .report-toc__group-title {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 12px 14px;
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
-  line-height: 1.3;
-}
-
-.report-toc__group--survey > .report-toc__group-title {
-  display: inline-block;
-  margin-bottom: 14px;
-}
-
-.report-toc__sublist {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.report-toc__sublist li + li {
-  margin-top: 8px;
-}
-
-.report-toc__item,
-.report-toc__sublist a {
-  display: block;
-  color: var(--color-text-soft);
-  font-weight: 600;
-  text-decoration: none;
-  line-height: 1.35;
-  padding-left: 14px;
-  position: relative;
-}
-
-.report-toc__item::before,
-.report-toc__sublist a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.58em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(32, 178, 170, 0.55);
-}
-
-.report-toc__sublist--nested {
-  margin-top: 10px;
-  margin-left: 14px;
-  padding-left: 14px;
-  border-left: 1px solid rgba(32, 178, 170, 0.2);
-}
-
-.report-toc__sublist--nested li + li {
-  margin-top: 8px;
-}
-
-.report-toc__sublist--nested .report-toc__item {
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-/* ================================
-   MOBILE JUMP MENU
-================================ */
-
-.report-jump {
-  display: none;
-  max-width: var(--report-max);
-  margin: 0 auto;
-}
-
-.report-jump select {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--report-border);
-  background: var(--color-white);
-  font: inherit;
-  color: var(--color-text-main);
-  box-shadow: var(--shadow-card);
-}
-
-/* ================================
-   ACCESSIBILITY
-================================ */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-}
-
-/* ================================
-   REPORT PANELS / SECTIONS
-================================ */
-
-.report-panel {
-  padding-top: 48px;
-}
-
-.report-panel:first-child {
-  padding-top: clamp(28px, 4vw, 40px);
-}
-
-.report-panel:not(:first-child) {
-  border-top: 1px solid rgba(226, 232, 240, 0.6);
-  margin-top: 40px;
-}
-
-.report-section,
-.report-back {
-  max-width: var(--report-max);
-  margin: 0 auto;
-  padding: clamp(40px, 6vw, 72px) clamp(20px, 3vw, 28px);
-  scroll-margin-top: 120px;
-}
-
-.report-section {
-  border-radius: 28px;
-}
-
-.report-section--plain {
-  background: transparent;
-}
-
-.report-section--tint {
-  background: var(--report-pale);
-  border: 1px solid var(--report-border);
-  box-shadow: var(--shadow-card);
-}
-
-.report-section--sand {
-  background: var(--color-bg-secondary);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: var(--shadow-card);
-}
-
-.report-section--accent {
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-top: 6px solid var(--report-teal);
-  box-shadow: var(--shadow-soft);
-}
-
-.report-section > h2 {
-  max-width: 26ch;
-  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-}
-
-.report-section h2::after {
-  content: "";
-  display: block;
-  width: 72px;
-  height: 4px;
-  margin-top: 12px;
-  border-radius: 999px;
-  background: var(--report-teal);
-}
-
-.report-title--nowrap,
-.report-section > h2.report-title--nowrap,
-.report-back h2.report-title--nowrap {
-  max-width: none !important;
-  white-space: nowrap;
-  font-size: clamp(1.3rem, 2vw, 1.9rem) !important;
-}
-
-.report-section h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-top: 32px;
-  margin-bottom: 12px;
-  color: var(--color-text-main);
-}
-
-.report-section p {
-  font-size: clamp(1rem, 1.2vw, 1.08rem);
-  margin-bottom: 20px;
-  color: var(--color-text-soft);
-}
-
-.report-intro {
-  font-size: clamp(1.08rem, 1.35vw, 1.18rem);
-  color: var(--color-text-main);
-}
-
-.report-stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 28px 0 32px;
-}
-
-.report-stat {
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: var(--shadow-card);
-}
-
-.report-stat__number {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(1.9rem, 4vw, 2.5rem);
-  color: var(--report-teal);
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.report-stat__label {
-  font-size: 0.96rem;
-  font-weight: 700;
-  color: var(--color-text-main);
-  line-height: 1.35;
-}
-
-.report-stat-grid--center {
-  justify-content: center;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.report-stat-grid--center .report-stat {
-  text-align: center;
-}
-
-.report-list,
-.report-numbered-list {
-  padding-left: 1.2rem;
-  margin: 0 0 24px;
-}
-
-.report-list li,
-.report-numbered-list li {
-  margin-bottom: 12px;
-}
-
-.report-numbered-list {
-  list-style: none;
-  counter-reset: findings;
-  padding-left: 0;
-}
-
-.report-numbered-list li {
-  position: relative;
-  padding-left: 52px;
-  min-height: 36px;
-}
-
-.report-numbered-list li::before {
-  counter-increment: findings;
-  content: counter(findings);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--report-teal);
-  color: white;
-  font-weight: 800;
-  display: grid;
-  place-items: center;
-}
-
-.report-numbered-list strong {
-  display: block;
-  color: var(--color-text-main);
-  margin-bottom: 6px;
-}
-
-.report-list-card {
-  margin: 28px 0;
-  padding: clamp(20px, 3vw, 28px);
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 22px;
-  box-shadow: var(--shadow-card);
-}
-
-.report-list-card__title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
-  color: var(--color-text-main);
-  margin: 0 0 18px;
-}
-
-.report-list-card__title::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 4px;
-  margin-top: 10px;
-  border-radius: 999px;
-  background: var(--report-teal);
-}
-
-.report-list-card .report-numbered-list {
-  margin-bottom: 0;
-}
-
-.report-list-card .report-numbered-list li:last-child {
-  margin-bottom: 0;
-}
-
-.report-callout {
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: var(--shadow-card);
-  margin: 24px 0;
-  clear: right;
-}
-
-.report-callout--soft {
-  background: var(--report-quote-bg);
-}
-
-.report-callout--center {
-  text-align: center;
-}
-
-.report-callout p:last-child,
-.report-callout ul:last-child {
-  margin-bottom: 0;
-}
-
-.report-callout ul,
-.report-stat-list {
-  list-style: disc;
-  padding-left: 1.2rem;
-  margin: 12px 0 0;
-}
-
-.report-callout li,
-.report-stat-list li {
-  margin-bottom: 8px;
-  color: var(--color-text-soft);
-}
-
-.report-inline-callout {
-  margin: 24px 0;
-}
-
-.report-inline-callout .report-stat-grid {
-  margin: 0;
-}
-
-.report-inline-callout .report-stat-grid--two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.report-float-stat {
-  float: right;
-  width: min(280px, 42%);
-  margin: 80px 0 20px 20px;
-}
-
-.report-float-stat--causes {
-  margin-top: 28px;
-}
-
-.report-float-stat .report-stat-grid {
-  grid-template-columns: 1fr;
-  margin: 0;
-}
-
-.report-float-stat .report-stat {
-  height: 100%;
-}
-
-#executive-summary .report-float-stat {
-  margin-top: 0;
-}
-
-.report-float-icon {
-  float: right;
-  width: 140px;
-  margin: 0 0 18px 24px;
-}
-
-.report-float-icon--large {
-  float: right;
-  width: 300px;
-  margin: 0 0 20px 28px;
-}
-
-.report-icon {
-  width: 100%;
-  max-width: 140px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-.report-icon--large {
-  width: 100%;
-  max-width: none;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-#financial-strain .report-float-icon--large {
-  width: 220px;
-  margin: 0 0 20px 28px;
-}
-
-#financial-strain .report-icon--large {
-  width: 100%;
-  max-width: none;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-#financial-strain .report-callout {
-  clear: none;
-  display: inline-block;
-  vertical-align: top;
-  max-width: calc(100% - 250px);
-  margin-top: 12px;
-}
-
-.report-quote {
-  margin: 28px 0;
-  padding: clamp(20px, 3vw, 32px);
-  background: var(--report-quote-bg);
-  border-left: 4px solid var(--report-teal);
-  border-radius: 0 18px 18px 0;
-  clear: both;
-}
-
-.report-quote p {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(1.08rem, 1.7vw, 1.35rem);
-  line-height: 1.55;
-  color: var(--color-text-main);
-  font-style: italic;
-}
-
-/* Reset global footer styles on quote attributions */
-.report-quote-attribution,
-.report-quote footer.report-quote-attribution,
-.report-quote-card footer.report-quote-attribution {
-  display: block;
-  margin: 14px 0 0;
-  padding: 0;
-  background: transparent !important;
-  color: var(--color-text-main) !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  filter: none !important;
-  font-family: var(--font-main);
-  font-size: 0.95rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.4;
-  text-align: inherit;
-}
-
-/* Inline citations */
-.report-citation {
-  display: inline-block;
-  vertical-align: super;
-  font-size: 0.72em;
-  line-height: 1;
-  margin-left: 0.08em;
-}
-
-.report-citation a {
-  color: var(--report-teal);
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.report-citation a:hover,
-.report-citation a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.report-chart {
-  margin: 28px 0;
-  padding: clamp(14px, 2vw, 20px);
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 20px;
-  box-shadow: var(--shadow-card);
-  clear: both;
-}
-
-.report-chart img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-.report-chart figcaption {
-  margin-top: 12px;
-  font-size: 0.9rem;
-  color: var(--color-text-soft);
-  font-style: italic;
-}
-
-.report-quote-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.report-quote-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  background: var(--color-white);
-  border: 1px solid var(--report-border);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: var(--shadow-card);
-  clear: both;
-}
-
-.report-quote-card p {
-  margin: 0;
-  color: var(--color-text-main);
-  font-style: italic;
-  line-height: 1.6;
-}
-
-.report-quote-card--featured {
-  grid-column: 1 / -1;
-  background: var(--report-quote-bg);
-  border-left: 4px solid var(--report-teal);
-}
-
-.report-quote-grid--center .report-quote-card {
-  align-items: center;
-  text-align: center;
-  min-height: 220px;
-}
-
-.report-quote-grid--center .report-quote-card p,
-.report-quote-grid--center .report-quote-card .report-quote-attribution {
-  width: 100%;
-}
-
-.report-quote-grid--center .report-quote-card--featured {
-  min-height: 200px;
-}
-
-.report-quote-card + p,
-.report-quote-card + figure,
-.report-quote + p,
-.report-quote + figure {
-  margin-top: 24px;
-}
-
-/* case study: floated diagram so three paragraphs wrap */
-.report-case-study-layout {
-  display: block;
-  margin: 24px 0 28px;
-}
-
-.report-case-study-layout::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.report-case-study-diagram {
-  float: right;
-  width: 240px;
-  margin: 6px 0 16px 24px;
-}
-
-.report-case-study-diagram img {
-  display: block;
-  width: 100%;
-  max-width: 240px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 16px;
-}
-
-.report-case-study-photo {
-  margin: 24px 0;
-}
-
-.report-case-study-photo img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  max-height: 440px;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
-.report-clear {
-  clear: both;
-}
-
-.report-section--sand .report-quote {
-  background: var(--color-white);
-}
-
-.report-section--sand .report-quote-card {
-  background: var(--color-white);
-}
-
-.report-section--sand .report-quote-card--featured {
-  background: var(--color-white);
-}
-
-.report-callout-group {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 320px));
-  gap: 20px;
-  justify-content: center;
-  align-items: stretch;
-  max-width: 680px;
-  margin: 24px auto;
-}
-
-.report-callout-group .report-callout {
-  margin: 0;
-  text-align: center;
-}
-
-/* References */
-.report-references {
-  margin-top: 20px;
-}
-
-.report-references-list {
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
-}
-
-.report-references-list li {
-  margin-bottom: 18px;
-  padding: 0 0 18px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.report-references-list li:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.report-reference-number {
-  display: inline-block;
-  min-width: 2.1em;
-  font-family: var(--font-heading);
-  color: var(--report-teal);
-}
-
-.report-reference-text {
-  color: var(--color-text-soft);
-}
-
-.report-reference-backlink {
-  margin-left: 8px;
-  font-weight: 700;
-  color: var(--report-teal);
-  text-decoration: none;
-}
-
-.report-reference-backlink:hover,
-.report-reference-backlink:focus-visible {
-  text-decoration: underline;
-}
-
-/* ================================
-   BACK SECTION
-================================ */
-
-.report-back {
-  background: var(--color-text-main);
-  color: var(--color-white);
-  border-radius: 28px;
-  text-align: center;
-}
-
-.report-back img {
-  width: 120px;
-  height: auto;
-  filter: brightness(0) invert(1);
-  margin: 0 auto 24px;
-  display: block;
-}
-
-.report-back h2 {
-  color: var(--color-white);
-  margin-bottom: 16px;
-}
-
-.report-back h2::after {
-  content: "";
-  display: block;
-  width: 72px;
-  height: 4px;
-  margin: 12px auto 0;
-  border-radius: 999px;
-  background: var(--color-brand-green);
-}
-
-.report-back p {
-  color: rgba(255, 255, 255, 0.88);
-  margin-bottom: 12px;
-}
-
-.report-back .btn,
-.report-back .btn:hover,
-.report-back .btn:focus,
-.report-back .btn:visited {
-  color: var(--color-text-main);
-}
-
-.report-back p a {
-  color: var(--color-brand-green);
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 900px) {
-  .report-toc {
-    display: none;
-  }
-
-  .report-jump {
-    display: block;
-    padding: 0 16px;
-  }
-
-  .report-stat-grid,
-  .report-quote-grid,
-  .report-callout-group,
-  .report-inline-callout .report-stat-grid--two {
-    grid-template-columns: 1fr;
-  }
-
-  .report-quote-card--featured {
-    grid-column: auto;
-  }
-
-  .report-section,
-  .report-back {
-    scroll-margin-top: 96px;
-  }
-
-  .report-float-stat,
-  .report-float-icon,
-  .report-float-icon--large,
-  .report-case-study-diagram {
-    float: none;
-    width: 100%;
-    margin: 20px 0;
-  }
-
-  .report-icon,
-  .report-icon--large {
-    margin: 0 auto;
-  }
-
-  .report-title--nowrap,
-  .report-section > h2.report-title--nowrap,
-  .report-back h2.report-title--nowrap {
-    white-space: normal;
-  }
-
-  .report-quote-grid--center .report-quote-card,
-  .report-quote-grid--center .report-quote-card--featured {
-    min-height: auto;
-  }
-
-  .report-case-study-diagram img,
-  .report-case-study-photo img {
-    max-width: 100%;
-    max-height: none;
-  }
-
-  #financial-strain .report-callout {
-    max-width: 100%;
-    display: block;
-    clear: both;
-  }
-}
-
-@media (max-width: 640px) {
-  .report-section,
-  .report-back {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .report-quote {
-    padding: 18px;
-  }
-
-  .report-jump {
-    padding: 0 12px;
-  }
-}
-
-/* =================================
-   PRINT / PDF VERSION
-================================= */
-
-@page {
-  size: Letter;
-  margin: 0.65in;
-}
-
-@media print {
-  html {
-    scroll-behavior: auto;
-  }
-
-  body.report-page {
-    background: #fff;
-    color: #000;
-  }
-
-  .site-header,
-  footer,
-  .skip-link,
-  .report-toc-wrap,
-  .report-jump {
-    display: none !important;
-  }
-
-  .report-shell {
-    padding: 0;
-  }
-
-  .report-panel {
-    padding: 0;
-    margin: 0;
-    border-top: none !important;
-  }
-
-  .report-panel:not(:first-child) {
-    margin-top: 0;
-  }
-
-  .report-hero {
-    min-height: 9.5in;
-    padding: 1.1in 0 0.8in;
-    border-bottom: none;
-    background: #fff;
-    page-break-after: always;
-    break-after: page;
-  }
-
-  .report-hero__inner {
-    max-width: 6.5in;
-  }
-
-  .report-title {
-    font-size: 30pt;
-    line-height: 1.05;
-  }
-
-  .report-subtitle {
-    font-size: 15pt;
-  }
-
-  .report-meta {
-    font-size: 10.5pt;
-  }
-
-  .report-section,
-  .report-back {
-    max-width: none;
-    width: 100%;
-    margin: 0 0 0.22in 0;
-    padding: 0.28in 0.3in;
-    border-radius: 0;
-    box-shadow: none !important;
-    break-inside: auto;
-    page-break-inside: auto;
-  }
-
-  .report-section--plain,
-  .report-section--tint,
-  .report-section--sand,
-  .report-section--accent {
-    border: 1px solid #d9e1e8;
-    background: #fff !important;
-  }
-
-  .report-section--accent {
-    border-top: 4px solid var(--report-teal);
-  }
-
-  .report-section > h2,
-  .report-back h2 {
-    max-width: none;
-    font-size: 18pt;
-    line-height: 1.15;
-    margin-bottom: 12pt;
-    white-space: normal !important;
-  }
-
-  .report-section h3 {
-    font-size: 12.5pt;
-    margin-top: 18pt;
-    margin-bottom: 8pt;
-  }
-
-  .report-section p,
-  .report-section li,
-  .report-back p {
-    font-size: 10.5pt;
-    line-height: 1.45;
-    color: #222 !important;
-  }
-
-  .report-kicker {
-    font-size: 8pt;
-    margin-bottom: 8pt;
-    color: #555 !important;
-  }
-
-  .report-stat-grid,
-  .report-chart,
-  .report-quote,
-  .report-quote-grid,
-  .report-callout,
-  .report-list-card,
-  .report-references-list li {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .report-stat-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10pt;
-    margin: 14pt 0 16pt;
-  }
-
-  .report-stat {
-    border: 1px solid #d9e1e8;
-    box-shadow: none;
-    padding: 10pt;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .report-stat__number {
-    font-size: 18pt;
-  }
-
-  .report-stat__label {
-    font-size: 9pt;
-  }
-
-  .report-list-card {
-    box-shadow: none;
-    border: 1px solid #d9e1e8;
-    background: #fff !important;
-  }
-
-  .report-chart {
-    padding: 10pt;
-    margin: 14pt 0;
-    box-shadow: none;
-  }
-
-  .report-chart figcaption {
-    font-size: 8.5pt;
-  }
-
-  .report-callout {
-    border: 1px solid #d9e1e8;
-    box-shadow: none;
-    background: #fff !important;
-  }
-
-  .report-quote {
-    background: #fff !important;
-    border: 1px solid #d9e1e8;
-    border-left: 4px solid var(--report-teal);
-    border-radius: 0;
-    padding: 12pt;
-    margin: 14pt 0;
-  }
-
-  .report-quote p {
-    font-size: 11pt;
-    line-height: 1.45;
-  }
-
-  .report-quote-attribution,
-  .report-quote footer.report-quote-attribution,
-  .report-quote-card footer.report-quote-attribution {
-    font-size: 9pt;
-    margin-top: 10pt;
-    color: #000 !important;
-    background: transparent !important;
-  }
-
-  .report-citation a {
-    color: #000 !important;
-  }
-
-  .report-quote-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10pt;
-    margin-top: 12pt;
-  }
-
-  .report-quote-card {
-    box-shadow: none;
-    border: 1px solid #d9e1e8;
-    background: #fff !important;
-    padding: 10pt;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .report-quote-card p {
-    font-size: 9.5pt;
-    line-height: 1.4;
-  }
-
-  .report-quote-card--featured {
-    grid-column: 1 / -1;
-  }
-
-  .report-float-stat,
-  .report-float-icon,
-  .report-float-icon--large,
-  .report-case-study-diagram {
-    float: none !important;
-    width: auto !important;
-    margin: 0 0 12pt 0 !important;
-  }
-
-  h2, h3 {
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-
-  figure, blockquote, ul, ol {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .report-back {
-    margin-top: 0.25in;
-    min-height: 4.5in;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    page-break-before: always;
-    break-before: page;
-    background: #fff !important;
-    color: #000 !important;
-  }
-
-  .report-back img {
-    filter: none;
-    width: 1.1in;
-    margin-bottom: 14pt;
-  }
-
-  .report-back .btn {
-    display: inline-block;
-    border: 1px solid #000;
-    background: #fff !important;
-    color: #000 !important;
-    box-shadow: none;
-  }
-
-  .report-back p a {
-    color: #000 !important;
-    text-decoration: underline;
-  }
-
-  a,
-  a:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bridging the Gap | ReFund</title>
+  <link rel="icon" href="/favicon.png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles.css?v=20260130" />
+  <link rel="stylesheet" href="/assets/reports.css?v=20260331" />
+</head>
+
+<body id="top" class="report-page">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container nav-wrapper">
+      <a href="/#top" class="logo">
+        <img src="/assets/refund-logo-notext.png" alt="ReFund logo - seedling in leaf" />
+        <span class="logo-text">
+          <strong>ReFund</strong>
+          <span class="logo-subtitle">The Recoverable Grants Fund</span>
+        </span>
+      </a>
+
+      <button
+        type="button"
+        class="nav-toggle-btn"
+        id="nav-toggle-btn"
+        aria-label="Open menu"
+        aria-controls="primary-nav"
+        aria-expanded="false">
+        <i class="ri-menu-line nav-open" aria-hidden="true"></i>
+        <i class="ri-close-line nav-close" aria-hidden="true"></i>
+      </button>
+
+      <span class="nav-scrim" id="nav-scrim" aria-hidden="true"></span>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="/#challenge">The Challenge</a></li>
+          <li><a href="/#solution">The Solution</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#impact">Impact</a></li>
+          <li><a href="/#insights">Insights</a></li>
+          <li><a href="/#funding">For Funders</a></li>
+          <li class="nav-cta-mobile">
+            <a href="/#contact" class="btn btn-nav">Get Involved</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/#contact" class="btn btn-desktop">Get Involved</a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="report-hero" aria-labelledby="report-title">
+      <div class="container report-hero__inner">
+        <img
+          src="/assets/refund-logo.png"
+          alt="ReFund logo - seedling in leaf"
+          class="report-hero__logo"
+        />
+        <p class="report-kicker">Research Report</p>
+        <h1 class="report-title" id="report-title">Bridging the Gap</h1>
+        <p class="report-subtitle">Cash Flow Challenges in Government-Funded Work</p>
+        <p class="report-meta">A Survey of Nonprofit Organizations and Tribes</p>
+      </div>
+    </section>
+
+    <section class="report-toc-wrap" aria-labelledby="report-toc-title">
+      <div class="report-toc">
+        <div class="report-toc__header">
+          <p class="report-toc__eyebrow">Contents</p>
+          <h2 id="report-toc-title">In This Report</h2>
+        </div>
+
+        <div class="report-toc__balanced">
+          <div class="report-toc__column">
+            <div class="report-toc__group report-toc__group--simple">
+              <a class="report-toc__group-title" href="#acknowledgements">Acknowledgements</a>
+              <a class="report-toc__group-title" href="#executive-summary">Executive Summary</a>
+              <a class="report-toc__group-title" href="#context">Context</a>
+              <a class="report-toc__group-title" href="#profile">Respondent Profile</a>
+              <a class="report-toc__group-title" href="#path-forward">Recoverable Grants</a>
+              <a class="report-toc__group-title" href="#case-study">Case Study</a>
+              <a class="report-toc__group-title" href="#scaling-solutions">Conclusions</a>
+              <a class="report-toc__group-title" href="#references">References</a>
+            </div>
+          </div>
+
+          <div class="report-toc__column">
+            <div class="report-toc__group report-toc__group--survey">
+              <a class="report-toc__group-title" href="#survey-findings">Survey Findings</a>
+
+              <ol class="report-toc__sublist">
+                <li>
+                  <a class="report-toc__item" href="#structural">Structural Drivers of Cash Flow Instability</a>
+                  <ol class="report-toc__sublist report-toc__sublist--nested">
+                    <li><a class="report-toc__item" href="#core-revenue">Government Funding Is Core Revenue</a></li>
+                    <li><a class="report-toc__item" href="#cash-flow">Prevalence of Cash Flow Instability</a></li>
+                    <li><a class="report-toc__item" href="#common-causes">Causes of Cash Flow Instability</a></li>
+                  </ol>
+                </li>
+
+                <li>
+                  <a class="report-toc__item" href="#consequences">Consequences for Organizations</a>
+                  <ol class="report-toc__sublist report-toc__sublist--nested">
+                    <li><a class="report-toc__item" href="#mission-impact">Impact on Program Delivery</a></li>
+                    <li><a class="report-toc__item" href="#financial-strain">Financial Strain</a></li>
+                    <li><a class="report-toc__item" href="#operational-impact">Operational Impact</a></li>
+                  </ol>
+                </li>
+
+                <li>
+                  <a class="report-toc__item" href="#systems">Gaps in the System</a>
+                  <ol class="report-toc__sublist report-toc__sublist--nested">
+                    <li><a class="report-toc__item" href="#declining-funding">Organizations Are Opting Out</a></li>
+                    <li><a class="report-toc__item" href="#respondent-voices">Respondent Voices</a></li>
+                    <li><a class="report-toc__item" href="#borrowing">Borrowing Is a Costly Solution</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-jump">
+        <label class="sr-only" for="report-jump-select">Jump to a section</label>
+        <select id="report-jump-select">
+          <option value="">Jump to a section</option>
+          <option value="#acknowledgements">Acknowledgements</option>
+          <option value="#executive-summary">Executive Summary</option>
+          <option value="#context">Context</option>
+          <option value="#profile">Respondent Profile</option>
+          <option value="#survey-findings">Survey Findings</option>
+          <option value="#structural">Structural Drivers of Cash Flow Instability</option>
+          <option value="#core-revenue">Government Funding Is Core Revenue</option>
+          <option value="#cash-flow">Prevalence of Cash Flow Instability</option>
+          <option value="#common-causes">Causes of Cash Flow Instability</option>
+          <option value="#consequences">Consequences for Organizations</option>
+          <option value="#mission-impact">Impact on Program Delivery</option>
+          <option value="#financial-strain">Financial Strain</option>
+          <option value="#operational-impact">Operational Impact</option>
+          <option value="#systems">Gaps in the System</option>
+          <option value="#declining-funding">Organizations Are Opting Out</option>
+          <option value="#respondent-voices">Respondent Voices</option>
+          <option value="#borrowing">Borrowing Is a Costly Solution</option>
+          <option value="#path-forward">Recoverable Grants</option>
+          <option value="#case-study">Case Study</option>
+          <option value="#scaling-solutions">Conclusions</option>
+          <option value="#references">References</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="report-panel">
+      <section class="report-section report-section--accent" id="acknowledgements" aria-labelledby="acknowledgements-title">
+        <h2 id="acknowledgements-title" class="report-title--nowrap">Acknowledgements</h2>
+        <p>
+          The authors would like to thank and acknowledge the 51 nonprofit organizations and Tribes that participated in this survey. Their insights and experiences made this research possible and provide critical visibility into the cash flow challenges associated with reimbursement-based funding.
+        </p>
+        <p>
+          The findings reflect the perspectives of organizations implementing publicly funded programs across diverse geographies, issue areas, and organizational sizes. To protect confidentiality, all quotes included in this report are drawn from survey respondents and are presented anonymously. In some cases, limited descriptors (such as organization type or geography) are included to provide context.
+        </p>
+        <p>
+          We extend a special thank you to Kaʻehu for their participation in the case study featured in this report, which offers an illustration of these challenges in practice. Mahalo!
+        </p>
+        <p>
+          We would also like to thank and acknowledge ReFund’s fiscal sponsor, Indigenous Futures Society. Their ongoing support and partnership makes ReFund’s work possible.
+        </p>
+      </section>
+    </div>
+
+    <article class="report-shell">
+      <div class="report-panel">
+        <section class="report-section report-section--plain" id="executive-summary" aria-labelledby="executive-summary-title">
+          <h2 id="executive-summary-title" class="report-title--nowrap">Executive Summary</h2>
+
+          <div class="report-float-stat">
+            <div class="report-stat-grid">
+              <div class="report-stat">
+                <span class="report-stat__number">83%</span>
+                <span class="report-stat__label">experience cash flow challenges related to reimbursement systems</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="report-intro">
+            Government funding supports thousands of nonprofit organizations and Tribes delivering essential programs across the United States. Yet reimbursement-based payment systems require organizations to cover costs upfront and wait weeks or months for repayment, creating significant financial strain. Payment delays are common, with many organizations experiencing delays of three months or more.
+          </p>
+
+          <p>
+            This report examines these challenges through a survey of 51 nonprofit organizations and Tribes implementing government-funded programs. Cash flow instability is widespread: 83 percent of respondents that received government funding report challenges related to reimbursement-based funding systems.
+          </p>
+          <p>
+            These dynamics extend beyond individual organizations. Because funding must be fronted, access to public dollars is effectively limited to organizations with sufficient unrestricted cash or access to credit. Those without it are either excluded or forced to take on high-interest debt, shaping which communities receive services. At its core, this system embeds inequity by conditioning access to public funding on upfront cash, privileging well-capitalized organizations and excluding those with the greatest need.
+          </p>
+          <p>
+            Recoverable grants offer a practical, non-extractive solution by providing zero-interest working capital that can be repaid once reimbursements are received, enabling organizations to sustain operations without taking on debt.
+          </p>
+
+          <div class="report-clear"></div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="key-findings" aria-labelledby="key-findings-title">
+          <h2 id="key-findings-title" class="report-title--nowrap">Key Findings</h2>
+
+          <ol class="report-numbered-list">
+            <li>
+              <strong>Cash flow instability is widespread.</strong>
+              Government funding is core funding for most organizations, yet 83 percent of respondents report cash challenges related to reimbursement-based systems.
+            </li>
+            <li>
+              <strong>Reimbursement-based funding drives cash flow instability.</strong>
+              91 percent of respondents cite payment delays, 86 percent cite reimbursement-based funding structures, and 80 percent cite administrative delays.
+            </li>
+            <li>
+              <strong>Organizations absorb the financial and operational risks.</strong>
+              To bridge liquidity gaps, 74 percent of respondents draw on reserves, 40 percent borrow, and 20 percent rely on personal or leadership loans.
+            </li>
+            <li>
+              <strong>Cash flow instability disrupts program delivery and limits access.</strong>
+              49 percent of respondents cut programs, 26 percent delayed payments, 23 percent reduced staff, and 17 percent laid off staff.
+            </li>
+            <li>
+              <strong>Borrowing is not a sustainable solution.</strong>
+              All respondents that borrowed report negative consequences, including increased financial risk, administrative burden, and program changes.
+            </li>
+            <li>
+              <strong>Recoverable grants offer a transformative alternative.</strong>
+              Respondents consistently identified zero-interest bridge capital as a tool that would enable them to participate in government funding programs.
+            </li>
+          </ol>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              For an Indigenous-led grassroots organization like ours, the greatest barrier is rarely vision or capacity. It is timing. Most of our work responds to urgent community needs: protecting sacred sites, intervening in land-use decisions, responding to environmental harms, or mobilizing legal and legislative advocacy on compressed timelines. Recoverable grants would allow us to act when communities need us most, rather than waiting months for reimbursement-based funding or navigating high-risk bridge loans that place undue financial strain on our organization.
+            </p>
+            <footer class="report-quote-attribution">— An Indigenous-led Environmental Organization in the Southeastern U.S.</footer>
+          </blockquote>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--sand" id="context" aria-labelledby="context-title">
+          <p class="report-kicker">Context</p>
+          <h2 id="context-title" class="report-title--nowrap">Structural Challenges in Government-Funded Work</h2>
+
+          <p>
+            Government funding plays a critical role in supporting nonprofit organizations and Tribes delivering programs that serve communities across the United States.
+          </p>
+
+          <p>
+            It is estimated that approximately $900 billion flows annually from government agencies to nonprofit organizations through grants and contracts. These funds support programs addressing environmental protection, community development, education, food systems, and social services. Despite the scale of this funding, the systems used to deliver it often create financial challenges for the organizations responsible for implementing these programs.
+          </p>
+
+          <p>
+            Reimbursement-based government funding systems require nonprofit organizations and Tribes to finance public programs upfront, effectively transferring financial risk from government institutions to organizations with limited access to capital.
+          </p>
+
+          <p>
+            Most government grants and contracts operate through reimbursement-based payment systems. Under these systems, organizations must cover program expenses first and submit documentation to receive reimbursement later.
+          </p>
+
+          <p>
+            When reimbursements are delayed by weeks or months, organizations must continue paying staff, contractors, and vendors while waiting for funds to arrive. Research by the Urban Institute highlights the prevalence of this challenge<sup class="report-citation" id="cite-1"><a href="#ref-1" aria-label="See reference 1">[1]</a></sup>:
+          </p>
+
+          <div class="report-stat-grid">
+            <div class="report-stat">
+              <span class="report-stat__number">64%</span>
+              <span class="report-stat__label">of U.S. nonprofits have reimbursement grants</span>
+            </div>
+            <div class="report-stat">
+              <span class="report-stat__number">50%</span>
+              <span class="report-stat__label">of U.S. nonprofits reported payment delays</span>
+            </div>
+            <div class="report-stat">
+              <span class="report-stat__number">25%</span>
+              <span class="report-stat__label">of U.S. nonprofits reported delays of 3+ months</span>
+            </div>
+          </div>
+
+          <p>
+            These structural features of government funding systems create persistent liquidity pressures for nonprofits and Tribes.
+          </p>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--plain" id="profile" aria-labelledby="profile-title">
+          <h2 id="profile-title" class="report-title--nowrap">Respondent Profile</h2>
+
+          <p>
+            This survey gathered responses from nonprofit organizations and Tribes that regularly implement government-funded programs and therefore experience the impacts of reimbursement-based funding systems. 51 organizations across the United States participated in the survey, with particularly strong representation from the Western United States.
+          </p>
+
+          <div class="report-callout report-callout--soft">
+            <p><strong>The respondent pool (n=51) includes organizations led by individuals from historically undercapitalized communities:</strong></p>
+            <ul class="report-stat-list">
+              <li>67 percent are Indigenous-led.</li>
+              <li>59 percent are woman-led.</li>
+              <li>28 percent are BIPOC-led.</li>
+              <li>10 percent are LGBTQIA-led.</li>
+            </ul>
+          </div>
+
+          <figure class="report-chart">
+            <img src="/assets/leadership-profiles.png" alt="Green lollipop chart on a white background showing the precentage of respondents identifying as Indigenous-led, BIPOC-led, woman-led, and LGBTQIA-led" />
+            <figcaption>Figure 1: Leadership Profile of Responding Organizations</figcaption>
+          </figure>
+
+          <p>
+            These organizations serve Indigenous communities, environmental and climate priorities, education initiatives, food systems programs, and social justice efforts. Environmental and climate organizations (65 percent) and organizations serving Indigenous or Tribal communities (61 percent) were among the most represented groups in the survey<sup class="report-citation" id="cite-3"><a href="#ref-3" aria-label="See reference 3">[3]</a></sup>.
+          </p>
+
+          <div class="report-stat-grid report-stat-grid--center">
+            <div class="report-stat">
+              <span class="report-stat__number">65%</span>
+              <span class="report-stat__label">environmental and climate organizations</span>
+            </div>
+            <div class="report-stat">
+              <span class="report-stat__number">61%</span>
+              <span class="report-stat__label">serve Indigenous or Tribal communities</span>
+            </div>
+          </div>
+
+          <div class="report-callout-group">
+            <div class="report-callout report-callout--center">
+              <p><strong>Overall, 82 percent of survey respondents meet at least one marginalized leadership definition.</strong></p>
+              <p>This profile is significant because organizations led by historically undercapitalized communities often have less access to flexible capital.</p>
+            </div>
+          </div>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              Government reimbursement systems are not designed for Tribal and grassroots organizations that operate with very limited reserves. Delays in payment force us to scale back services, take personal or organizational risks, or walk away from funding that was meant to help our communities. Fixing cash flow barriers is just as important as awarding the grants themselves.
+            </p>
+            <footer class="report-quote-attribution">— A Small Tribal Health and Human Services Organization</footer>
+          </blockquote>
+
+          <p>
+            The survey also highlights an important gap in existing research. Public audit data typically focuses on organizations receiving more than $750,000 in federal funding. However, according to the National Council of Nonprofits, 92 percent of nonprofit organizations in the United States operate with budgets under $1 million<sup class="report-citation" id="cite-4"><a href="#ref-4" aria-label="See reference 4">[4]</a></sup>. As a result, the experiences of smaller organizations are often underrepresented in existing evidence, making this an invisible issue that needs deeper research.
+          </p>
+          <p>
+            This is important because organizations with smaller budgets typically have less access to flexible capital, making them more vulnerable to the cash flow challenges associated with reimbursement-based funding.
+          </p>
+
+          <figure class="report-chart">
+            <img src="/assets/leadership-profiles.png" alt="Graphic showing a side-by-side comparison of smaller and larger nonprofits" />
+            <figcaption>Figure 2: Side-by-side comparison of how smaller and larger nonprofits are represented in existing data</figcaption>
+          </figure>
+
+          <div class="report-callout report-callout--center">
+              <p>
+                Among survey respondents, small organizations are well-represented.
+              </p>
+              <p>
+                27 percent had annual budgets of less than $250,000, 47 percent less than $1 million, and 82 percent less than $5 million.
+              </p>
+          </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--accent" id="survey-findings" aria-labelledby="survey-findings-title">
+          <h2 id="survey-findings-title" class="report-title--nowrap">Survey Findings</h2>
+
+          <p>
+            The survey findings reveal that cash flow instability in government-funded work is not an isolated organizational challenge but a systemic feature of reimbursement-based funding systems. Together, these findings illustrate how reimbursement-based funding structures create persistent financial pressures that affect program delivery, organizational stability, and participation in government-funded programs.
+          </p>
+
+          <p>
+            These findings also point to a broader gap in the financial infrastructure that supports government-funded work. While nonprofit organizations and Tribes are expected to implement publicly funded programs, many lack access to the working capital required to manage reimbursement cycles. As a result, organizations must rely on reserves, borrowing, or other stopgap measures to bridge funding gaps.
+          </p>
+
+          <div class="report-list-card">
+            <h3 class="report-list-card__title">Areas for Analysis</h3>
+            <ol class="report-numbered-list">
+              <li>Structural drivers of cash flow instability, including the prevalence of cash flow challenges associated with government funding.</li>
+              <li>Consequences for organizations managing cash flow instability, including programmatic, financial, and operational consequences.</li>
+              <li>Gaps in current systems that add to pressures and instability, including negative consequences of borrowing or opting out.</li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--sand" id="structural" aria-labelledby="structural-title">
+          <p class="report-kicker">Survey Findings: Structural Drivers</p>
+          <h2 id="structural-title" class="report-title--nowrap">Structural Drivers of Cash Flow Instability</h2>
+
+          <p>
+            The survey findings indicate that cash flow instability among nonprofit organizations and Tribes is driven by structural features of government funding systems rather than isolated organizational challenges. Many nonprofit organizations and Tribes rely heavily on government funding to implement programs, yet the majority of respondents have experienced cash flow challenges as a result of reimbursement-based funding structures that require them to cover costs in advance.
+          </p>
+
+          <p>
+            Even when funds are delivered on time, participants identify reimbursement-based funding structures as challenging. Payment delays and administrative delays are routine across federal, state, and county/local grants. These inefficiencies are often exacerbated during times of greatest need, when governments want to distribute funds to communities quickly.
+          </p>
+
+          <p>
+            When combined with administrative delays and complex reimbursement processes, these structures create persistent liquidity pressures for organizations responsible for delivering essential services.
+          </p>
+
+          <div class="report-list-card">
+            <h3 class="report-list-card__title">Structural Drivers of Cash Flow Instability</h3>
+            <ol class="report-numbered-list">
+              <li><strong>Government funding from federal, state, and county/local sources is core revenue for nonprofit organizations and Tribes.</strong></li>
+              <li><strong>Cash flow instability is widespread among organizations that receive government funding.</strong></li>
+              <li><strong>Common causes of cash flow instability include reimbursement-based funding structures and delays.</strong></li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="core-revenue" aria-labelledby="core-revenue-title">
+          <p class="report-kicker">Survey Findings: Structural Drivers</p>
+          <h2 id="core-revenue-title" class="report-title--nowrap">Government Funding Is Core Revenue</h2>
+
+          <p>
+            For respondents (n=51), government funding is not supplemental but a core source of revenue and financial sustainability. Most respondents reported receiving government funding within the past five years, and nearly half rely on it for more than half of their annual budgets. In some cases, government funding makes up 76 percent to 100 percent of their total budgets.
+          </p>
+
+          <div class="report-stat-grid">
+            <div class="report-stat">
+              <span class="report-stat__number">76%</span>
+              <span class="report-stat__label">received government funding within the past five years</span>
+            </div>
+            <div class="report-stat">
+              <span class="report-stat__number">45%</span>
+              <span class="report-stat__label">rely on government funding for more than half of their budget</span>
+            </div>
+            <div class="report-stat">
+              <span class="report-stat__number">12%</span>
+              <span class="report-stat__label">rely on government funding for 76-100% of their budget</span>
+            </div>
+          </div>
+
+          <p>
+            Respondents reported receiving funding from multiple levels of government, including federal, state, and local agencies. While 74 percent reported federal grants, many also receive state grants (67 percent) and county or local grants (45 percent). Among organizations receiving contracts, the distribution is even more concentrated at the state and local level, with county or local contracts (29 percent) and state contracts (19 percent) reported more frequently than federal contracts (17 percent).
+          </p>
+
+          <div class="report-callout report-callout--center">
+            <p><strong>While federal grants remain an important source of funding, state and county grants and contracts are also significant for nonprofit organizations and Tribes.</strong></p>
+          </div>
+
+          <p>
+            Survey findings show that government funding represents a substantial share of revenue for many respondents. Because this funding supports core operations, delays in reimbursement have immediate and material consequences. Organizations must continue delivering programs while absorbing the financial burden of those delays, and when multiple government-funded programs are affected, the strain on cash flow and operations intensifies.
+          </p>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="cash-flow" aria-labelledby="cash-flow-title">
+          <p class="report-kicker">Survey Findings: Structural Drivers</p>
+          <h2 id="cash-flow-title" class="report-title--nowrap">Cash Flow Instability Is Widespread</h2>
+
+          <p>
+            Among organizations receiving government funding (n=42), 83 percent report experiencing cash flow challenges related to government funding. These findings indicate that liquidity disruptions are not isolated incidents but a routine feature of reimbursement-based funding systems.
+          </p>
+
+          <figure class="report-chart">
+            <img src="/assets/83-percent.png" alt="Bar showing that 83.3 percent of organizations experienced challenges and 17.6 percent reported no challenges" />
+            <figcaption>Figure 4: Bar showing the percentage of organizations experiencing cash flow challenges</figcaption>
+          </figure>
+
+          <p>
+            Many organizations experience multiple overlapping liquidity disruptions associated with government reimbursement cycles.
+          </p>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              Many state grants have grant withholding where a portion of each invoice is withheld until the very end of the grant. This is also an issue that impacts cash flow. Also, some grants may allow for advances instead of reimbursements, but sometimes the administrative staff cost for pursuing the advances is not worth it because the process is too time-consuming and burdensome.
+            </p>
+            <footer class="report-quote-attribution">— A Large Environmental Organization in the Western U.S.</footer>
+          </blockquote>
+
+          <p>
+            This quote highlights how policy or regulatory changes that enable advances can create a misleading context for nonprofit organizations, Tribes, and funders. When advances are available, it can appear that cash flow challenges are less significant than they are. However, burdensome and slow processes for cash advances create similar barriers. Moreover, the complexity of managing these cash flow challenges requires nonprofit and Tribal leaders to invest large amounts of time working with their accounting teams to manage liquidity, reducing their ability to focus on other priorities and increasing stress.
+          </p>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="common-causes" aria-labelledby="common-causes-title">
+          <p class="report-kicker">Survey Findings: Structural Drivers</p>
+          <h2 id="common-causes-title" class="report-title--nowrap">Common Causes of Cash Flow Instability</h2>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              For an Indigenous-led grassroots organization like ours, the greatest barrier is rarely vision or capacity. It is timing. Most of our work responds to urgent community needs: protecting sacred sites, intervening in land-use decisions, responding to environmental harms, or mobilizing legal and legislative advocacy on compressed timelines. Recoverable grants would allow us to act when communities need us most, rather than waiting months for reimbursement-based funding or navigating high-risk bridge loans that place undue financial strain on our organization.
+            </p>
+            <footer class="report-quote-attribution">— An Indigenous-led Environmental Organization in the Southeastern U.S.</footer>
+          </blockquote>
+
+          <div class="report-clear"></div>
+
+          <div class="report-float-stat report-float-stat--causes">
+            <div class="report-stat-grid">
+              <div class="report-stat">
+                <span class="report-stat__number">86%</span>
+                <span class="report-stat__label">cite reimbursement-based funding as a cause of cash flow issues</span>
+              </div>
+            </div>
+          </div>
+<br>
+          <p>
+            Among those experiencing cash flow challenges related to government funding (n=35), respondents identified several common causes of cash flow instability: 91 percent cited payment delays, 86 percent cited reimbursement-based funding, and 80 percent cited administrative delays<sup class="report-citation" id="cite-2"><a href="#ref-2" aria-label="See reference 2">[2]</a></sup>. Together, these factors create persistent liquidity pressures for organizations responsible for delivering government-funded programs.
+          </p>
+
+          <div class="report-clear"></div>
+
+          <figure class="report-chart">
+            <img src="/assets/cash-flow-causes.png" alt="Horizontal bar chart showing payment delays, reimbursements, administrative delays, and other causes of cash flow instability" />
+            <figcaption>Figure 5: Horizontal bar chart showing the causes of cash flow instability</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--sand" id="consequences" aria-labelledby="consequences-title">
+          <p class="report-kicker">Survey Findings</p>
+          <h2 id="consequences-title" class="report-title--nowrap">Consequences for Organizations</h2>
+
+          <p>
+            The survey findings indicate that reimbursement-based funding structures shift significant financial risk from public institutions onto nonprofit organizations and Tribes responsible for implementing publicly funded programs. When payments are delayed, organizations must advance program costs while waiting for reimbursement, often with limited reserves or access to flexible capital.
+          </p>
+
+          <p>
+            The following findings examine how organizations respond to these liquidity gaps and how those responses destabilize programs, finances, and operations over both the short and long term. Organizations without sufficient liquidity to absorb reimbursement delays often face difficult choices, including delaying or cancelling critical programs that serve their communities.
+          </p>
+
+          <p>
+            Cash flow gaps associated with a single grant can create lasting consequences, including financial instability and staffing reductions. When organizations manage multiple reimbursement-based grants alongside other financial pressures, these effects can compound. In many cases, organizations are pushed into increasingly precarious financial positions as they take on costly debt or draw down limited unrestricted resources to cover reimbursable expenses.
+          </p>
+
+          <div class="report-list-card">
+            <h3 class="report-list-card__title">The Consequences</h3>
+            <ol class="report-numbered-list">
+              <li><strong>Cash flow challenges disrupt the delivery of essential programs and services.</strong></li>
+              <li><strong>Cash challenges put ongoing financial strain onto organizations with limited financial resources.</strong></li>
+              <li><strong>Cash flow challenges lead to long-term disruptions in operations, including staffing.</strong></li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="mission-impact" aria-labelledby="mission-impact-title">
+          <p class="report-kicker">Survey Findings: Consequences</p>
+          <h2 id="mission-impact-title" class="report-title--nowrap">Impact on Program Delivery</h2>
+
+          <p>
+            Cash flow instability disrupts program delivery. Programs must be delayed, reduced or cancelled due to cash flow challenges. In some cases, organizations decline funding opportunities altogether because they are unable to take on the cash flow burdens associated with reimbursement-based funding structures.
+          </p>
+
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges (n=35):</strong></p>
+            <ul class="report-stat-list">
+              <li>57 percent delayed work due to cash flow challenges.</li>
+              <li>54 percent reduced the scope of work due to cash flow challenges.</li>
+              <li>29 percent stopped work due to cash flow challenges.</li>
+              <li>23 percent declined funding due to cash flow challenges.</li>
+            </ul>
+          </div>
+
+          <figure class="report-chart">
+            <img src="/assets/program-consequences.png" alt="Chart showing delayed work, reduced scope of work, stopped work, and declined funding" />
+            <figcaption>Figure 6: Horizontal bar chart showing the impact of cash flow instability on program delivery</figcaption>
+          </figure>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              We have to be very careful in our planning and management strategies, and sometimes even have to consider whether or not we are able to take on a project that otherwise has large merit and fits well with our mission and the needs of those we serve, because we have no access to a funding source or a cash flow loan that makes the upfront cash flow requirements doable.
+            </p>
+            <footer class="report-quote-attribution">— Mid-Sized Organization Serving Indigenous Communities in the Western U.S.</footer>
+          </blockquote>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="financial-strain" aria-labelledby="financial-strain-title">
+          <p class="report-kicker">Survey Findings: Consequences</p>
+          <h2 id="financial-strain-title" class="report-title--nowrap">Financial Strain</h2>
+
+          <div class="report-float-icon report-float-icon--large">
+            <img src="/assets/financial-strain-icon.png" alt="" class="report-icon report-icon--large" />
+          </div>
+
+          <p>
+            When reimbursements are delayed, organizations must find a way to cover program expenses while waiting for their funds. These responses shift liquidity risk from public institutions to nonprofit organizations.
+          </p>
+
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges (n=35):</strong></p>
+            <ul class="report-stat-list">
+              <li>74 percent drew on reserves/savings.</li>
+              <li>40 percent took out a loan or credit.</li>
+              <li>20 percent drew on leaders’ personal finances or credit.</li>
+            </ul>
+          </div>
+
+          <p>
+            Drawing down reserves weakens long-term financial resilience, while borrowing introduces additional administrative and financial burdens. Critically, many organizations cannot use unrestricted resources to invest in capacity because they need to maintain an ample reserve to address cash flow challenges brought on by reimbursement structures. It is not unusual for leaders to use their personal credit or financial resources to keep organizations afloat.
+          </p>
+
+          <div class="report-clear"></div>
+
+          <figure class="report-chart">
+            <img src="/assets/financial-strain.png" alt="Vertical bar chart showing reserves or savings, loan or credit, and personal financing used to cover cash flow gaps" />
+            <figcaption>Figure 7: Vertical bar chart showing how organizations respond to cash flow gaps</figcaption>
+          </figure>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              [Our organization] has to pay our subcontractor and hold the debt, which we cannot do, or the subcontractor has to hold that debt until we are reimbursed and can pay them. This puts undue strain on businesses, many of them small, who still have to make payroll every two weeks even if they are not getting paid for the work.
+            </p>
+            <footer class="report-quote-attribution">— A Small Woman-led Environmental Organization</footer>
+          </blockquote>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="operational-impact" aria-labelledby="operational-impact-title">
+          <p class="report-kicker">Survey Findings: Consequences</p>
+          <h2 id="operational-impact-title" class="report-title--nowrap">Operational Impact</h2>
+
+          <div class="report-float-icon">
+            <img src="/assets/program-cuts-icon.png" alt="" class="report-icon" />
+          </div>
+
+          <p>
+            Beyond these immediate financial responses, many organizations reported broader operational responses with long-term consequences. When organizations delay programs, reduce staff capacity, or postpone payments to vendors, the effects extend beyond a single grant cycle. Over time, these disruptions can weaken organizational stability, reduce program continuity, and limit the ability of nonprofit organizations and Tribes to respond effectively to community needs.
+          </p>
+
+          <div class="report-callout">
+            <p><strong>Among organizations experiencing cash flow challenges (n=35):</strong></p>
+            <ul class="report-stat-list">
+              <li>49 percent cut programs.</li>
+              <li>26 percent delayed payments.</li>
+              <li>23 percent reduced staff.</li>
+              <li>17 percent laid off staff.</li>
+            </ul>
+          </div>
+
+          <div class="report-clear"></div>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              We needed money for land acquisition, had it delayed, and had to dip into other program area funding. We have lost staff and talent as a direct result.
+            </p>
+            <footer class="report-quote-attribution">— A Small Indigenous-led Organization in the Southeastern U.S.</footer>
+          </blockquote>
+
+          <figure class="report-chart">
+            <img src="/assets/mission-consequences.png" alt="Vertical bar chart showing cut programs, delayed payments, reduced staff, and laid off staff" />
+            <figcaption>Figure 8: Vertical bar chart showing the operational consequences of cash flow instability</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--sand" id="systems" aria-labelledby="systems-title">
+          <p class="report-kicker">Survey Findings</p>
+          <h2 id="systems-title" class="report-title--nowrap">Gaps in the System</h2>
+
+          <div class="report-float-icon report-float-icon--large">
+            <img src="/assets/systems-gaps-icon.png" alt="" class="report-icon report-icon--large" />
+          </div>
+
+          <p>
+            The survey findings highlight broader systemic gaps in the financing structures that support government-funded work.
+          </p>
+
+          <p>
+            When reimbursement systems create liquidity gaps, organizations must rely on imperfect tools to manage cash flow. Some attempt to bridge these gaps through borrowing, while others reduce or decline participation in government programs altogether.
+          </p>
+
+          <p>
+            These responses can limit the effectiveness of government funding and reduce access to public programs for communities. Ultimately, less funding flows to and remains in the communities that may need it most.
+          </p>
+
+          <div class="report-clear"></div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="declining-funding" aria-labelledby="declining-funding-title">
+          <p class="report-kicker">Survey Findings: Gaps in the System</p>
+          <h2 id="declining-funding-title" class="report-title--nowrap">Organizations Are Opting Out</h2>
+
+          <p>
+            For some organizations, the financial risk associated with reimbursement-based funding becomes significant enough that they reduce or decline participation in government programs.
+          </p>
+          <p>
+            Organizations already managing one or more government-funded contracts are often unable to take on the additional cash flow burden associated with new awards. Some decline additional funding when it is offered, while others do not apply for new opportunities at all. Still others are effectively excluded from government funding altogether.
+          </p>
+          <p>
+            Among survey respondents, 96 percent of organizations with budgets over $1,000,000 (n=26) received some government funding, while only 33 percent of organizations with budgets under $50,000 (n=6) did. These findings suggest that smaller organizations are less likely to apply for or receive funding, likely due in part to the financial risks associated with reimbursement-based structures. These patterns reflect a structural dynamic in which participation is conditioned on access to upfront capital.
+          </p>
+          <p>Without access to flexible working capital, organizations must either absorb financial risk or forgo participation altogether.</p>
+
+
+          <div class="report-callout report-callout--center">
+            <p>
+                23 percent of organizations experiencing cash flow challenges (n=35) are declining some government funding due to these challenges.
+              </p>
+              <p>
+                This is significant, but it does not capture the number of organizations that do not receive nor apply for funding at all.
+              </p>
+          </div>
+
+          <p>When organizations are shut out or choose to opt out, public funds are directed to those best equipped to manage cash flow rather than those best positioned to deliver programs and serve intended beneficiaries. Reimbursement-based systems shape not only how funding is delivered, but which organizations are able to participate at all.</p>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="respondent-voices" aria-labelledby="respondent-voices-title">
+          <p class="report-kicker">Survey Findings: Gaps in the System</p>
+          <h2 id="respondent-voices-title" class="report-title--nowrap">Respondent Voices</h2>
+
+          <div class="report-quote-grid report-quote-grid--center">
+            <blockquote class="report-quote-card report-quote-card--featured">
+              <p>
+                In more than one case we had existing contracts but had to suspend work pending payment, which was running 11 months behind due to audit procedures. In several cases we negotiated a reduction in scope to help manage cash flow. In many cases we have refused funding for projects that we either had already been awarded or would likely have been awarded to avoid cash flow issues.
+              </p>
+              <footer class="report-quote-attribution">— A Large Economic Development Organization in the Western U.S.</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                Numerous opportunities were affected, including funding for participation in collaborative planning and forgoing landscape-scale restoration proposals.
+              </p>
+              <footer class="report-quote-attribution">— A Federally Recognized Tribe</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                We cut back on the federal contract work due to issues with delayed payments, uncertainty of contract funding, and increasing demands on reporting. These reporting demands eventually led us to cancel our contract.
+              </p>
+              <footer class="report-quote-attribution">— A Small Indigenous-led Organization in Alaska</footer>
+            </blockquote>
+
+          <div class="report-quote-grid report-quote-grid--center">
+            <blockquote class="report-quote-card report-quote-card--featured">
+              <p>
+                We decided not to apply for certain grants due to high initial costs and the potential for loss of funds due to federal uncertainty. We reduced the scope of work on a particular grant due to lack of organizational funds to support the full project before reimbursement occurred. We also delayed work for several months due to federal and state delays in continuing funding approvals and reimbursements.
+              </p>
+              <footer class="report-quote-attribution">— A Small Tribal Organization in the Western U.S.</footer>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--tint" id="borrowing" aria-labelledby="borrowing-title">
+          <p class="report-kicker">Survey Findings: Gaps in the System</p>
+          <h2 id="borrowing-title" class="report-title--nowrap">Borrowing Is a Costly Solution</h2>
+
+          <p>
+            Some organizations attempt to manage reimbursement delays by borrowing. However, survey findings indicate that debt-based solutions frequently introduce additional challenges. Organizations that borrowed (n=11) report negative consequences.
+          </p>
+
+          <div class="report-inline-callout">
+            <div class="report-stat-grid report-stat-grid--two">
+              <div class="report-callout">
+                <p><strong>Operational and financial strain</strong></p>
+                <ul class="report-stat-list">
+                  <li>73 percent: More admin burden</li>
+                  <li>64 percent: Financial risk/instability</li>
+                  <li>64 percent: Reduced reserves</li>
+                  <li>64 percent: Reduced programs</li>
+                </ul>
+              </div>
+              <div class="report-callout">
+                <p><strong>Additional organizational consequences</strong></p>
+                <ul class="report-stat-list">
+                  <li>27 percent: Reputational risk</li>
+                  <li>27 percent: Reduced capacity</li>
+                  <li>18 percent: Limited opportunities</li>
+                  <li>9 percent: Governance strain</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <figure class="report-chart">
+            <img src="/assets/borrowing.png" alt="Horizontal bar chart showing administrative burden, increased risk or instability, reduced reserves, reduced programs, reputational risk, reduced capacity, limited opportunities, and governance strain as consequences of borrowing" />
+            <figcaption>Figure 9: Horizontal bar chart showing the negative consequences of borrowing for nonprofits and Tribes</figcaption>
+          </figure>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              We spent nearly $8,500 last year on interest expenses, so having access to a zero-interest loan would help us immensely. Every single dollar makes a difference, even for organizations like ours that have a budget over $1.5 million, when most of our funds are restricted and nearly 50% of our funding is from government grants that are paid on either a monthly or quarterly reimbursement basis.
+            </p>
+            <footer class="report-quote-attribution">— A Mid-sized Health and Human Services Organization in the Western U.S.</footer>
+          </blockquote>
+
+          <div class="report-callout report-callout--center">
+            <p><strong>No organization reported borrowing without negative consequences.</strong></p>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--accent" id="path-forward" aria-labelledby="path-forward-title">
+          <p class="report-kicker">Practical Path Forward</p>
+          <h2 id="path-forward-title" class="report-title--nowrap">Recoverable Grants</h2>
+
+          <blockquote class="report-quote">
+            <p>
+              We are so small. I wonder if we might try to access more government funding if we knew that we can access a debt-free bridge loan.
+            </p>
+            <footer class="report-quote-attribution">— A Small Indigenous-led Arts Organization in the Western U.S.</footer>
+          </blockquote>
+
+          <div class="report-float-icon">
+            <img src="/assets/recoverable-icon.png" alt="" class="report-icon" />
+          </div>
+
+          <p>
+            Recoverable grants are a philanthropic tool that provide funding with the expectation that funds will be repaid once certain conditions are met. They are already deployed by donor-advised funds and private foundations across a wide range of contexts for many purposes. ReFund applies this tool in a specific way to address the cash flow challenges created by reimbursement-based government funding.
+          </p>
+
+          <p>
+            Recoverable grants offer a practical non-extractive alternative to traditional financing options. Recoverable grants provide organizations with zero-interest working capital that is repaid once government reimbursements are received. Unlike other low cost alternatives, recoverable grants can be implemented with limited administrative overhead and with limited disruptions to operational or financial systems.
+          </p>
+          <p>
+            Recoverable grants align financing with the cash flow realities of government-funded programs while avoiding the risks associated with debt. Because recoverable grant funds are repaid once reimbursements are received, philanthropic capital can be recycled to support many organizations over time.
+          </p>
+
+          <div class="report-clear"></div>
+
+          <div class="report-callout">
+            <p><strong>Survey respondents consistently described recoverable grants as a tool that could:</strong></p>
+            <ul class="report-stat-list">
+              <li>reduce financial precarity</li>
+              <li>expand access to government funding</li>
+              <li>strengthen long-term planning</li>
+              <li>allow organizations to focus on programs rather than cash flow management</li>
+            </ul>
+          </div>
+
+          <figure class="report-chart">
+            <img src="/assets/recoverable-grants-diagram.png" alt="Diagram illustrating how recoverable grants bridge government reimbursement delays" />
+            <figcaption>Figure 10: Recoverable grants provide zero-interest bridge capital aligned with reimbursement cycles</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--accent" id="voices-path" aria-labelledby="voices-path-title">
+          <p class="report-kicker">A Practical Path Forward</p>
+          <h2 id="voices-path-title" class="report-title--nowrap">Respondent Voices</h2>
+
+          <div class="report-quote-grid report-quote-grid--center">
+            <blockquote class="report-quote-card report-quote-card--featured">
+              <p>
+                It would move us from a state of perpetual financial precarity, juggling restrictive grants, toward becoming a more resilient, innovative, and sustainable organization. We could focus our energy on creating maximum impact, not just surviving the next funding cycle.
+              </p>
+              <footer class="report-quote-attribution">— Small Indigenous-led Youth Development Organization</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                It would allow us to implement our projects right away without hesitation. It would allow us to create a continuum of service without taking pauses to replenish funds to front the expenses.
+              </p>
+              <footer class="report-quote-attribution">— Small Environmental Organization in Hawai’i</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                Access to zero-interest financing would give us the ability to access programs that we otherwise would likely pass on to serve our residents.
+              </p>
+              <footer class="report-quote-attribution">— Large Economic Development Organization in the Western U.S.</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                It would be a game-changer for us. We currently spend a tremendous amount of effort, planning time, and worry in order to manage the cash flow needs associated with reimbursable grants and contracts. Removing that barrier would open up many possibilities and allow us to increase our impact and focus our time and effort on the important work rather than on constantly monitoring, assessing, and scrambling to avoid cash flow setbacks.
+              </p>
+              <footer class="report-quote-attribution">— Mid-sized Indigenous-led Organization in the Western U.S.</footer>
+            </blockquote>
+
+            <blockquote class="report-quote-card">
+              <p>
+                Ultimately, access to zero-interest, recoverable capital would strengthen our financial resilience, expand our reach, and enable us to lead proactively rather than reactively, ensuring that frontline communities are not left waiting for justice because of funding mechanics that were never designed with them in mind.
+              </p>
+              <footer class="report-quote-attribution">— Small Indigenous-led Organization in the Southeastern U.S.</footer>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--accent" id="case-study" aria-labelledby="case-study-title">
+          <p class="report-kicker">A Practical Path Forward</p>
+          <h2 id="case-study-title" class="report-title--nowrap">Recoverable Grants: Maui Case Study</h2>
+
+          <div class="report-case-study-layout">
+            <figure class="report-case-study-diagram">
+              <img src="/assets/case-study-flow.png" alt="Diagram showing how the recoverable grant filled cash flow gaps" />
+            </figure>
+
+            <p>
+              Reimbursement delays in Maui County created a six-month cash flow gap for Ka’Ehu, an organization implementing a $597,000 county-funded program. Although the funding was secured, delayed payments required the organization to cover approximately $120,000 in operating costs before reimbursement would arrive.
+            </p>
+
+            <p>
+              The impacts were immediate. Services were halted, staff hours were reduced, and employees were furloughed or laid off. Organizational momentum stalled during a period of heightened community need. Additional borrowing was not a viable option, as the organization already carried a line of credit and could not take on further financial risk.
+            </p>
+
+            <p>
+              A $75,000 recoverable grant provided the working capital needed to bridge the delay. ReFund connected Ka’Ehu with a donor-advised fund that could provide this grant. With this support, the organization was able to rehire staff, restore services, and resume operations without disruption. Programs ran continuously, and leadership attention shifted back to service delivery. By avoiding additional borrowing, the organization prevented an estimated $5,000 to $10,000 in interest and fees while preserving limited unrestricted resources. At the same time, the recoverable grant helped stabilize nearly $600,000 in public funding.
+            </p>
+          </div>
+
+          <figure class="report-case-study-photo">
+            <img src="/assets/kaehu.png" alt="Photo showing participants in Kaʻehu's work" />
+          </figure>
+
+          <blockquote class="report-quote-card report-quote-card--featured">
+            <p>
+              Without a third-party organization like ReFund, operations can be halted, and those in need don’t receive support.
+            </p>
+            <footer class="report-quote-attribution">— Ka’Ehu</footer>
+          </blockquote>
+
+          <p>
+            This case illustrates a broader structural challenge: even when funding is committed, reimbursement delays shift financial risk onto organizations with limited access to capital. Recoverable grants provide timely, zero-interest working capital that allows services to continue while public funds are delayed.
+          </p>
+
+          <p>
+            A $75,000 recoverable grant enabled KaʻEhu to bridge a $120,000 cash gap, prevent further layoffs, and sustain essential services.
+          </p>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--plain" id="scaling-solutions" aria-labelledby="scaling-solutions-title">
+          <p class="report-kicker">Conclusions</p>
+          <h2 id="scaling-solutions-title" class="report-title--nowrap">Scaling Solutions to the Cash Flow Crisis</h2>
+
+          <div class="report-float-icon">
+            <img src="/assets/scaling-icon.png" alt="" class="report-icon" />
+          </div>
+
+          <p>
+            The findings presented in this report demonstrate that reimbursement-based funding systems create persistent cash flow instability for nonprofit organizations and Tribes delivering publicly funded programs. Nonprofit organizations and Tribes must carry the financial burden of publicly funded programs while waiting for reimbursement.
+          </p>
+
+          <p>
+            These challenges are structural rather than incidental. Payment delays, reimbursement requirements, and administrative processes combine to shift financial risk onto organizations with limited access to flexible capital.
+          </p>
+
+          <p>
+            Addressing this challenge will require purpose-built tools that provide working capital aligned with government reimbursement cycles. While large-scale reform of reimbursement systems would be welcome, it is likely to be slow even if it does occur. Existing financing tools such as loans or lines of credit provide short-term liquidity but frequently introduce additional risks, costs, and administrative burdens.
+          </p>
+
+          <p>
+            These findings highlight the need for dedicated infrastructure designed to provide working capital aligned with government reimbursement cycles.
+          </p>
+
+          <p>
+            Platforms that efficiently deploy zero-interest capital in the form of recoverable grants can reduce administrative complexity for nonprofit organizations while ensuring that bridge capital is delivered quickly and predictably. Expanding this infrastructure would stabilize cash flow for organizations implementing public programs and strengthen the effectiveness of government-funded work and the nonprofit sector.
+          </p>
+          <p>
+            Ultimately, reducing reimbursement-driven cash flow instability will determine whether organizations serving frontline communities can act when their communities need them.
+          </p>
+
+          <div class="report-clear"></div>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-section report-section--plain report-references" id="references" aria-labelledby="references-title">
+          <p class="report-kicker">References</p>
+          <h2 id="references-title" class="report-title--nowrap">References</h2>
+
+          <ol class="report-references-list">
+            <li id="ref-1">
+              <span class="report-reference-number">[1]</span>
+              <span class="report-reference-text">Placeholder reference text for Urban Institute source.</span>
+              <a class="report-reference-backlink" href="#cite-1" aria-label="Back to citation 1">↩</a>
+            </li>
+            <li id="ref-2">
+              <span class="report-reference-number">[2]</span>
+              <span class="report-reference-text">Placeholder reference text for survey findings on payment delays, reimbursement-based funding, and administrative delays.</span>
+              <a class="report-reference-backlink" href="#cite-2" aria-label="Back to citation 2">↩</a>
+            </li>
+            <li id="ref-3">
+              <span class="report-reference-number">[3]</span>
+              <span class="report-reference-text">Placeholder reference text for respondent profile representation data.</span>
+              <a class="report-reference-backlink" href="#cite-3" aria-label="Back to citation 3">↩</a>
+            </li>
+            <li id="ref-4">
+              <span class="report-reference-number">[4]</span>
+              <span class="report-reference-text">Placeholder reference text for National Council of Nonprofits budget-size statistic.</span>
+              <a class="report-reference-backlink" href="#cite-4" aria-label="Back to citation 4">↩</a>
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="report-panel">
+        <section class="report-back" id="report-contact" aria-labelledby="report-contact-title">
+          <img src="/assets/refund-logo.png" alt="ReFund logo - seedling in leaf" />
+          <h2 id="report-contact-title" class="report-title--nowrap">Contact</h2>
+          <a href="https://forms.gle/hffd39fyrjGEtBPH7" target="_blank" rel="noopener noreferrer" class="btn">
+            Contact ReFund
+          </a>
+          <p><a href="https://recoverablegrants.org/">recoverablegrants.org</a></p>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="/#top" class="footer-logo">
+            <img src="/assets/refund-logo-notext.png" alt="ReFund logo - seedling in leaf" />
+          </a>
+          <p class="footer-brand-text">
+            ReFund provides zero-cost recoverable grants so nonprofits can do government-funded work.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="/#challenge">The Challenge</a></li>
+            <li><a href="/#solution">The Solution</a></li>
+            <li><a href="/#how-it-works">How It Works</a></li>
+            <li><a href="/#about">About ReFund</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>More</h4>
+          <ul class="footer-links">
+            <li><a href="/impact/index.html">Impact Stories</a></li>
+            <li><a href="/insights/index.html">Insights</a></li>
+            <li><a href="/funders/index.html">Resources for Funders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="/#contact">Contact Form</a></li>
+            <li>
+              <a href="https://www.linkedin.com/company/therefund/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        &copy; 2026 ReFund. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const header = document.querySelector('.site-header');
+      const nav = document.getElementById('primary-nav');
+      const btn = document.getElementById('nav-toggle-btn');
+
+      if (!header || !nav || !btn) return;
+
+      let scrollY = 0;
+
+      function isOpen() {
+        return header.classList.contains('nav-open');
+      }
+
+      function lockScroll() {
+        scrollY = window.scrollY || 0;
+        document.body.classList.add('nav-lock');
+        document.body.style.top = `-${scrollY}px`;
+      }
+
+      function unlockScroll() {
+        document.body.classList.remove('nav-lock');
+        const y = Math.abs(parseInt(document.body.style.top || '0', 10)) || scrollY;
+        document.body.style.top = '';
+        window.scrollTo(0, y);
+      }
+
+      function openMenu() {
+        header.classList.add('nav-open');
+        btn.setAttribute('aria-label', 'Close menu');
+        btn.setAttribute('aria-expanded', 'true');
+        lockScroll();
+      }
+
+      function closeMenu() {
+        header.classList.remove('nav-open');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.setAttribute('aria-expanded', 'false');
+        unlockScroll();
+      }
+
+      function toggleMenu() {
+        if (isOpen()) closeMenu();
+        else openMenu();
+      }
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (a) closeMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!isOpen()) return;
+        const clickedInsideNav = nav.contains(e.target);
+        const clickedButton = btn.contains(e.target);
+        if (!clickedInsideNav && !clickedButton) closeMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) closeMenu();
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900 && isOpen()) closeMenu();
+      });
+
+      closeMenu();
+    })();
+
+    const reportJump = document.getElementById('report-jump-select');
+
+    if (reportJump) {
+      reportJump.addEventListener('change', function () {
+        const target = document.querySelector(this.value);
+        if (!target) return;
+
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    }
+  </script>
+</body>
+</html>
