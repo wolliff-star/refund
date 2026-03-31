@@ -856,10 +856,6 @@
   text-decoration: underline;
 }
 
-/* ================================
-   BACK SECTION
-================================ */
-
 .report-back {
   background: var(--color-text-main);
   color: var(--color-white);
@@ -905,10 +901,6 @@
 .report-back p a {
   color: var(--color-brand-green);
 }
-
-/* ================================
-   RESPONSIVE
-================================ */
 
 @media (max-width: 900px) {
   .report-toc {
