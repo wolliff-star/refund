@@ -344,10 +344,57 @@
 }
 
 .report-stat-grid {
+  --report-stat-columns: 3;
+  --report-stat-gap: 16px;
+  --report-stat-card-width: 220px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(var(--report-stat-columns), minmax(0, 1fr));
+  gap: var(--report-stat-gap);
   margin: 28px 0 32px;
+}
+
+.report-stat-grid--one {
+  --report-stat-columns: 1;
+}
+
+.report-stat-grid--two {
+  --report-stat-columns: 2;
+}
+
+.report-stat-grid--three {
+  --report-stat-columns: 3;
+}
+
+.report-stat-grid--center,
+.report-stat-grid--centered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--report-stat-gap);
+  width: 100%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.report-stat-grid--center .report-stat,
+.report-stat-grid--centered .report-stat {
+  flex: 0 1 var(--report-stat-card-width);
+  width: min(100%, var(--report-stat-card-width));
+  max-width: var(--report-stat-card-width);
+  margin: 0;
+  text-align: center;
+}
+
+.report-stat-grid--two.report-stat-grid--center,
+.report-stat-grid--two.report-stat-grid--centered {
+  --report-stat-card-width: 220px;
+}
+
+.report-stat-grid--one.report-stat-grid--center,
+.report-stat-grid--one.report-stat-grid--centered {
+  --report-stat-card-width: 280px;
 }
 
 .report-stat {
@@ -375,21 +422,6 @@
   color: var(--color-text-main);
   line-height: 1.35;
   text-align: inherit;
-}
-
-.report-stat-grid--center {
-  justify-content: center;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.report-stat-grid--center .report-stat {
-  text-align: center;
-}
-
-.report-stat-grid--center {
-  place-content: center;
 }
 
 .report-list,
@@ -964,6 +996,18 @@
   .report-callout-group,
   .report-inline-callout .report-stat-grid--two {
     grid-template-columns: 1fr;
+  }
+
+  .report-stat-grid--center,
+  .report-stat-grid--centered {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report-stat-grid--center .report-stat,
+  .report-stat-grid--centered .report-stat {
+    width: 100%;
+    max-width: 320px;
   }
 
   .report-quote-card--featured {
