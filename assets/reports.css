@@ -1380,3 +1380,79 @@
     text-decoration: none;
   }
 }
+
+/* =========================================
+   v6 layout corrections
+========================================= */
+
+/* Tighten list-card top spacing */
+.report-list-card {
+  padding-top: 8px;
+}
+
+.report-list-card__title {
+  margin-top: 0;
+  margin-bottom: 4px;
+  line-height: 1.02;
+}
+
+.report-list-card__title::after {
+  margin-top: 6px;
+}
+
+/* Keep numbered-list badges and text from collapsing together */
+.report-list-card .report-numbered-list {
+  margin: 0;
+  padding-top: 0;
+}
+
+.report-list-card .report-numbered-list li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: start;
+  padding-left: 0;
+  margin-bottom: 8px;
+  min-height: 36px;
+  line-height: 1.4;
+}
+
+.report-list-card .report-numbered-list li::before {
+  position: static;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+}
+
+.report-list-card .report-numbered-list li strong {
+  display: block;
+  margin: 2px 0 0;
+  line-height: 1.35;
+}
+
+/* Respondent voices: keep quote content visually centered */
+.report-quote-grid--center .report-quote-card,
+.report-quote-grid--center .report-quote-card--featured {
+  justify-content: center;
+}
+
+.report-quote-grid--center .report-quote-card p,
+.report-quote-grid--center .report-quote-card--featured p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .report-list-card {
+    padding-top: 10px;
+  }
+
+  .report-list-card .report-numbered-list li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 10px;
+  }
+
+  .report-list-card .report-numbered-list li::before {
+    width: 34px;
+    height: 34px;
+  }
+}
