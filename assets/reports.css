@@ -1586,3 +1586,24 @@
     display: block;
   }
 }
+
+/* Recoverable Grants icon: larger */
+#path-forward .report-float-icon {
+  width: 220px;
+  margin: 0 0 18px 28px;
+}
+
+#path-forward .report-icon {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  #path-forward .report-float-icon {
+    width: 140px;
+    margin: 0 auto 16px;
+    float: none;
+  }
+}
