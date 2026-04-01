@@ -1467,3 +1467,16 @@
 .report-list-card__content {
   padding-bottom: 16px;
 }
+
+/* =========================================
+   SPACING BELOW SECTION DIVIDER LINE
+========================================= */
+
+.report-section h2::after {
+  margin-bottom: 10px;
+}
+
+/* Ensure list doesn't sit too tight under the line */
+.report-numbered-list {
+  margin-top: 10px;
+}
