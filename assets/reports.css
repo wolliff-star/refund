@@ -471,7 +471,7 @@
 
 .report-list-card {
   margin: 24px 0;
-  padding: clamp(16px, 2.2vw, 22px) clamp(18px, 2.6vw, 24px);
+  padding: clamp(10px, 1.4vw, 14px) clamp(18px, 2.6vw, 24px) clamp(14px, 1.8vw, 18px);
   background: var(--color-white);
   border: 1px solid var(--report-border);
   border-radius: 22px;
@@ -482,8 +482,8 @@
   font-family: var(--font-heading);
   font-size: clamp(1.5rem, 2.3vw, 1.9rem);
   color: var(--color-text-main);
-  margin: 0 0 8px;
-  line-height: 1.1;
+  margin: 0 0 6px;
+  line-height: 1.05;
 }
 
 .report-list-card__title::after {
@@ -538,6 +538,16 @@
 
 .report-callout--left {
   text-align: left;
+}
+
+/* Respondent Profile callout fixes */
+#profile .report-callout-group .report-callout {
+  text-align: left;
+}
+
+#profile .report-stat-grid--two.report-stat-grid--center,
+#profile .report-stat-grid--two.report-stat-grid--centered {
+  justify-content: center;
 }
 
 
@@ -784,6 +794,7 @@
 
 .report-quote-grid--center .report-quote-card {
   align-items: stretch;
+  justify-content: center;
   text-align: center;
   min-height: 220px;
 }
@@ -794,6 +805,7 @@
 }
 
 .report-quote-grid--center .report-quote-card--featured {
+  justify-content: center;
   min-height: 200px;
 }
 
