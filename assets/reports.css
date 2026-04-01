@@ -1456,3 +1456,14 @@
     height: 34px;
   }
 }
+
+/* Balance bottom padding in numbered list cards */
+.report-numbered-list,
+.report-list-card {
+  padding-bottom: 20px; /* adjust to 18–24px if needed */
+}
+
+/* If your list cards use an inner wrapper */
+.report-list-card__content {
+  padding-bottom: 16px;
+}
