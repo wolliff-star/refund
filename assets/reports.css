@@ -1607,3 +1607,36 @@
     float: none;
   }
 }
+
+/* =========================================
+   RECOVERABLE GRANTS ICON — ACTUAL OVERRIDE
+========================================= */
+
+#path-forward .report-float-icon {
+  float: right;
+  width: 220px !important;
+  max-width: 220px !important;
+  margin: 0 0 18px 28px !important;
+}
+
+#path-forward .report-float-icon .report-icon {
+  display: block;
+  width: 220px !important;
+  max-width: 220px !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  #path-forward .report-float-icon {
+    float: none !important;
+    width: 140px !important;
+    max-width: 140px !important;
+    margin: 20px auto !important;
+  }
+
+  #path-forward .report-float-icon .report-icon {
+    width: 140px !important;
+    max-width: 140px !important;
+  }
+}
