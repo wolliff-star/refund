@@ -1550,3 +1550,39 @@
     max-width: 320px;
   }
 }
+
+/* =========================================
+   RECOVERABLE GRANTS ICON — FORCE SCALE
+========================================= */
+
+#path-forward .report-float-icon {
+  max-width: 180px;   /* increase overall footprint */
+}
+
+#path-forward .report-float-icon img,
+#path-forward .report-float-icon .report-icon {
+  width: 180px !important;
+  max-width: 180px !important;
+  height: auto;
+  display: block;
+}
+
+/* tighten wrap so text flows cleanly */
+#path-forward .report-float-icon {
+  margin: 0 0 12px 20px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  #path-forward .report-float-icon img,
+  #path-forward .report-float-icon .report-icon {
+    width: 120px !important;
+    max-width: 120px !important;
+  }
+
+  #path-forward .report-float-icon {
+    float: none;
+    margin: 0 auto 16px;
+    display: block;
+  }
+}
