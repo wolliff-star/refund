@@ -448,10 +448,10 @@
 
 .report-list-card__title {
   font-family: var(--font-heading);
-  font-size: clamp(1.36rem, 2.05vw, 1.7rem);
+  font-size: clamp(1.5rem, 2.3vw, 1.9rem);
   color: var(--color-text-main);
-  margin: 0 0 10px;
-  line-height: 1.15;
+  margin: 0 0 8px;
+  line-height: 1.1;
 }
 
 .report-list-card__title::after {
@@ -469,9 +469,16 @@
 }
 
 .report-list-card .report-numbered-list li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   min-height: 0;
-  line-height: 1.45;
+  line-height: 1.4;
+  padding-left: 48px;
+}
+
+.report-list-card .report-numbered-list li strong {
+  display: inline;
+  margin: 0;
+  line-height: inherit;
 }
 
 .report-list-card .report-numbered-list li:last-child {
@@ -824,16 +831,18 @@
 
 .report-callout-group {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 320px));
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   justify-content: center;
   align-items: stretch;
-  max-width: 680px;
-  margin: 24px auto;
+  max-width: 100%;
+  margin: 24px 0;
 }
 
 .report-callout-group .report-callout {
   margin: 0;
+  width: 100%;
+  max-width: none;
 }
 
 .report-callout-group .report-callout--center {
@@ -1180,8 +1189,9 @@
   }
 
   .report-list-card__title {
-    font-size: 14pt;
-    margin-bottom: 8pt;
+    font-size: 16pt;
+    margin-bottom: 6pt;
+    line-height: 1.1;
   }
 
   .report-chart {
