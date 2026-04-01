@@ -344,57 +344,10 @@
 }
 
 .report-stat-grid {
-  --report-stat-columns: 3;
-  --report-stat-gap: 16px;
-  --report-stat-card-width: 220px;
   display: grid;
-  grid-template-columns: repeat(var(--report-stat-columns), minmax(0, 1fr));
-  gap: var(--report-stat-gap);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   margin: 28px 0 32px;
-}
-
-.report-stat-grid--one {
-  --report-stat-columns: 1;
-}
-
-.report-stat-grid--two {
-  --report-stat-columns: 2;
-}
-
-.report-stat-grid--three {
-  --report-stat-columns: 3;
-}
-
-.report-stat-grid--center,
-.report-stat-grid--centered {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  gap: var(--report-stat-gap);
-  width: 100%;
-  max-width: none;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.report-stat-grid--center .report-stat,
-.report-stat-grid--centered .report-stat {
-  flex: 0 1 var(--report-stat-card-width);
-  width: min(100%, var(--report-stat-card-width));
-  max-width: var(--report-stat-card-width);
-  margin: 0;
-  text-align: center;
-}
-
-.report-stat-grid--two.report-stat-grid--center,
-.report-stat-grid--two.report-stat-grid--centered {
-  --report-stat-card-width: 220px;
-}
-
-.report-stat-grid--one.report-stat-grid--center,
-.report-stat-grid--one.report-stat-grid--centered {
-  --report-stat-card-width: 280px;
 }
 
 .report-stat {
@@ -422,6 +375,17 @@
   color: var(--color-text-main);
   line-height: 1.35;
   text-align: inherit;
+}
+
+.report-stat-grid--center {
+  justify-content: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.report-stat-grid--center .report-stat {
+  text-align: center;
 }
 
 .report-list,
@@ -471,7 +435,7 @@
 
 .report-list-card {
   margin: 24px 0;
-  padding: clamp(10px, 1.4vw, 14px) clamp(18px, 2.6vw, 24px) clamp(14px, 1.8vw, 18px);
+  padding: clamp(16px, 2.2vw, 22px) clamp(18px, 2.6vw, 24px);
   background: var(--color-white);
   border: 1px solid var(--report-border);
   border-radius: 22px;
@@ -480,10 +444,10 @@
 
 .report-list-card__title {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 2.3vw, 1.9rem);
+  font-size: clamp(1.28rem, 1.95vw, 1.55rem);
   color: var(--color-text-main);
-  margin: 0 0 6px;
-  line-height: 1.05;
+  margin: 0 0 12px;
+  line-height: 1.2;
 }
 
 .report-list-card__title::after {
@@ -501,16 +465,8 @@
 }
 
 .report-list-card .report-numbered-list li {
-  margin-bottom: 6px;
-  min-height: 0;
-  line-height: 1.4;
-  padding-left: 48px;
-}
-
-.report-list-card .report-numbered-list li strong {
-  display: inline;
-  margin: 0;
-  line-height: inherit;
+  margin-bottom: 10px;
+  min-height: 32px;
 }
 
 .report-list-card .report-numbered-list li:last-child {
@@ -535,21 +491,6 @@
 .report-callout--center {
   text-align: center;
 }
-
-.report-callout--left {
-  text-align: left;
-}
-
-/* Respondent Profile callout fixes */
-#profile .report-callout-group .report-callout {
-  text-align: left;
-}
-
-#profile .report-stat-grid--two.report-stat-grid--center,
-#profile .report-stat-grid--two.report-stat-grid--centered {
-  justify-content: center;
-}
-
 
 .report-callout p:last-child,
 .report-callout ul:last-child {
@@ -697,22 +638,6 @@
   text-align: center;
 }
 
-.report-quote-card .report-quote-attribution {
-  width: 100%;
-  align-self: stretch;
-  text-align: right;
-}
-
-.report-quote-grid--center .report-quote-card,
-.report-quote-grid--center .report-quote-card--featured {
-  align-items: center;
-}
-
-.report-quote-grid--center .report-quote-card .report-quote-attribution,
-.report-quote-grid--center .report-quote-card--featured .report-quote-attribution {
-  text-align: center;
-}
-
 /* Inline citations */
 .report-citation {
   display: inline-block;
@@ -793,8 +718,7 @@
 }
 
 .report-quote-grid--center .report-quote-card {
-  align-items: stretch;
-  justify-content: center;
+  align-items: center;
   text-align: center;
   min-height: 220px;
 }
@@ -805,7 +729,6 @@
 }
 
 .report-quote-grid--center .report-quote-card--featured {
-  justify-content: center;
   min-height: 200px;
 }
 
@@ -875,18 +798,16 @@
 
 .report-callout-group {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(260px, 320px));
   gap: 20px;
   justify-content: center;
   align-items: stretch;
-  max-width: 100%;
-  margin: 24px 0;
+  max-width: 680px;
+  margin: 24px auto;
 }
 
 .report-callout-group .report-callout {
   margin: 0;
-  width: 100%;
-  max-width: none;
 }
 
 .report-callout-group .report-callout--center {
@@ -1008,18 +929,6 @@
   .report-callout-group,
   .report-inline-callout .report-stat-grid--two {
     grid-template-columns: 1fr;
-  }
-
-  .report-stat-grid--center,
-  .report-stat-grid--centered {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .report-stat-grid--center .report-stat,
-  .report-stat-grid--centered .report-stat {
-    width: 100%;
-    max-width: 320px;
   }
 
   .report-quote-card--featured {
@@ -1245,9 +1154,8 @@
   }
 
   .report-list-card__title {
-    font-size: 16pt;
-    margin-bottom: 6pt;
-    line-height: 1.1;
+    font-size: 14pt;
+    margin-bottom: 8pt;
   }
 
   .report-chart {
@@ -1382,28 +1290,130 @@
 }
 
 /* =========================================
-   v6 layout corrections
+   FINAL LAYOUT NORMALIZATION
 ========================================= */
 
-/* Tighten list-card top spacing */
+/* Center stat cards as objects, not just their contents */
+.report-stat-grid {
+  --report-stat-columns: 3;
+  --report-stat-gap: 16px;
+  --report-stat-card-width: 220px;
+  display: grid;
+  grid-template-columns: repeat(var(--report-stat-columns), minmax(0, 1fr));
+  gap: var(--report-stat-gap);
+  margin: 28px 0 32px;
+}
+
+.report-stat-grid--one {
+  --report-stat-columns: 1;
+}
+
+.report-stat-grid--two {
+  --report-stat-columns: 2;
+}
+
+.report-stat-grid--three {
+  --report-stat-columns: 3;
+}
+
+.report-stat-grid--center,
+.report-stat-grid--centered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--report-stat-gap);
+  width: 100%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.report-stat-grid--center .report-stat,
+.report-stat-grid--centered .report-stat {
+  flex: 0 1 var(--report-stat-card-width);
+  width: min(100%, var(--report-stat-card-width));
+  max-width: var(--report-stat-card-width);
+  margin: 0;
+  text-align: center;
+}
+
+.report-stat-grid--two.report-stat-grid--center,
+.report-stat-grid--two.report-stat-grid--centered {
+  --report-stat-card-width: 220px;
+}
+
+.report-stat-grid--one.report-stat-grid--center,
+.report-stat-grid--one.report-stat-grid--centered {
+  --report-stat-card-width: 280px;
+}
+
+/* Respondent Profile */
+#profile .report-callout-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 24px 0;
+}
+
+#profile .report-callout-group .report-callout {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  text-align: left;
+}
+
+#profile .report-stat-grid--two.report-stat-grid--center,
+#profile .report-stat-grid--two.report-stat-grid--centered {
+  justify-content: center;
+}
+
+/* Recoverable Grants icon */
+#path-forward .report-float-icon {
+  width: 180px;
+  margin: 0 0 20px 28px;
+}
+
+#path-forward .report-icon {
+  max-width: 180px;
+}
+
+/* List cards: larger heading, less top white space, more room below divider */
 .report-list-card {
-  padding-top: 8px;
+  margin: 24px 0;
+  padding: clamp(10px, 1.4vw, 14px) clamp(18px, 2.6vw, 24px) 20px;
+  background: var(--color-white);
+  border: 1px solid var(--report-border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-card);
 }
 
 .report-list-card__title {
-  margin-top: 0;
-  margin-bottom: 4px;
-  line-height: 1.02;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.3vw, 1.9rem);
+  color: var(--color-text-main);
+  margin: 0 0 6px;
+  line-height: 1.05;
 }
 
 .report-list-card__title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
   margin-top: 6px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--report-teal);
 }
 
-/* Keep numbered-list badges and text from collapsing together */
 .report-list-card .report-numbered-list {
   margin: 0;
   padding-top: 0;
+  padding-bottom: 0;
 }
 
 .report-list-card .report-numbered-list li {
@@ -1430,15 +1440,45 @@
   line-height: 1.35;
 }
 
-/* Respondent voices: keep quote content visually centered */
+.report-list-card .report-numbered-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Quote cards */
+.report-quote-card .report-quote-attribution {
+  width: 100%;
+  align-self: stretch;
+  text-align: right;
+}
+
 .report-quote-grid--center .report-quote-card,
 .report-quote-grid--center .report-quote-card--featured {
+  align-items: stretch;
   justify-content: center;
 }
 
 .report-quote-grid--center .report-quote-card p,
 .report-quote-grid--center .report-quote-card--featured p {
   margin: 0;
+}
+
+.report-quote-grid--center .report-quote-card .report-quote-attribution,
+.report-quote-grid--center .report-quote-card--featured .report-quote-attribution {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .report-stat-grid--center,
+  .report-stat-grid--centered {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report-stat-grid--center .report-stat,
+  .report-stat-grid--centered .report-stat {
+    width: 100%;
+    max-width: 320px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1456,29 +1496,3 @@
     height: 34px;
   }
 }
-
-/* Balance bottom padding in numbered list cards */
-.report-numbered-list,
-.report-list-card {
-  padding-bottom: 20px; /* adjust to 18–24px if needed */
-}
-
-/* If your list cards use an inner wrapper */
-.report-list-card__content {
-  padding-bottom: 16px;
-}
-
-/* =========================================
-   SPACING BELOW SECTION DIVIDER LINE
-========================================= */
-
-.report-list-card .report-section h2::after {
-  margin-bottom: 10px;
-}
-
-/* Ensure list doesn't sit too tight under the line */
-.report-numbered-list {
-  margin-top: 10px;
-}
-
-
